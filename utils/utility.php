@@ -55,11 +55,11 @@ function getUserToken() {
 		return $_SESSION['user'];
 	}
 	$token = getCookie('token');
-	$sql = "select * from Tokens where token = '$token'";
+	$sql = "select * from db_token where token = '$token'";
 	$item = executeResult($sql, true);
 	if($item != null) {
 		$userId = $item['user_id'];
-		$sql = "select * from User where id = '$userId' and deleted = 0";
+		$sql = "select * from db_user where id = '$userId' and status = 1";
 		$item = executeResult($sql, true);
 		if($item != null) {
 			$_SESSION['user'] = $item;

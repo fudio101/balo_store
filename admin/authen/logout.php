@@ -8,7 +8,7 @@ $user = getUserToken();
 if($user != null) {
 	$token = getCookie('token');
 	$id = $user['id'];
-	$sql = "delete from Tokens where user_id = '$id' and token = '$token'";
+	$sql = "delete from db_token where 1";
 	execute($sql);
 	setcookie('token', '', time() - 100, '/');
 }
