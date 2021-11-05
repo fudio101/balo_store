@@ -8,14 +8,13 @@
 
 	$id = getGet('id');
 	if($id != '' && $id > 0) {
-		$sql = "select * from Product where id = '$id' and deleted = 0";
+		$sql = "select * from db_product where id = '$id' and status = 1";
 		$userItem = executeResult($sql, true);
 		if($userItem != null) {
 			$thumbnail = $userItem['thumbnail'];
 			$title = $userItem['title'];
 			$price = $userItem['price'];
-			$discount = $userItem['discount'];
-			$category_id = $userItem['category_id'];
+			$category_id = $userItem['catid'];
 			$description = $userItem['description'];
 		} else {
 			$id = 0;

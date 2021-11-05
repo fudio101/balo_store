@@ -20,76 +20,80 @@ if ($user == null) {
   <link rel="icon" type="image/png" href="../../assets/images/icon.png" />
 
   <!-- Latest compiled and minified CSS -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
   <link rel="stylesheet" type="text/css" href="<?= $baseUrl ?>../assets/css/dashboard.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.6.1/font/bootstrap-icons.css">
 
   <!-- jQuery library -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
   <!-- Popper JS -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 
   <!-- Latest compiled JavaScript -->
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
 </head>
 
 <body>
   <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-    <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">GokiSoft</a>
-    <input class="form-control form-control-dark w-100" type="text" placeholder="Tìm kiếm" aria-label="Search">
+
+    <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">FinalShop</a>
+
     <ul class="navbar-nav px-3">
+
       <li class="nav-item text-nowrap">
-        <a class="nav-link" href="<?= $baseUrl ?>authen/logout.php">Thoát</a>
+        <a class="nav-link" href="<?= $baseUrl ?>authen/logout.php">Logout</a>
       </li>
+
     </ul>
+
   </nav>
+
   <div class="container-fluid">
     <div class="row">
-      <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+      <nav class="col-md-2 d-none d-md-block bg-light sidebar" style="height: 100%;">
         <div class="sidebar-sticky">
-          <ul class="nav flex-column">
+          <ul class="nav flex-column mt-5">
+
             <li class="nav-item">
-              <a class="nav-link active" href="<?= $baseUrl ?>">
+              <a class="nav-link admin" href="<?= $baseUrl ?>">
                 <i class="bi bi-house-fill"></i>
                 Dashboard
               </a>
             </li>
+
             <li class="nav-item">
-              <a class="nav-link" href="<?= $baseUrl ?>category">
+              <a class="nav-link category" href="<?= $baseUrl ?>category">
                 <i class="bi bi-folder"></i>
-                Danh Mục Sản Phẩm
+                Categorys
               </a>
             </li>
+
             <li class="nav-item">
-              <a class="nav-link" href="<?= $baseUrl ?>product">
+              <a class="nav-link product" href="<?= $baseUrl ?>product">
                 <i class="bi bi-file-earmark-text"></i>
-                Sản Phẩm
+                Products
               </a>
             </li>
+
             <li class="nav-item">
-              <a class="nav-link" href="<?= $baseUrl ?>order">
+              <a class="nav-link order" href="<?= $baseUrl ?>order">
                 <i class="bi bi-minecart"></i>
-                Quản Lý Đơn Hàng
+                Orders
               </a>
             </li>
+
             <li class="nav-item">
-              <a class="nav-link" href="<?= $baseUrl ?>feedback">
-                <i class="bi bi-question-circle-fill"></i>
-                Quản Lý Phản Hồi
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="<?= $baseUrl ?>user">
+              <a class="nav-link user" href="<?= $baseUrl ?>user">
                 <i class="bi bi-people-fill"></i>
-                Quản Lý Người Dùng
+                Users
               </a>
             </li>
+
           </ul>
         </div>
       </nav>
-
       <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
         <!-- hien thi tung chuc nang cua trang quan tri START-->
