@@ -1,115 +1,95 @@
 <?php
-	$title = 'Thêm/Sửa Sản Phẩm';
-	$baseUrl = '../';
-	require_once('../layouts/header.php');
+$title = 'Add/Edit Products';
+$baseUrl = '../';
+require_once('../layouts/header.php');
 
-	$id = $thumbnail = $title = $price = $discount = $category_id = $description = '';
-	require_once('form_save.php');
+$id = $thumbnail = $title = $price = $discount = $category_id = $description = '';
+require_once('form_save.php');
 
-	$id = getGet('id');
-	if($id != '' && $id > 0) {
-		$sql = "select * from db_product where id = '$id' and status = 1";
-		$userItem = executeResult($sql, true);
-		if($userItem != null) {
-			$thumbnail = $userItem['thumbnail'];
-			$title = $userItem['title'];
-			$price = $userItem['price'];
-			$category_id = $userItem['catid'];
-			$description = $userItem['description'];
-		} else {
-			$id = 0;
-		}
+$id = getGet('id');
+if ($id != '' && $id > 0) {
+	$sql = "select * from db_product where id = '$id' and status = 1";
+	$userItem = executeResult($sql, true);
+	if ($userItem != null) {
+		$thumbnail = $userItem['avatar'];
+		$title = $userItem['name'];
+		$price = $userItem['price'];
+		$category_id = $userItem['catid'];
+		$description = $userItem['description'];
 	} else {
 		$id = 0;
 	}
+} else {
+	$id = 0;
+}
 
-	$sql = "select * from Category";
-	$categoryItems = executeResult($sql);
+$sql = "select * from db_category";
+$categoryItems = executeResult($sql);
 ?>
 <!-- include summernote css/js -->
-<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+<!-- <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet"> -->
+<!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous"> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.20/dist/summernote.min.js"></script> -->
+<script></script>
 
-<div class="row" style="margin-top: 20px;">
+<div class="row" style="margin-top: 48px;">
 	<div class="col-md-12 table-responsive">
-		<h3>Thêm/Sửa Sản Phẩm</h3>
+		<h3>Add/Edit Products</h3>
 		<div class="panel panel-primary">
 			<div class="panel-body">
 				<form method="post" enctype="multipart/form-data">
-				<div class="row">
-					<div class="col-md-9 col-12">
-						<div class="form-group">
-						  <label for="usr">Tên Sản Phẩm:</label>
-						  <input required="true" type="text" class="form-control" id="usr" name="title" value="<?=$title?>">
-						  <input type="text" name="id" value="<?=$id?>" hidden="true">
-						</div>
-						<div class="form-group">
-						  <label for="pwd">Nội Dung:</label>
-						  <textarea class="form-control" rows="5" name="description" id="description"><?=$description?></textarea>
+					<div class="row">
+
+						<div class="col-9">
+							<div class="form-group">
+								<label class="mb-2" for="usr">Product Name:</label>
+								<input required="true" type="text" class="form-control" id="usr" name="title" value="<?= $title ?>">
+								<input type="text" name="id" value="<?= $id ?>" hidden="true">
+							</div>
+							<div class="form-group mt-3">
+								<label for="pwd">Content:</label>
+								<textarea class="form-control mt-2" rows="5" name="description" id="description"><?= $description ?></textarea>
+							</div>
+
+							<button class="btn btn-success mt-3">Save</button>
 						</div>
 
-						<button class="btn btn-success">Lưu Sản Phẩm</button>
-					</div>
-					<div class="col-md-3 col-12" style="border: solid grey 1px; padding-top: 10px; padding-bottom: 10px;">
-						<div class="form-group">
-						  <label for="thumbnail">Thumbnail:</label>
-						  <input type="file" class="form-control" id="thumbnail" name="thumbnail" accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*">
-						  <img id="thumbnail_img" src="<?=fixUrl($thumbnail)?>" style="max-height: 160px; margin-top: 5px; margin-bottom: 15px;">
+						<div class="col-3">
+							<div class="form-group">
+								<label class="mb-2"for="thumbnail">Thumbnail:</label>
+								<input type="file" class="form-control" id="thumbnail" onchange="updateThumbnail(event);" name="thumbnail" accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*">
+								<img id="thumbnail_img" src="<?= fixUrl($thumbnail) == "../../" ? "" : fixUrl($thumbnail) ?>" style="max-height: 160px; margin-top: 5px; margin-bottom: 15px;">
+							</div>
+
+							<div class="form-group">
+								<label for="usr">Product Category:</label>
+								<select class="form-control mt-2" name="category_id" id="category_id" required="true">
+									<option value="">-- Select --</option>
+									<?php
+									foreach ($categoryItems as $item) {
+										if ($item['id'] == $category_id) {
+											echo '<option selected value="' . $item['id'] . '">' . $item['name'] . '</option>';
+										} else {
+											echo '<option value="' . $item['id'] . '">' . $item['name'] . '</option>';
+										}
+									}
+									?>
+								</select>
+							</div>
+							<div class="form-group mt-3">
+								<label class="mb-2" for="price">Price:</label>
+								<input required="true" type="number" class="form-control" id="price" name="price" value="<?= $price ?>">
+							</div>
 						</div>
 
-						<div class="form-group">
-						  <label for="usr">Danh Mục Sản Phẩm:</label>
-						  <select class="form-control" name="category_id" id="category_id" required="true">
-						  	<option value="">-- Chọn --</option>
-						  	<?php
-						  		foreach($categoryItems as $item) {
-						  			if($item['id'] == $category_id) {
-						  				echo '<option selected value="'.$item['id'].'">'.$item['name'].'</option>';
-						  			} else {
-						  				echo '<option value="'.$item['id'].'">'.$item['name'].'</option>';
-						  			}
-						  		}
-						  	?>
-						  </select>
-						</div>
-						<div class="form-group">
-						  <label for="price">Giá:</label>
-						  <input required="true" type="number" class="form-control" id="price" name="price" value="<?=$price?>">
-						</div>
-						<div class="form-group">
-						  <label for="discount">Giảm Giá:</label>
-						  <input required="true" type="text" class="form-control" id="discount" name="discount" value="<?=$discount?>">
-						</div>
 					</div>
-				</div>
 				</form>
 			</div>
 		</div>
 	</div>
 </div>
 
-<script type="text/javascript">
-	function updateThumbnail() {
-		$('#thumbnail_img').attr('src', $('#thumbnail').val())
-	}
-</script>
-<script>
-  $('#description').summernote({
-    placeholder: 'Nhập nội dung dữ liệu',
-    tabsize: 2,
-    height: 300,
-    toolbar: [
-      ['style', ['style']],
-      ['font', ['bold', 'underline', 'clear']],
-      ['color', ['color']],
-      ['para', ['ul', 'ol', 'paragraph']],
-      ['table', ['table']],
-      ['insert', ['link', 'picture', 'video']],
-      ['view', ['fullscreen', 'codeview', 'help']]
-    ]
-  });
-</script>
-
 <?php
-	require_once('../layouts/footer.php');
+require_once('../layouts/footer.php');
 ?>

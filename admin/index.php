@@ -1,7 +1,7 @@
 <?php
-	$title = 'Dashboard Page';
-	$baseUrl = '';
-	require_once('layouts/header.php');
+$title = 'Dashboard Page';
+$baseUrl = '';
+require_once('layouts/header.php');
 ?>
 
 <div class="row">
@@ -11,5 +11,5 @@
 </div>
 
 <?php
-	require_once('layouts/footer.php');
+require_once('layouts/footer.php');
 ?>
