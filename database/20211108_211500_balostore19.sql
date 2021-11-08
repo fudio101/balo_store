@@ -9,7 +9,7 @@
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
-SET time_zone = "+00:00";
+SET time_zone = "+07:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -33,10 +33,11 @@ CREATE TABLE IF NOT EXISTS `db_category` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) CHARACTER SET utf8 NOT NULL COMMENT 'Tên danh mục',
   `link` varchar(255) CHARACTER SET utf8 NOT NULL COMMENT 'link danh mục',
-  `created_at` datetime NOT NULL,
-  `created_by` varchar(255) CHARACTER SET utf8 NOT NULL,
-  `updated_at` datetime NOT NULL,
-  `updated_by` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `created` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `created_by` varchar(100) CHARACTER SET utf8 NOT NULL DEFAULT 'BaloStore SuperAdmin',
+  `modified` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `modified_by` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -75,7 +76,11 @@ CREATE TABLE IF NOT EXISTS `db_customer` (
   `fullname` varchar(100) CHARACTER SET utf8 NOT NULL,
   `address` varchar(100) CHARACTER SET utf8 NOT NULL,
   `email` varchar(50) CHARACTER SET utf8 NOT NULL,
-  `created` datetime NOT NULL,
+  `created` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `created_by` varchar(100) CHARACTER SET utf8 NOT NULL DEFAULT 'BaloStore SuperAdmin',
+  `modified` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `modified_by` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT 1,
   PRIMARY KEY (`phone`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -94,7 +99,11 @@ CREATE TABLE IF NOT EXISTS `db_discount` (
   `expiration_date` date NOT NULL COMMENT 'Ngày hết hạn',
   `payment_limit` int(11) NOT NULL COMMENT 'giới hạn đơn hàng tối thiểu',
   `description` varchar(255) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Mô tả',
-  `created` date NOT NULL,
+  `created` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `created_by` varchar(100) CHARACTER SET utf8 NOT NULL DEFAULT 'BaloStore SuperAdmin',
+  `modified` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `modified_by` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -884,12 +893,22 @@ CREATE TABLE IF NOT EXISTS `db_producer` (
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `code` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `keyword` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `created_at` datetime NOT NULL,
-  `created_by` int(11) NOT NULL,
-  `modified` datetime NOT NULL,
-  `modified_by` int(11) NOT NULL,
+  `created` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `created_by` varchar(100) CHARACTER SET utf8 NOT NULL DEFAULT 'BaloStore SuperAdmin',
+  `modified` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `modified_by` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `db_district`
+--
+
+INSERT INTO `db_producer` (`id`, `name`, `code`, `keyword`, `created`, `created_by`, `modified`, `modified_by`, `status`) VALUES
+(1, 'Bảo Fashion', 'baoit', 'balo chong soc, balo laptop', '2021-11-05 06:47:28', 'BaloStore SuperAdmin', '2021-11-05 06:47:28', 'BaloStore SuperAdmin', '1'),
+(2, 'Lịch Fashion', 'lichit', 'Tui xach ca tinh, tui sach thoi trang', '2021-11-05 06:47:28', 'BaloStore SuperAdmin', '2021-11-05 06:47:28', 'BaloStore SuperAdmin', '1'),
+(3, 'Nguyên Fashion', 'nguyenit', 'Vali du lich, vali cao cap', '2021-11-05 06:47:28', 'BaloStore SuperAdmin', '2021-11-05 06:47:28', 'BaloStore SuperAdmin', '1');
 
 -- --------------------------------------------------------
 
@@ -901,21 +920,18 @@ CREATE TABLE IF NOT EXISTS `db_product` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `catid` int(11) NOT NULL,
   `name` varchar(255) CHARACTER SET utf8 NOT NULL,
-  `alias` varchar(255) CHARACTER SET utf8 NOT NULL,
   `avatar` varchar(255) CHARACTER SET utf8 NOT NULL,
   `img` varchar(255) CHARACTER SET utf8 NOT NULL,
-  `sortDesc` text CHARACTER SET utf8 NOT NULL,
   `detail` text CHARACTER SET utf8 NOT NULL,
   `producer` int(11) NOT NULL,
   `number` int(11) NOT NULL,
-  `number_buy` int(11) NOT NULL,
-  `sale` int(3) DEFAULT NULL,
+  `number_buy` int(11) NOT NULL DEFAULT 0,
   `price` int(11) NOT NULL,
-  `created` datetime NOT NULL,
-  `created_by` varchar(100) CHARACTER SET utf8 NOT NULL DEFAULT 'HDL',
-  `modified` datetime NOT NULL,
-  `modified_by` varchar(100) CHARACTER SET utf8 NOT NULL DEFAULT 'HDL',
-  `status` int(1) NOT NULL DEFAULT 1,
+  `created` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `created_by` varchar(100) CHARACTER SET utf8 NOT NULL DEFAULT 'BaloStore SuperAdmin',
+  `modified` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `modified_by` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`),
   KEY `producer` (`producer`),
   KEY `catid` (`catid`)
@@ -1012,12 +1028,11 @@ INSERT INTO `db_province` (`id`, `name`, `type`) VALUES
 CREATE TABLE IF NOT EXISTS `db_slider` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) CHARACTER SET utf8 NOT NULL,
-  `link` varchar(255) CHARACTER SET utf8 NOT NULL,
   `img` varchar(100) CHARACTER SET utf8 NOT NULL,
-  `created` datetime NOT NULL,
-  `created_by` varchar(50) CHARACTER SET utf8 NOT NULL DEFAULT 'Supper Admin',
-  `modified` datetime NOT NULL,
-  `modified_by` varchar(50) CHARACTER SET utf8 NOT NULL DEFAULT 'Supper Admin',
+  `created` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `created_by` varchar(100) CHARACTER SET utf8 NOT NULL DEFAULT 'BaloStore SuperAdmin',
+  `modified` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `modified_by` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
   `status` tinyint(1) NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -1061,8 +1076,11 @@ CREATE TABLE IF NOT EXISTS `db_user` (
   `phone` varchar(15) CHARACTER SET utf8 DEFAULT NULL,
   `address` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `img` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
-  `created` datetime NOT NULL,
-  `status` int(1) NOT NULL DEFAULT 1,
+  `created` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `created_by` varchar(100) CHARACTER SET utf8 NOT NULL DEFAULT 'BaloStore SuperAdmin',
+  `modified` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `modified_by` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`),
   KEY `role` (`role`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -1072,6 +1090,7 @@ CREATE TABLE IF NOT EXISTS `db_user` (
 --
 
 INSERT INTO `db_user` (`id`, `fullname`, `username`, `password`, `role`, `email`, `gender`, `phone`, `address`, `img`, `created`, `status`) VALUES
+(1, 'Super Admin', 'admin', 'b4cbd48886a5331c5eb2fedadabe311c', 1, 'laptrinhweb@cn19b.xyz', NULL, NULL, NULL, NULL, '2021-11-05 06:47:28', 1),
 (5, 'Nguyễn Đỗ Thế Nguyên', 'fudio101', 'c1a1a86a261a480179ac63906f6e425b', 2, NULL, NULL, NULL, NULL, NULL, '2021-11-05 06:47:28', 1);
 
 -- --------------------------------------------------------
