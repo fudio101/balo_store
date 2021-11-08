@@ -4,11 +4,11 @@ require_once('../../utils/utility.php');
 require_once('../../database/dbhelper.php');
 
 $user = getUserToken();
-if($user == null) {
-	die();
+if ($user == null || $user["role" != "1"]) {
+	header('Location: ../');
 }
 
-if(!empty($_POST)) {
+if (!empty($_POST)) {
 	$action = getPost('action');
 
 	switch ($action) {
@@ -18,9 +18,10 @@ if(!empty($_POST)) {
 	}
 }
 
-function deleteUser() {
+function deleteUser()
+{
 	$id = getPost('id');
-	$updated_at = date("Y-m-d H:i:s");
-	$sql = "update User set deleted = 1, updated_at = '$updated_at' where id = $id";
+	// $updated_at = date("Y-m-d H:i:s");
+	$sql = "update db_user set status = 0 where id = $id";
 	execute($sql);
 }

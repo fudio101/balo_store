@@ -5,10 +5,10 @@ require_once('../../utils/utility.php');
 require_once('../../database/dbhelper.php');
 
 $user = getUserToken();
-if($user != null) {
+if ($user != null) {
 	$token = getCookie('token');
 	$id = $user['id'];
-	$sql = "delete from db_token where 1";
+	$sql = "delete from db_token where token = '$token'";
 	execute($sql);
 	setcookie('token', '', time() - 100, '/');
 }
