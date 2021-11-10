@@ -9,7 +9,7 @@
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
-SET time_zone = "+00:00";
+SET time_zone = "+07:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -858,8 +858,7 @@ INSERT INTO `db_district` (`id`, `name`, `type`, `provinceid`) VALUES
 
 CREATE TABLE IF NOT EXISTS `db_order` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `orderCode` varchar(8) CHARACTER SET utf8 NOT NULL,
-  `orderdate` datetime NOT NULL,
+  `orderCode` varchar(15) CHARACTER SET utf8 NOT NULL,
   `fullname` varchar(100) CHARACTER SET utf8 NOT NULL,
   `phone` varchar(100) CHARACTER SET utf8 NOT NULL COMMENT 'Khách hàn thân thiết thì nhớ SĐT',
   `money` int(12) NOT NULL,
@@ -868,14 +867,41 @@ CREATE TABLE IF NOT EXISTS `db_order` (
   `province` int(5) NOT NULL,
   `district` int(5) NOT NULL,
   `address` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `order_status` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `created` datetime NOT NULL DEFAULT current_timestamp(),
+  `modified` datetime DEFAULT NULL ON UPDATE current_timestamp(),
+  `modified_by` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
+  `status_code` int(1) NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`),
   KEY `customerid` (`phone`),
   KEY `province` (`province`),
-  KEY `district` (`district`)
+  KEY `district` (`district`),
+  KEY `db_orderstatus` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
+--
+-- Table structure for table `db_orderstatus`
+--
+
+CREATE TABLE IF NOT EXISTS `db_orderstatus` (
+  `id` int(11) NOT NULL,
+  `orderstatus` varchar(100) CHARACTER SET utf8 NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `db_orderstatus`
+--
+
+INSERT INTO `db_orderstatus` (`id`, `orderstatus`) VALUES
+(1, 'Đã thanh toán'),
+(2, 'Đang giao hàng'),
+(3, 'Đã giao'),
+(0, 'Đã hủy');
+
+-- --------------------------------------------------------
 --
 -- Table structure for table `db_orderdetail`
 --
@@ -1153,7 +1179,8 @@ ALTER TABLE `db_district`
 ALTER TABLE `db_order`
   ADD CONSTRAINT `db_order_ibfk_2` FOREIGN KEY (`province`) REFERENCES `db_province` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `db_order_ibfk_3` FOREIGN KEY (`district`) REFERENCES `db_district` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `db_order_ibfk_4` FOREIGN KEY (`phone`) REFERENCES `db_customer` (`phone`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `db_order_ibfk_4` FOREIGN KEY (`phone`) REFERENCES `db_customer` (`phone`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `db_order_ibfk_5` FOREIGN KEY (`status_code`) REFERENCES `db_orderstatus` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `db_orderdetail`
