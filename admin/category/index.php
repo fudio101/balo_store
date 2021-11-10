@@ -3,7 +3,7 @@ $title = 'Product Category Management';
 $baseUrl = '../';
 require_once('../layouts/header.php');
 
-$sql = "select * from db_category";
+$sql = "select * from db_category where status = 1";
 $data = executeResult($sql);
 ?>
 
@@ -14,20 +14,12 @@ $data = executeResult($sql);
 	</div>
 
 	<!-- Add category -->
-	<div class="col-md-4 bg-info p-2 text-dark bg-opacity-10" style="height: 169px;">
-		<form onsubmit="submitForm();">
-			<div class="form-group">
+	<div class="col-md-4 bg-info p-2 text-dark bg-opacity-10" style="height: 120px;">
+		<form class="form-group" onsubmit="submitForm();">
 
-				<div class="input-group mb-3">
-					<span class="input-group-text" id="basic-addon3">Name</span>
-					<input name="name" id="name" type="text" class="form-control">
-				</div>
-
-				<div class="input-group mb-3">
-					<span class="input-group-text" id="basic-addon3">Link</span>
-					<input name="link" id="link" type="text" class="form-control">
-				</div>
-
+			<div class="input-group mb-3">
+				<span class="input-group-text" id="basic-addon3">Name</span>
+				<input name="name" id="name" type="text" class="form-control">
 			</div>
 
 			<button class="btn btn-success mt-2 float-end">Save</button>
@@ -41,7 +33,6 @@ $data = executeResult($sql);
 				<tr>
 					<th scope="col">#</th>
 					<th scope="col">Name</th>
-					<th scope="col">Link</th>
 					<th scope="col"></th>
 					<th scope="col"></th>
 				</tr>
@@ -54,7 +45,6 @@ $data = executeResult($sql);
 					<tr>
 						<th scope="row"><?= ++$index ?></th>
 						<td><?= $item['name'] ?></td>
-						<td><?= $item['link'] ?></td>
 						<td style="width: 50px">
 							<button onclick="modifyCategory(<?= $item['id'] ?>, '<?= $item['name'] ?>', '<?= $item['link'] ?>')" class="btn btn-warning">Modify</button>
 						</td>
@@ -88,8 +78,7 @@ $data = executeResult($sql);
 
 	function modifyCategory(id, name, link) {
 		name_ = prompt('Enter new category name: ', name);
-		link_ = prompt('Enter new category name: ', link);
-		if (name == name_ && link == link_ || !name_ || !link_) {
+		if (name == name_ || !name_) {
 			alert('Invalid input!!!');
 			return;
 		}
@@ -97,7 +86,6 @@ $data = executeResult($sql);
 		$.post('form_api.php', {
 			'id_modi': id,
 			'name_modi': name_,
-			'link_modi': link_,
 			'action': 'modify'
 		}, function(data) {
 			if (data != null && data != '') {
@@ -110,15 +98,13 @@ $data = executeResult($sql);
 
 	function submitForm() {
 		name = $('#name').val().trim();
-		link = $('#link').val().trim();
-		if (name == "" || link == "") {
+		if (name == "") {
 			alert('Please enter all required fields');
 			return;
 		}
 
 		$.post('form_api.php', {
 			'name_add': name,
-			'link_add': link,
 			'action': 'add'
 		}, function(data) {
 			if (data != null && data != '') {

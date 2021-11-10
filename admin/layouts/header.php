@@ -11,7 +11,7 @@ if ($user == null) {
 ?>
 
 <!DOCTYPE html>
-<html>
+<html style="height: 100%;">
 
 <head>
   <title><?= $title ?></title>
@@ -36,10 +36,10 @@ if ($user == null) {
 
 </head>
 
-<body>
-  <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+<body style="height: 100%;">
+  <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow navbar-custom">
 
-    <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">FinalShop</a>
+    <a class="navbar-brand col-sm-3 col-md-2 mr-0 ms-4 fs-6" href="#">FinalShop</a>
 
     <ul class="navbar-nav px-3">
 
@@ -51,9 +51,9 @@ if ($user == null) {
 
   </nav>
 
-  <div class="container-fluid">
-    <div class="row">
-      <nav class="col-md-2 d-none d-md-block bg-light sidebar" style="height: 100%;">
+  <div class="container-fluid" style="height: 100%;">
+    <div class="row" style="height: 100%;">
+      <nav class="col-md-2 d-none d-md-block bg-secondary bg-opacity-10 sidebar">
         <div class="sidebar-sticky">
           <ul class="nav flex-column mt-5">
 
@@ -93,7 +93,6 @@ if ($user == null) {
                 </a>
               </li>
             <?php endif; ?>
-
 
           </ul>
         </div>
