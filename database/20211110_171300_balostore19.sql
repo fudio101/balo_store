@@ -3,13 +3,13 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Nov 05, 2021 at 08:14 AM
+-- Generation Time: Nov 10, 2021 at 11:12 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
-SET time_zone = "+07:00";
+SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -32,14 +32,23 @@ USE `balostore19`;
 CREATE TABLE IF NOT EXISTS `db_category` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) CHARACTER SET utf8 NOT NULL COMMENT 'Tên danh mục',
-  `link` varchar(255) CHARACTER SET utf8 NOT NULL COMMENT 'link danh mục',
-  `created` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `link` varchar(255) CHARACTER SET utf8 DEFAULT NULL COMMENT 'link danh mục',
+  `created` datetime NOT NULL DEFAULT current_timestamp(),
   `created_by` varchar(100) CHARACTER SET utf8 NOT NULL DEFAULT 'BaloStore SuperAdmin',
-  `modified` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `modified` datetime DEFAULT NULL ON UPDATE current_timestamp(),
   `modified_by` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
   `status` tinyint(1) NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `db_category`
+--
+
+INSERT INTO `db_category` (`id`, `name`, `link`, `created`, `created_by`, `modified`, `modified_by`, `status`) VALUES
+(7, 'Balo', NULL, '2021-11-10 14:12:57', 'fudio101', NULL, NULL, 1),
+(8, 'Túi xách', NULL, '2021-11-10 14:13:43', 'fudio101', NULL, NULL, 1),
+(9, 'Vali', NULL, '2021-11-10 14:13:49', 'fudio101', NULL, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -76,9 +85,9 @@ CREATE TABLE IF NOT EXISTS `db_customer` (
   `fullname` varchar(100) CHARACTER SET utf8 NOT NULL,
   `address` varchar(100) CHARACTER SET utf8 NOT NULL,
   `email` varchar(50) CHARACTER SET utf8 NOT NULL,
-  `created` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `created` datetime NOT NULL DEFAULT current_timestamp(),
   `created_by` varchar(100) CHARACTER SET utf8 NOT NULL DEFAULT 'BaloStore SuperAdmin',
-  `modified` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `modified` datetime DEFAULT NULL ON UPDATE current_timestamp(),
   `modified_by` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
   `status` tinyint(1) NOT NULL DEFAULT 1,
   PRIMARY KEY (`phone`)
@@ -99,9 +108,9 @@ CREATE TABLE IF NOT EXISTS `db_discount` (
   `expiration_date` date NOT NULL COMMENT 'Ngày hết hạn',
   `payment_limit` int(11) NOT NULL COMMENT 'giới hạn đơn hàng tối thiểu',
   `description` varchar(255) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Mô tả',
-  `created` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `created` datetime NOT NULL DEFAULT current_timestamp(),
   `created_by` varchar(100) CHARACTER SET utf8 NOT NULL DEFAULT 'BaloStore SuperAdmin',
-  `modified` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `modified` datetime DEFAULT NULL ON UPDATE current_timestamp(),
   `modified_by` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
   `status` tinyint(1) NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`)
@@ -893,22 +902,22 @@ CREATE TABLE IF NOT EXISTS `db_producer` (
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `code` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `keyword` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `created` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `created` datetime NOT NULL DEFAULT current_timestamp(),
   `created_by` varchar(100) CHARACTER SET utf8 NOT NULL DEFAULT 'BaloStore SuperAdmin',
-  `modified` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `modified` datetime DEFAULT NULL ON UPDATE current_timestamp(),
   `modified_by` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
   `status` tinyint(1) NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `db_district`
+-- Dumping data for table `db_producer`
 --
 
 INSERT INTO `db_producer` (`id`, `name`, `code`, `keyword`, `created`, `created_by`, `modified`, `modified_by`, `status`) VALUES
-(1, 'Bảo Fashion', 'baoit', 'balo chong soc, balo laptop', '2021-11-05 06:47:28', 'BaloStore SuperAdmin', '2021-11-05 06:47:28', 'BaloStore SuperAdmin', '1'),
-(2, 'Lịch Fashion', 'lichit', 'Tui xach ca tinh, tui sach thoi trang', '2021-11-05 06:47:28', 'BaloStore SuperAdmin', '2021-11-05 06:47:28', 'BaloStore SuperAdmin', '1'),
-(3, 'Nguyên Fashion', 'nguyenit', 'Vali du lich, vali cao cap', '2021-11-05 06:47:28', 'BaloStore SuperAdmin', '2021-11-05 06:47:28', 'BaloStore SuperAdmin', '1');
+(1, 'Bảo Fashion', 'baoit', 'balo chong soc, balo laptop', '2021-11-05 06:47:28', 'BaloStore SuperAdmin', '2021-11-05 06:47:28', 'BaloStore SuperAdmin', 1),
+(2, 'Lịch Fashion', 'lichit', 'Tui xach ca tinh, tui sach thoi trang', '2021-11-05 06:47:28', 'BaloStore SuperAdmin', '2021-11-05 06:47:28', 'BaloStore SuperAdmin', 1),
+(3, 'Nguyên Fashion', 'nguyenit', 'Vali du lich, vali cao cap', '2021-11-05 06:47:28', 'BaloStore SuperAdmin', '2021-11-05 06:47:28', 'BaloStore SuperAdmin', 1);
 
 -- --------------------------------------------------------
 
@@ -924,18 +933,25 @@ CREATE TABLE IF NOT EXISTS `db_product` (
   `img` varchar(255) CHARACTER SET utf8 NOT NULL,
   `detail` text CHARACTER SET utf8 NOT NULL,
   `producer` int(11) NOT NULL,
-  `number` int(11) NOT NULL,
+  `number` int(11) NOT NULL DEFAULT 0,
   `number_buy` int(11) NOT NULL DEFAULT 0,
   `price` int(11) NOT NULL,
-  `created` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `created` datetime NOT NULL DEFAULT current_timestamp(),
   `created_by` varchar(100) CHARACTER SET utf8 NOT NULL DEFAULT 'BaloStore SuperAdmin',
-  `modified` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `modified` datetime DEFAULT NULL ON UPDATE current_timestamp(),
   `modified_by` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
   `status` tinyint(1) NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`),
   KEY `producer` (`producer`),
   KEY `catid` (`catid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `db_product`
+--
+
+INSERT INTO `db_product` (`id`, `catid`, `name`, `avatar`, `img`, `detail`, `producer`, `number`, `number_buy`, `price`, `created`, `created_by`, `modified`, `modified_by`, `status`) VALUES
+(6, 8, 'asjhgdjhgsadjgksahflk', 'assets/photos/163653785017451.gif', 'assets/photos/163653735407016.gif', '', 1, 0, 0, 1555, '2021-11-10 16:42:34', 'fudio101', '2021-11-10 16:50:50', 'fudio101', 1);
 
 -- --------------------------------------------------------
 
@@ -1029,9 +1045,9 @@ CREATE TABLE IF NOT EXISTS `db_slider` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) CHARACTER SET utf8 NOT NULL,
   `img` varchar(100) CHARACTER SET utf8 NOT NULL,
-  `created` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `created` datetime NOT NULL DEFAULT current_timestamp(),
   `created_by` varchar(100) CHARACTER SET utf8 NOT NULL DEFAULT 'BaloStore SuperAdmin',
-  `modified` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `modified` datetime DEFAULT NULL ON UPDATE current_timestamp(),
   `modified_by` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
   `status` tinyint(1) NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`)
@@ -1057,7 +1073,8 @@ CREATE TABLE IF NOT EXISTS `db_token` (
 INSERT INTO `db_token` (`user_id`, `token`, `created_at`) VALUES
 (5, '0a5326d467b849c3b8ace2c8c9ae6adf', '2021-11-05 06:47:36'),
 (5, '948e97ebcbcb2c860cfd4c093c22eb7c', '2021-11-05 07:14:54'),
-(5, '0a5326d467b849c3b8ace2c8c9ae6adf', '2021-11-05 06:47:36');
+(5, '0a5326d467b849c3b8ace2c8c9ae6adf', '2021-11-05 06:47:36'),
+(5, 'f58fe5e4ae8f20ee4dcb56263fdf2e5b', '2021-11-10 04:50:16');
 
 -- --------------------------------------------------------
 
@@ -1076,22 +1093,24 @@ CREATE TABLE IF NOT EXISTS `db_user` (
   `phone` varchar(15) CHARACTER SET utf8 DEFAULT NULL,
   `address` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `img` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
-  `created` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `created` datetime NOT NULL DEFAULT current_timestamp(),
   `created_by` varchar(100) CHARACTER SET utf8 NOT NULL DEFAULT 'BaloStore SuperAdmin',
-  `modified` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `modified` datetime DEFAULT NULL ON UPDATE current_timestamp(),
   `modified_by` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
   `status` tinyint(1) NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`),
   KEY `role` (`role`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `db_user`
 --
 
-INSERT INTO `db_user` (`id`, `fullname`, `username`, `password`, `role`, `email`, `gender`, `phone`, `address`, `img`, `created`, `status`) VALUES
-(1, 'Super Admin', 'admin', 'b4cbd48886a5331c5eb2fedadabe311c', 1, 'laptrinhweb@cn19b.xyz', NULL, NULL, NULL, NULL, '2021-11-05 06:47:28', 1),
-(5, 'Nguyễn Đỗ Thế Nguyên', 'fudio101', 'c1a1a86a261a480179ac63906f6e425b', 2, NULL, NULL, NULL, NULL, NULL, '2021-11-05 06:47:28', 1);
+INSERT INTO `db_user` (`id`, `fullname`, `username`, `password`, `role`, `email`, `gender`, `phone`, `address`, `img`, `created`, `created_by`, `modified`, `modified_by`, `status`) VALUES
+(1, 'Super Admin', 'admin', 'b4cbd48886a5331c5eb2fedadabe311c', 1, 'laptrinhweb@cn19b.xyz', NULL, NULL, NULL, NULL, '2021-11-05 06:47:28', 'BaloStore SuperAdmin', NULL, NULL, 1),
+(5, 'Nguyễn Đỗ Thế Nguyên', 'fudio101', 'c1a1a86a261a480179ac63906f6e425b', 1, 'thenguyen1024@gmail.com', NULL, '0337202484', 'Bình Định', NULL, '2021-11-05 06:47:28', 'BaloStore SuperAdmin', '2021-11-10 10:49:55', 'fudio101', 1),
+(6, 'Nguyễn Đỗ Thế Nguyên', 'fudio', 'b4cbd48886a5331c5eb2fedadabe311c', 2, '1951120113@sv.ut.edu.vn', NULL, '+84337202484', 'Phú An, Tây Xuân', NULL, '2021-11-10 11:32:46', 'fudio101', '2021-11-10 11:36:35', 'fudio101', 0),
+(7, 'Nguyễn Đỗ Thế Nguyên', 'fudio001', 'c1a1a86a261a480179ac63906f6e425b', 2, 'tatsukiyoshi@gmail.com', NULL, '+84337202484', 'Phú An, Tây Xuân', NULL, '2021-11-10 11:34:06', 'fudio101', '2021-11-10 11:36:01', 'fudio101', 0);
 
 -- --------------------------------------------------------
 
