@@ -38,7 +38,7 @@ $roleItems = executeResult($sql);
 			<div class="panel-heading">
 				<h5 style="color: red;"><?= $msg ?></h5>
 			</div>
-			<div class="panel-body">
+			<div class="panel-body"> 
 				<form method="post" onsubmit="return validateForm();">
 					<div class="form-group">
 						<label class="mt-3 mb-2" for="usr">Full Name</label>:</label>
@@ -47,8 +47,7 @@ $roleItems = executeResult($sql);
 					</div>
 					<div class="form-group">
 						<label class="mt-3 mb-2" for="usr">Username:</label>
-						<input type="text" class="form-control" id="usrn" name="username" value="<?= $username ?>" disabled>
-						<input type="text" name="id" value="<?= $id ?>" hidden="true">
+						<input type="text" class="form-control" id="usrn" name="username" value="<?= $username ?>" <?= ($id != '' && $id > 0)?"disabled":"" ?>>
 					</div>
 					<div class="form-group">
 						<label class="mt-3 mb-2" for="usr">Role:</label>
@@ -85,7 +84,7 @@ $roleItems = executeResult($sql);
 						<label class="mt-3 mb-2" for="confirmation_pwd">Password Verification:</label>
 						<input <?= ($id > 0 ? '' : 'required="true"') ?> type="password" class="form-control" id="confirmation_pwd" minlength="6">
 					</div>
-					<button class="btn btn-success mt-3">Submit</button>
+					<button class="btn btn-success my-3">Submit</button>
 				</form>
 			</div>
 		</div>

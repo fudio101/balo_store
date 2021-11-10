@@ -7,7 +7,7 @@ if ($user["role"] != "1")
 
 $sql = "select db_user.*, db_usergroup.name as role_name 
 	from db_user left join db_usergroup on db_user.role = db_usergroup.id 
-	where db_user.status = 1";
+	where db_user.status = 1 and (db_user.role = 2 or db_user.username = '" . $user["username"] . "')";
 $data = executeResult($sql);
 ?>
 

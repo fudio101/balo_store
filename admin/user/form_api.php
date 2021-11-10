@@ -22,6 +22,6 @@ function deleteUser()
 {
 	$id = getPost('id');
 	// $updated_at = date("Y-m-d H:i:s");
-	$sql = "update db_user set status = 0 where id = $id";
+	$sql = "UPDATE db_user SET modified_by = 'fudio101', status = 0 WHERE id = $id";
 	execute($sql);
 }

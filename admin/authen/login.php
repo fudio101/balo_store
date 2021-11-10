@@ -52,10 +52,7 @@ if ($user != null) {
 						<label for="pwd">Mật Khẩu:</label>
 						<input required="true" type="password" class="form-control" id="pwd" name="password" minlength="6">
 					</div>
-
-					<p>
-						<a href="register.php">Đăng ký tài khoản mới</a>
-					</p>
+					
 					<button class="btn btn-success">Đăng Nhập</button>
 				</form>
 			</div>
