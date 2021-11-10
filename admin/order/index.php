@@ -4,7 +4,7 @@
 	require_once('../layouts/header.php');
 
 	//pending, approved, cancel
-	$sql = "select * from Orders order by status asc, order_date desc";
+	$sql = "SELECT * FROM `db_order` ORDER BY status ASC, orderdate DESC";
 	$data = executeResult($sql);
 ?>
 
