@@ -21,6 +21,8 @@ $data = executeResult($sql);
 					<th>Name</th>
 					<th>Price</th>
 					<th>Category</th>
+					<th>Quantity</th>
+					<th>Quantity Sold</th>
 					<th style="width: 50px"></th>
 					<th style="width: 50px"></th>
 				</tr>
@@ -31,15 +33,17 @@ $data = executeResult($sql);
 				foreach ($data as $item) {
 					echo '<tr>
 					<th>' . (++$index) . '</th>
-					<td><img src="' . fixUrl($item['thumbnail']) . '" style="height: 100px"/></td>
-					<td>' . $item['title'] . '</td>
-					<td>' . number_format($item['discount']) . ' VNĐ</td>
+					<td><img src="' . fixUrl($item['avatar']) . '" style="height: 100px"/></td>
+					<td>' . $item['name'] . '</td>
+					<td>' . $item['price'] . '</td>
 					<td>' . $item['category_name'] . '</td>
+					<td>' . $item['number'] . '</td>
+					<td>' . $item['number_buy'] . '</td>
 					<td style="width: 50px">
-						<a href="editor.php?id=' . $item['id'] . '"><button class="btn btn-warning">Sửa</button></a>
+						<a href="editor.php?id=' . $item['id'] . '"><button class="btn btn-warning">Modify</button></a>
 					</td>
 					<td style="width: 50px">
-						<button onclick="deleteProduct(' . $item['id'] . ')" class="btn btn-danger">Xoá</button>
+						<button onclick="deleteProduct(' . $item['id'] . ')" class="btn btn-danger">Delete</button>
 					</td>
 				</tr>';
 				}

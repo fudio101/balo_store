@@ -1,36 +1,41 @@
 <?php
-if(!empty($_POST)) {
+if (!empty($_POST)) {
 	$id = getPost('id');
 	$title = getPost('title');
 	$price = getPost('price');
-	
+
 	$thumbnail = moveFile('thumbnail');
 	// $img = moveFile('img');
 
 	$description = getPost('description');
 	$category_id = getPost('category_id');
+	$producer_id = getPost('producer_id');
 	$created_at = $updated_at = date('Y-m-d H:s:i');
 
-	if($id > 0) {
+	$user_ = $user['username'];
+
+	if ($id > 0) {
 		//update
-		if($thumbnail != '') {
-			$sql = "update db_product set avatar = '$thumbnail', name = '$title', price = $price, detail = '$description', modified = '$updated_at', catid = '$category_id' where id = $id";
+		if ($thumbnail != '') {
+			$sql = "SELECT avatar FROM db_product WHERE id = $id";
+			$item = executeResult($sql, true);
+			deleteFile($item['avatar']);
+			$sql = "update db_product set avatar = '$thumbnail', name = '$title', price = $price, detail = '$description', catid = '$category_id', modified_by = '$user_' where id = $id";
 		} else {
-			$sql = "update db_product set name = '$title', price = $price, detail = '$description', modified = '$updated_at', catid = '$category_id' where id = $id";
+			$sql = "update db_product set name = '$title', price = $price, detail = '$description', catid = '$category_id', modified_by = '$user_' where id = $id";
 		}
-		
+
 		execute($sql);
 
-		header('Location: index.php');
+		header('Location: ./');
 		die();
 	} else {
 		//insert
-		// $sql = "insert into db_product(thumbnail, title, price, discount, description, updated_at, created_at, deleted, category_id) values ('$thumbnail', '$title', '$price', '$discount', '$description', '$updated_at', '$created_at', 0, $category_id)";
-		$sql = "INSERT INTO `db_product`(`catid`, `name`, `avatar`, `img`, `detail`, `producer`, `number`, `price`, `created_by`) 
-		VALUES ('$category_id', '$name', '$thumbnail', '$thumbnail',)";
+		$sql = "INSERT INTO `db_product`(`catid`, `name`, `avatar`, `img`, `detail`, `producer`, `price`, `created_by`) 
+		VALUES ($category_id, '$title', '$thumbnail', '$thumbnail', '$description', $producer_id, '$price', '$user_')";
 		execute($sql);
 
-		header('Location: index.php');
+		header('Location: ./');
 		die();
 	}
 }

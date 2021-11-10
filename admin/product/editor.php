@@ -15,6 +15,7 @@ if ($id != '' && $id > 0) {
 		$title = $userItem['name'];
 		$price = $userItem['price'];
 		$category_id = $userItem['catid'];
+		$producer_id = $userItem['producer'];
 		$description = $userItem['description'];
 	} else {
 		$id = 0;
@@ -25,6 +26,8 @@ if ($id != '' && $id > 0) {
 
 $sql = "select * from db_category";
 $categoryItems = executeResult($sql);
+$sql = "select * from db_producer";
+$producerItems = executeResult($sql);
 ?>
 <!-- include summernote css/js -->
 <!-- <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet"> -->
@@ -48,7 +51,7 @@ $categoryItems = executeResult($sql);
 								<input type="text" name="id" value="<?= $id ?>" hidden="true">
 							</div>
 							<div class="form-group mt-3">
-								<label for="pwd">Content:</label>
+								<label for="description">Content:</label>
 								<textarea class="form-control mt-2" rows="5" name="description" id="description"><?= $description ?></textarea>
 							</div>
 
@@ -57,13 +60,13 @@ $categoryItems = executeResult($sql);
 
 						<div class="col-3">
 							<div class="form-group">
-								<label class="mb-2"for="thumbnail">Thumbnail:</label>
+								<label class="mb-2" for="thumbnail">Thumbnail:</label>
 								<input type="file" class="form-control" id="thumbnail" onchange="updateThumbnail(event);" name="thumbnail" accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*">
 								<img id="thumbnail_img" src="<?= fixUrl($thumbnail) == "../../" ? "" : fixUrl($thumbnail) ?>" style="max-height: 160px; margin-top: 5px; margin-bottom: 15px;">
 							</div>
 
 							<div class="form-group">
-								<label for="usr">Product Category:</label>
+								<label for="category_id">Product Category:</label>
 								<select class="form-control mt-2" name="category_id" id="category_id" required="true">
 									<option value="">-- Select --</option>
 									<?php
@@ -77,6 +80,23 @@ $categoryItems = executeResult($sql);
 									?>
 								</select>
 							</div>
+
+							<div class="form-group mt-3">
+								<label for="producer_id">Producer:</label>
+								<select class="form-control mt-2" name="producer_id" id="producer_id" required="true">
+									<option value="">-- Select --</option>
+									<?php
+									foreach ($producerItems as $item) {
+										if ($item['id'] == $producer_id) {
+											echo '<option selected value="' . $item['id'] . '">' . $item['name'] . '</option>';
+										} else {
+											echo '<option value="' . $item['id'] . '">' . $item['name'] . '</option>';
+										}
+									}
+									?>
+								</select>
+							</div>
+
 							<div class="form-group mt-3">
 								<label class="mb-2" for="price">Price:</label>
 								<input required="true" type="number" class="form-control" id="price" name="price" value="<?= $price ?>">

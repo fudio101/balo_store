@@ -33,7 +33,7 @@ if (!empty($_POST)) {
 			$sql = "SELECT * FROM `db_user` WHERE id = $id;";
 			$user = executeResult($sql, true);
 			$_SESSION['user'] = $user;
-			header('Location: index.php');
+			header('Location: ./');
 			die();
 		}
 	} else {
@@ -45,7 +45,7 @@ if (!empty($_POST)) {
 			$sql = "INSERT INTO db_user(fullname, username, password, role, email, phone , address, created_by) VALUES 
 			('$fullname', '$username', '$password', '$role_id', '$email', '$phone_number', '$address', '$user_')";
 			execute($sql);
-			header('Location: index.php');
+			header('Location: ./');
 			die();
 		} else {
 			//Tai khoan da ton tai -> failed

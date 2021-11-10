@@ -4,11 +4,13 @@ require_once('../../utils/utility.php');
 require_once('../../database/dbhelper.php');
 
 $user = getUserToken();
-if($user == null) {
+if ($user == null) {
 	die();
 }
 
-if(!empty($_POST)) {
+$user_ = $user["username"];
+
+if (!empty($_POST)) {
 	$action = getPost('action');
 
 	switch ($action) {
@@ -18,9 +20,11 @@ if(!empty($_POST)) {
 	}
 }
 
-function deleteProduct() {
+function deleteProduct()
+{
+	global $user_;
 	$id = getPost('id');
 	$updated_at = date("Y-m-d H:i:s");
-	$sql = "update Product set deleted = 1, updated_at = '$updated_at' where id = $id";
+	$sql = "UPDATE `db_product` SET `modified_by`='$user_',`status`=0 WHERE `id`=$id";
 	execute($sql);
 }
