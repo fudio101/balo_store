@@ -37,7 +37,7 @@ if (!empty($_POST)) {
 			die();
 		}
 	} else {
-		$sql = "select * from db_user where email = '$email' and username = '$username'";
+		$sql = "select * from db_user where email = '$email' or username = '$username'";
 		$userItem = executeResult($sql, true);
 		//insert
 		if ($userItem == null) {
