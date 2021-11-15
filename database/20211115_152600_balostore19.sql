@@ -3,13 +3,13 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Nov 10, 2021 at 11:12 AM
+-- Generation Time: Nov 15, 2021 at 09:26 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
-SET time_zone = "+07:00";
+SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -104,7 +104,7 @@ CREATE TABLE IF NOT EXISTS `db_discount` (
   `code` varchar(255) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Mã giảm giá',
   `discount` int(11) NOT NULL COMMENT 'Số tiền',
   `limit_number` int(11) NOT NULL COMMENT 'giới hạn lượt mua',
-  `number_used` int(11) NOT NULL COMMENT 'Số lượng đã nhập',
+  `number_used` int(11) NOT NULL DEFAULT 0 COMMENT 'Số lượng đã nhập',
   `expiration_date` date NOT NULL COMMENT 'Ngày hết hạn',
   `payment_limit` int(11) NOT NULL COMMENT 'giới hạn đơn hàng tối thiểu',
   `description` varchar(255) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Mô tả',
@@ -114,7 +114,20 @@ CREATE TABLE IF NOT EXISTS `db_discount` (
   `modified_by` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
   `status` tinyint(1) NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `db_discount`
+--
+
+INSERT INTO `db_discount` (`id`, `code`, `discount`, `limit_number`, `number_used`, `expiration_date`, `payment_limit`, `description`, `created`, `created_by`, `modified`, `modified_by`, `status`) VALUES
+(1, '213312', 12323, 12, 0, '2021-11-10', 5, 'Nguyên đẹp trai', '2021-11-14 22:29:23', 'BaloStore SuperAdmin', '2021-11-15 13:27:17', 'fudio101', 0),
+(2, '01012001', 15000, 5, 0, '2021-11-17', 30000, '', '2021-11-14 22:29:26', 'BaloStore SuperAdmin', '2021-11-15 13:27:17', 'fudio101', 0),
+(3, 'sdas', 123, 213, 0, '2021-11-17', 213, '123', '2021-11-15 13:19:08', 'fudio101', '2021-11-15 13:26:45', 'fudio101', 0),
+(4, 'sdas', 123, 213, 0, '2021-11-17', 213, '123', '2021-11-15 13:19:11', 'fudio101', '2021-11-15 13:26:46', 'fudio101', 0),
+(5, 'sdas', 123, 213, 0, '2021-11-17', 213, '123', '2021-11-15 13:19:25', 'fudio101', '2021-11-15 13:26:46', 'fudio101', 0),
+(6, 'sdasn', 123, 213, 0, '2021-11-17', 213, '123', '2021-11-15 13:26:41', 'fudio101', '2021-11-15 13:27:18', 'fudio101', 0),
+(7, '0803HAPPY', 100000, 83, 0, '2021-11-22', 150000, 'Happy 8/3', '2021-11-15 13:28:34', 'fudio101', NULL, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -876,7 +889,25 @@ CREATE TABLE IF NOT EXISTS `db_order` (
   KEY `customerid` (`phone`),
   KEY `province` (`province`),
   KEY `district` (`district`),
-  KEY `db_orderstatus` (`id`)
+  KEY `db_orderstatus` (`id`),
+  KEY `db_order_ibfk_5` (`status_code`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `db_orderdetail`
+--
+
+CREATE TABLE IF NOT EXISTS `db_orderdetail` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `orderid` int(11) NOT NULL,
+  `productid` int(11) NOT NULL,
+  `number` int(10) NOT NULL,
+  `price` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `productid` (`productid`),
+  KEY `orderid` (`orderid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -896,26 +927,10 @@ CREATE TABLE IF NOT EXISTS `db_orderstatus` (
 --
 
 INSERT INTO `db_orderstatus` (`id`, `orderstatus`) VALUES
+(0, 'Đã hủy'),
 (1, 'Đã thanh toán'),
 (2, 'Đang giao hàng'),
-(3, 'Đã giao'),
-(0, 'Đã hủy');
-
--- --------------------------------------------------------
---
--- Table structure for table `db_orderdetail`
---
-
-CREATE TABLE IF NOT EXISTS `db_orderdetail` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `orderid` int(11) NOT NULL,
-  `productid` int(11) NOT NULL,
-  `number` int(10) NOT NULL,
-  `price` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `productid` (`productid`),
-  KEY `orderid` (`orderid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+(3, 'Đã giao');
 
 -- --------------------------------------------------------
 
@@ -970,14 +985,7 @@ CREATE TABLE IF NOT EXISTS `db_product` (
   PRIMARY KEY (`id`),
   KEY `producer` (`producer`),
   KEY `catid` (`catid`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Dumping data for table `db_product`
---
-
-INSERT INTO `db_product` (`id`, `catid`, `name`, `avatar`, `img`, `detail`, `producer`, `number`, `number_buy`, `price`, `created`, `created_by`, `modified`, `modified_by`, `status`) VALUES
-(6, 8, 'asjhgdjhgsadjgksahflk', 'assets/photos/163653785017451.gif', 'assets/photos/163653735407016.gif', '', 1, 0, 0, 1555, '2021-11-10 16:42:34', 'fudio101', '2021-11-10 16:50:50', 'fudio101', 1);
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 

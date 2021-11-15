@@ -3,7 +3,7 @@ $title = 'Add/Edit Products';
 $baseUrl = '../';
 require_once('../layouts/header.php');
 
-$id = $thumbnail = $title = $price = $discount = $category_id = $description = '';
+$id = $fixedThumbnail = $imgs = $title = $price = $discount = $category_id = $description = '';
 require_once('form_save.php');
 
 $id = getGet('id');
