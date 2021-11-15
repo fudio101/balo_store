@@ -95,6 +95,33 @@ function moveFile($key, $rootPath = "../../")
 	return $newPath;
 }
 
+function moveFiles($key, $rootPath = "../../")
+{
+	$return = '';
+	$files = $_FILES[$key]['tmp_name'];
+	$i = count($files);
+	if ($i == 1) {
+		return $return;
+	}
+	foreach ($files as $index => $tmp_name) {
+		$filename = time() . str_pad(mt_rand(1, 99999), 5, '0', STR_PAD_LEFT);
+		$newPath = "assets/photos/" . $filename . "." . pathinfo($_FILES[$key]['name'][$index], PATHINFO_EXTENSION);;
+		move_uploaded_file($tmp_name, $rootPath . $newPath);
+		$return = $return . $newPath . ((--$i > 0) ? "#" : "");
+	}
+	return $return;
+}
+
+function deleteFiles($key, $rootPath = "../../")
+{
+	foreach (explode("#", $key) as $img) {
+		$path = $rootPath . $img;
+		if (!unlink($path))
+			return false;
+	}
+	return true;
+}
+
 function deleteFile($key, $rootPath = "../../")
 {
 	$path = $rootPath . $key;
