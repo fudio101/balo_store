@@ -7,7 +7,7 @@ if ($user["role"] != "1")
 
 $sql = "select db_user.*, db_usergroup.name as role_name 
 	from db_user left join db_usergroup on db_user.role = db_usergroup.id 
-	where db_user.status = 1 and (db_user.role = 2 or db_user.username = '" . $user["username"] . "')";
+	where db_user.status = 1";
 $data = executeResult($sql);
 ?>
 
@@ -47,7 +47,7 @@ $data = executeResult($sql);
 						<a href="editor.php?id=' . $item['id'] . '"><button class="btn btn-warning">Modify</button></a>
 					</td>
 					<td style="width: 50px">';
-					if ($user['id'] != $item['id'] && $item['role'] != 1) {
+					if ($user['id'] != $item['id']) {
 						echo '<button onclick="deleteUser(' . $item['id'] . ')" class="btn btn-danger">Delete</button>';
 					}
 					echo '

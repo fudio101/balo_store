@@ -10,7 +10,6 @@ if (!empty($_POST)) {
 	$description = getPost('description');
 	$category_id = getPost('category_id');
 	$producer_id = getPost('producer_id');
-	$created_at = $updated_at = date('Y-m-d H:s:i');
 
 	$user_ = $user['username'];
 
