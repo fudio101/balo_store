@@ -33,7 +33,7 @@ $data = executeResult($sql);
 				foreach ($data as $item) {
 					echo '<tr>
 					<th>' . (++$index) . '</th>
-					<td><img src="' . fixUrl($item['avatar']) . '" style="height: 100px"/></td>
+					<td><center><img src="' . fixUrl($item['avatar']) . '" style="height: 100px; object-fit: contain;"/></center></td>
 					<td>' . $item['name'] . '</td>
 					<td>' . $item['price'] . '</td>
 					<td>' . $item['category_name'] . '</td>

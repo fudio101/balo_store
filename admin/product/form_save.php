@@ -41,7 +41,7 @@ if (!empty($_POST)) {
 	} else {
 		//insert
 		$sql = "INSERT INTO `db_product`(`catid`, `name`, `avatar`, `img`, `detail`, `producer`, `price`, `created_by`) 
-		VALUES ($category_id, '$title', '$thumbnail', '$thumbnail', '$description', $producer_id, '$price', '$user_')";
+		VALUES ($category_id, '$title', '$thumbnail', '$imgs', '$description', $producer_id, '$price', '$user_')";
 		execute($sql);
 
 		header('Location: ./');

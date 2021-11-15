@@ -64,7 +64,7 @@ $producerItems = executeResult($sql);
 							<div class="form-group">
 								<label class="mb-2" for="thumbnail">Thumbnail:</label>
 								<input type="file" class="form-control" id="thumbnail" name="thumbnail" accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*">
-								<img src="<?= $fixedThumbnail == "../../" ? "" : $fixedThumbnail ?>" class="mt-2" style="max-height: 160px;">
+								<img src="<?= $fixedThumbnail ?>" class="mt-2" style="max-height: 160px;">
 							</div>
 
 							<div class="form-group mt-3">
@@ -75,7 +75,7 @@ $producerItems = executeResult($sql);
 									foreach (explode("#", $imgs) as $img) :
 										$fixedImg = fixUrl($img);
 									?>
-										<img src="<?= $fixedImg == "../../" ? "" : $fixedImg ?>" class="mt-2 col-6" style="max-height: 160px; object-fit: contain;">
+										<img src="<?= $fixedImg ?>" class="mt-2 col-6" style="max-height: 160px; object-fit: contain;">
 									<?php endforeach; ?>
 
 								</div>
