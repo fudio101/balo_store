@@ -1,5 +1,13 @@
 <?php
+
 $baseUrl = './';
+
+require_once('./utils/utility.php');
+require_once('./database/dbhelper.php');
+
+
+$sqlGetProduct = "SELECT * FROM db_product";
+$products =  executeResult($sqlGetProduct);
 
 ?>
 
@@ -56,6 +64,27 @@ $baseUrl = './';
                     </div>
                     <div class="row sm-gutter">
 
+                        <?php foreach($products as $product): ?>
+                        <div class="col l-2-4 m-4 c-6 container-shoping__culum">
+                            <a href="" class="container-home__fb">
+                                <div class="container-shoping">
+                                    <div class="container-shoping__img">
+                                        <img src="./<?=$product['avatar'];?>" alt="" class="container-shoping__img-image">
+                                    </div>
+                                    <div class="container-shoping__content">
+                                        <span class="container-shoping__content-span">
+                                            <?=$product['name'];?>
+                                        </span>
+                                    </div>
+                                    <div class="container-shoping__money">
+                                        <span class="container-shoping__money-line">
+                                            <?=number_format($product['price'],0,',','.');?>₫
+                                        </span>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <?php endforeach; ?>
                         <div class="col l-2-4 m-4 c-6 container-shoping__culum">
                             <a href="" class="container-home__fb">
                                 <div class="container-shoping">
