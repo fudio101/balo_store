@@ -3,13 +3,13 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Nov 10, 2021 at 11:12 AM
+-- Generation Time: Nov 15, 2021 at 10:11 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
-SET time_zone = "+07:00";
+SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -104,7 +104,7 @@ CREATE TABLE IF NOT EXISTS `db_discount` (
   `code` varchar(255) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Mã giảm giá',
   `discount` int(11) NOT NULL COMMENT 'Số tiền',
   `limit_number` int(11) NOT NULL COMMENT 'giới hạn lượt mua',
-  `number_used` int(11) NOT NULL COMMENT 'Số lượng đã nhập',
+  `number_used` int(11) NOT NULL DEFAULT 0 COMMENT 'Số lượng đã nhập',
   `expiration_date` date NOT NULL COMMENT 'Ngày hết hạn',
   `payment_limit` int(11) NOT NULL COMMENT 'giới hạn đơn hàng tối thiểu',
   `description` varchar(255) COLLATE utf8_unicode_ci NOT NULL COMMENT 'Mô tả',
@@ -114,7 +114,20 @@ CREATE TABLE IF NOT EXISTS `db_discount` (
   `modified_by` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
   `status` tinyint(1) NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `db_discount`
+--
+
+INSERT INTO `db_discount` (`id`, `code`, `discount`, `limit_number`, `number_used`, `expiration_date`, `payment_limit`, `description`, `created`, `created_by`, `modified`, `modified_by`, `status`) VALUES
+(1, '213312', 12323, 12, 0, '2021-11-10', 5, 'Nguyên đẹp trai', '2021-11-14 22:29:23', 'BaloStore SuperAdmin', '2021-11-15 13:27:17', 'fudio101', 0),
+(2, '01012001', 15000, 5, 0, '2021-11-17', 30000, '', '2021-11-14 22:29:26', 'BaloStore SuperAdmin', '2021-11-15 13:27:17', 'fudio101', 0),
+(3, 'sdas', 123, 213, 0, '2021-11-17', 213, '123', '2021-11-15 13:19:08', 'fudio101', '2021-11-15 13:26:45', 'fudio101', 0),
+(4, 'sdas', 123, 213, 0, '2021-11-17', 213, '123', '2021-11-15 13:19:11', 'fudio101', '2021-11-15 13:26:46', 'fudio101', 0),
+(5, 'sdas', 123, 213, 0, '2021-11-17', 213, '123', '2021-11-15 13:19:25', 'fudio101', '2021-11-15 13:26:46', 'fudio101', 0),
+(6, 'sdasn', 123, 213, 0, '2021-11-17', 213, '123', '2021-11-15 13:26:41', 'fudio101', '2021-11-15 13:27:18', 'fudio101', 0),
+(7, '0803HAPPY', 100000, 83, 0, '2021-11-22', 150000, 'Happy 8/3', '2021-11-15 13:28:34', 'fudio101', NULL, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -876,7 +889,25 @@ CREATE TABLE IF NOT EXISTS `db_order` (
   KEY `customerid` (`phone`),
   KEY `province` (`province`),
   KEY `district` (`district`),
-  KEY `db_orderstatus` (`id`)
+  KEY `db_orderstatus` (`id`),
+  KEY `db_order_ibfk_5` (`status_code`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `db_orderdetail`
+--
+
+CREATE TABLE IF NOT EXISTS `db_orderdetail` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `orderid` int(11) NOT NULL,
+  `productid` int(11) NOT NULL,
+  `number` int(10) NOT NULL,
+  `price` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `productid` (`productid`),
+  KEY `orderid` (`orderid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -896,26 +927,10 @@ CREATE TABLE IF NOT EXISTS `db_orderstatus` (
 --
 
 INSERT INTO `db_orderstatus` (`id`, `orderstatus`) VALUES
+(0, 'Đã hủy'),
 (1, 'Đã thanh toán'),
 (2, 'Đang giao hàng'),
-(3, 'Đã giao'),
-(0, 'Đã hủy');
-
--- --------------------------------------------------------
---
--- Table structure for table `db_orderdetail`
---
-
-CREATE TABLE IF NOT EXISTS `db_orderdetail` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `orderid` int(11) NOT NULL,
-  `productid` int(11) NOT NULL,
-  `number` int(10) NOT NULL,
-  `price` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `productid` (`productid`),
-  KEY `orderid` (`orderid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+(3, 'Đã giao');
 
 -- --------------------------------------------------------
 
@@ -970,14 +985,15 @@ CREATE TABLE IF NOT EXISTS `db_product` (
   PRIMARY KEY (`id`),
   KEY `producer` (`producer`),
   KEY `catid` (`catid`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `db_product`
 --
 
 INSERT INTO `db_product` (`id`, `catid`, `name`, `avatar`, `img`, `detail`, `producer`, `number`, `number_buy`, `price`, `created`, `created_by`, `modified`, `modified_by`, `status`) VALUES
-(6, 8, 'asjhgdjhgsadjgksahflk', 'assets/photos/163653785017451.gif', 'assets/photos/163653735407016.gif', '', 1, 0, 0, 1555, '2021-11-10 16:42:34', 'fudio101', '2021-11-10 16:50:50', 'fudio101', 1);
+(8, 7, 'Balo Mikkor The Kalino M Red', '163696677049082.jpg', '163696677069458.jpg#163696677093341.jpg#163696677042347.jpg#163696677029234.jpg#163696677031147.jpg', 'Mikkor The Kalino M Red là sản phẩm balo học sinh đến từ thương hiệu Mikkor với những đặc tính tiện lợi và mang vẻ đẹp đặc trưng của phong cách Hàn Quốc. Mikkor được giới trẻ Việt Nam ưa chuộng bởi những thiết kế hiện đại, nhiều tiện ích và luôn bắt kịp xu hướng thời trang của thế giới.\r\n\r\nTính năng nổi bật của balo Mikkor\r\nThiết kế hiện đại, năng động\r\nChiếc balo Mikkor The Kalino được thiết kế vẻ ngoài đơn giản với 6 màu sắc nổi bật: Black, Navy, Graphite, Light Grey và Red và các chi tiết được sắp xếp gọn gàng mang lại cho người sử dụng cảm giác nhẹ nhàng, thoải mái. Với phong cách trẻ trung, hiện đại, mẫu balo Mikkor sở hữu nhiều tính năng vượt trội có thể đồng hành cùng bạn suốt ngày dài đến trường học hay đến cơ quan làm việc thật hiệu quả và tiện lợi. \r\n\r\nNgăn chứa rộng rãi, tiện lợi\r\nBalo Mikkor The Kalino được thiết kế gồm 1 ngăn chính lớn, 1 ngăn laptop cho các dòng máy tính lớn lên đến 15.6 inch, 2 ngăn nhỏ đựng phụ kiện, 2 ngăn dắt viết, 1 ngăn lưới đựng chìa khoá, tai nghe, bên ngoài với 2 ngăn đựng bình nước. Mẫu balo Mikkor The Kalino mang đến cho bạn sự lựa chọn tuyệt vời khi cần mang theo nhiều đồ dùng trong mỗi chuyến đi.\r\n\r\nChất liệu chống thấm nước cực tốt\r\nBạn là người có sở thích đựng laptop, iPad trong những chiếc balo nhiều ngăn tiện dụng, thì balo Mikkor The Kalino  sẽ là một gợi ý mà bạn không thể bỏ qua. Được làm từ chất liệu vải cao cấp 900D Kodura Supertex , chống thấm nước tốt, sản phẩm sẽ giúp bảo vệ đồ dùng của bạn được an toàn, ngay cả khi đi dưới trời mưa.\r\n\r\nQuai đeo và đệm lưng chắc chắn\r\nThân sau đệm foam trên nền lưới airmesh thoáng nhiệt tạo sự êm ái và thoải mái khi đeo. Thân túi đệm foam PE dày giúp chống sốc tốt và bảo vệ máy tính cũng như đồ dùng bên trong được an toàn, foam dày cũng giúp cho sản phẩm định hình tốt và luôn có dáng form đẹp. Quai đeo êm ái giúp giảm bớt cảm giác mỏi vai và lưng khi đeo trong thời gian dài. Bên cạnh đó, quai đeo còn có thể tăng giảm độ dài, tiện lợi để bạn điều chỉnh phù hợp với chiều cao của mình.\r\nMikkor The Kalino và các lưu ý\r\nMang đồ vừa phải\r\nVới khả năng chứa đồ rộng rãi, thoải mái của những chiếc balo, người sử dụng thường sắp xếp đồ đạc mang đi nhiều mà không quan tâm đến trọng lượng của nó. Điều này không những dễ làm giảm tuổi thọ của sản phẩm mà còn ảnh hưởng phần nào đến sức khỏe vì phải tình trạng quá tải sức nặng lên vai. Chỉ nên chứa đựng vật dụng phù hợp và cần thiết để bảo quản tốt balo và đồ đạc được ngăn nắp, gọn gàng.\r\n\r\nThường xuyên vệ sinh balo\r\nVì balo là vật dụng thường xuyên chứa đựng nhiều đồ đạc và phải tiếp xúc với nhiều nơi như mặt đất, cốp xe, bàn, ghế,... nên bạn cần vệ sinh balo định kì để giữ cho sản phẩm luôn sạch sẽ và màu sắc tươi sáng như mới.', 3, 0, 0, 520000, '2021-11-15 15:42:36', 'fudio101', '2021-11-15 15:59:30', 'fudio101', 1),
+(9, 7, 'Balo Seliux F4 Phantom II Backpack M Black', '163696683491965.jpg', '163696684439828.jpg#163696684495853.jpg#163696684426418.jpg#163696684483013.jpg#163696684443983.jpg#163696684409639.jpg#163696684446525.jpg#163696684421762.jpg', '', 3, 0, 0, 500000, '2021-11-15 15:46:23', 'fudio101', '2021-11-15 16:00:44', 'fudio101', 1);
 
 -- --------------------------------------------------------
 

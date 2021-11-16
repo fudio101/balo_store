@@ -85,6 +85,13 @@ if ($user == null) {
               </a>
             </li>
 
+            <li class="nav-item">
+              <a class="nav-link discount" href="<?= $baseUrl ?>discount">
+                <i class="bi bi-minecart"></i>
+                Discount
+              </a>
+            </li>
+
             <?php if ($user["role"] == "1") : ?>
               <li class='nav-item'>
                 <a class='nav-link user' href='<?= $baseUrl ?>user'>

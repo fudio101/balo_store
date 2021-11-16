@@ -3,7 +3,7 @@ $title = 'Add/Edit Products';
 $baseUrl = '../';
 require_once('../layouts/header.php');
 
-$id = $thumbnail = $title = $price = $discount = $category_id = $description = '';
+$id = $fixedThumbnail = $imgs = $title = $price = $discount = $category_id = $description = '';
 require_once('form_save.php');
 
 $id = getGet('id');
@@ -12,11 +12,13 @@ if ($id != '' && $id > 0) {
 	$userItem = executeResult($sql, true);
 	if ($userItem != null) {
 		$thumbnail = $userItem['avatar'];
+		$fixedThumbnail = fixUrl($thumbnail);
+		$imgs = $userItem['img'];
 		$title = $userItem['name'];
 		$price = $userItem['price'];
 		$category_id = $userItem['catid'];
 		$producer_id = $userItem['producer'];
-		$description = $userItem['description'];
+		$description = $userItem['detail'];
 	} else {
 		$id = 0;
 	}
@@ -61,11 +63,25 @@ $producerItems = executeResult($sql);
 						<div class="col-3">
 							<div class="form-group">
 								<label class="mb-2" for="thumbnail">Thumbnail:</label>
-								<input type="file" class="form-control" id="thumbnail" onchange="updateThumbnail(event);" name="thumbnail" accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*">
-								<img id="thumbnail_img" src="<?= fixUrl($thumbnail) == "../../" ? "" : fixUrl($thumbnail) ?>" style="max-height: 160px; margin-top: 5px; margin-bottom: 15px;">
+								<input type="file" class="form-control" id="thumbnail" name="thumbnail" accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*">
+								<img src="<?= $fixedThumbnail ?>" class="mt-2" style="max-height: 160px;">
 							</div>
 
-							<div class="form-group">
+							<div class="form-group mt-3">
+								<label class="mb-2" for="imgs">Images:</label>
+								<input type="file" class="form-control" id="imgs" name="imgs[]" accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*" multiple>
+								<div class="row">
+									<?php
+									foreach (explode("#", $imgs) as $img) :
+										$fixedImg = fixUrl($img);
+									?>
+										<img src="<?= $fixedImg ?>" class="mt-2 col-6" style="max-height: 160px; object-fit: contain;">
+									<?php endforeach; ?>
+
+								</div>
+							</div>
+
+							<div class="form-group mt-3">
 								<label for="category_id">Product Category:</label>
 								<select class="form-control mt-2" name="category_id" id="category_id" required="true">
 									<option value="">-- Select --</option>
