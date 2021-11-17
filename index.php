@@ -75,7 +75,7 @@ $products =  executeResult($sqlGetProduct);
                                     </div>
                                     <div class="container-shoping__content">
                                         <span class="container-shoping__content-span">
-                                            Túi Xách Cartinoe MIVIDA1071 Lamando 15.6
+                                            Túi Xách Cartinoe MIVIDA1071 Lamando 15.7
                                         </span>
                                     </div>
                                     <div class="container-shoping__money">
