@@ -157,7 +157,7 @@ $baseUrl = '../';
                                                  lập theo địa chỉ khu vực của bạn. Vui lòng liên hệ
                                                   với quản trị website để hỗ trợ vấn đề này.
                                             </p>
-                                            <button type="" class="btn btn--green container-bill__pay-submit">Đặt Hàng</button>
+                                            <button type="button" class="btn btn--green container-bill__pay-submit js-pay-submit">Đặt Hàng</button>
                                             <p class="container-bill__pay-noti">
                                                 Thông tin cá nhân của bạn sẽ được sử dụng để
                                                  xử lý đơn hàng, tăng trải nghiệm sử dụng website
@@ -172,7 +172,24 @@ $baseUrl = '../';
                   </div>  
                </div>
             </div>
-
+            <div class="modal-pay js-modal-turnon">
+                <div class="modal-pay__over"></div>
+                <div class="modal-pay__form">
+                    <div class="modal-form__list">
+                        <img src="../assets/images/MoMo.png" alt="" class="modal-form__img-list">
+                        <p class="modal-form__list-text">Quét mã QR Code để thanh toán</p>
+                    </div>
+                    <div class="modal-form__img">
+                        <img src="../assets/images/qr.jpg" alt="" class="modal-form__img-last">
+                        <p class="modal-form__list-span js-modal-number"></p>
+                        <p class="modal-form__list-span js-modal-sucsess"></p>
+                    </div>
+                    <div class="modal-form__pays">
+                        <!-- <button class="modal-form__pays-submit js-modal-pays">Đồng ý thanh toán</button> -->
+                        <button class="modal-form__pays-close js-modal-close">Trở về</button>
+                    </div>
+                </div>
+            </div>
         <?php require_once($baseUrl . "layouts/bot.php"); ?>
         </div>
         <!-- javasprit -->

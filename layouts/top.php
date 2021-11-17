@@ -229,14 +229,14 @@
                                         <span class="hearder-shop__sumoney-money">15.500.000đ</span>
                                     </div>
                                     <div class="hearder-shop__box">
-                                        <bottom class="btn btn--blue hearder-shop__box-bottom">
+                                        <button class="hearder-shop__box-bottom">
                                             <a href="<?= $baseUrl ?>cart/" class="hearder-shop__box-link">Xem giỏ
                                                 hàng</a>
-                                        </bottom>
-                                        <bottom class="btn btn--green hearder-shop__box-bottom">
+                                        </button>
+                                        <button class="hearder-shop__box-bottom">
                                             <a href="<?= $baseUrl ?>pay" class="hearder-shop__box-pay">Thanh
                                                 toán</a>
-                                        </bottom>
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -251,7 +251,7 @@
             <div class="hearder-from">
                 <ul class="hearder-footer__list">
                     <li class="hearder-footer__link ">
-                        <a href="" class="hearder-footer__href hearder-footer__black">
+                        <a href="../index.php" class="hearder-footer__href hearder-footer__black">
                             Trang chủ
                         </a>
                     </li>
