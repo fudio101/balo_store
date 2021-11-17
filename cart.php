@@ -39,10 +39,10 @@ require_once("./utils/utility.php");
                                         <tr class="container-bank__table-tr">
                                             <td class="container-bank__table-td">
                                                 <div class="container-bank__table-flex">
-                                                    <i class="container-bank__table-icon far fa-times-circle" onclick="deleteItem(<?= $cart[$key]['id'] ?>)" style="margin:0 12px 0 -30px; cursor: pointer;"></i>
+                                                    <i class="container-bank__table-icon far fa-times-circle" onclick="deleteItem(<?= $cart[$key]['id'] ?>)" style="cursor: pointer;"></i>
                                                     <a href="<?= $baseUrl . 'product.php?id=' . $cart[$key]['id'] ?>" class="container-bank__link">
                                                         <img src="<?= fixUrl($product_['avatar'], $baseUrl) ?>" alt="" class="container-bank__link-img">
-                                                        <span class="container-bank__link-text" style="margin-left: 12px;">
+                                                        <span class="container-bank__link-text">
                                                             <?= $product_['name'] ?>
                                                         </span>
                                                     </a>
@@ -91,8 +91,8 @@ require_once("./utils/utility.php");
                                 <button type="" class="btn btn--green container-bank__cart-btn">Tiến hành thanh toán</button>
                                 <form action="" class="container-bank__form-list">
                                     <label for="" class="container-bank__lable">Phiếu ưu đãi</label>
-                                    <input type="text" class="container-bank__input">
-                                    <button class="container-bank__submit">Áp dụng</button>
+                                    <input type="text" class="container-bank__input js-bank-input" onchange="myFunction()">
+                                    <button class="container-bank__submit js-bank-submit">Áp dụng</button>
                                 </form>
                             </div>
                         </div>
@@ -162,6 +162,19 @@ require_once("./utils/utility.php");
             if ($('#fix-number-' + value).val() > 1) {
                 $('#fix-number-' + value).val(parseInt($('#fix-number-' + value).val()) - 1);
                 updateItem(value, $('#fix-number-' + value).val());
+            }
+        }
+    </script>
+    <script>
+        /*làm áp dụng phiếu ưu đãi */
+        let bankInput = $('.js-bank-input');
+        let bankSubmit = $('.js-bank-submit');
+
+        function myFunction() {
+            if (bankInput.val().trim().length > 0) {
+                bankSubmit.addClass('open');
+            } else {
+                bankSubmit.removeClass('open');
             }
         }
     </script>
