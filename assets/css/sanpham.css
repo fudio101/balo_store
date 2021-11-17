@@ -297,9 +297,8 @@ html {
 .container-painted__p {
     height: 40px;
     width: 100px;
-    text-align: center;
     line-height: 40px;
-    font-size: 0.9rem;
+    font-size: 1rem;
     text-transform: uppercase;
     font-weight: 600;
     display: block;
@@ -342,8 +341,11 @@ html {
     position: relative;
     display: block;
     text-decoration: none;
+    display: block;
 }
-
+.container-sp__cart:hover .container-sp__cart-img{
+    transform: scale(1.075);
+}
 .container-sp__cart-postion {
     position: absolute;
     top: 2%;
@@ -392,11 +394,11 @@ html {
     text-align: center;
     color: var(--blue-text);
     font-size: 0.9rem;
-    height: 32px;
+    height: 16px;
     overflow: hidden;
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: 1;
 }
 
 .container-sp__noti-p:hover {
@@ -468,6 +470,7 @@ html {
     text-decoration: none;
 }
 
+
 .container-sidebar__group-div {
     padding-left: 10px;
 }
@@ -475,12 +478,12 @@ html {
 .container-sidebar__group-noti {
     margin: 0;
     font-size: 0.9rem;
-    height: 32px;
+    height: 16px;
     overflow: hidden;
     color: var(--blue-text);
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: 1;
 }
 
 .container-sidebar__group-noti:hover {
