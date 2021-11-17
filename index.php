@@ -81,7 +81,7 @@ $products = executeResult($sqlGetProduct);
 
                         <?php foreach ($products as $product) : ?>
                             <div class="col l-2-4 m-4 c-6 container-shoping__culum">
-                                <a href="product.php?catid=<?= '1'; ?>&id=<?= '1'; ?>" class="container-home__fb">
+                                <a href="product.php?id=<?=$product['id']; ?>" class="container-home__fb">
                                     <div class="container-shoping">
                                         <div class="container-shoping__img">
                                             <img src="<?= fixUrl($product['avatar'], './'); ?>" alt="" class="container-shoping__img-image">
