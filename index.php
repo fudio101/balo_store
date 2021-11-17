@@ -27,8 +27,6 @@ if($curentPage < 4){
     $pageEnd = $maxPage;
     $pageStart = $maxPage>5?($pageEnd-4):1;
 }
-
-echo "$pageStart -> $pageEnd";
 //0->count-1
 $offset = ($curentPage - 1) * $numProductsPerPage;
 $sqlGetProduct =    "SELECT *
