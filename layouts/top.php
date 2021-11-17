@@ -2,7 +2,7 @@
 session_start();
 
 $total = $number = 0;
-$cart = $cartList = null;
+$cart = $cartList = $category = null;
 if (!empty($_SESSION['cart'])) {
     $cart = $_SESSION['cart'];
     foreach ($cart as $item) {
@@ -14,6 +14,13 @@ if (!empty($_SESSION['cart'])) {
     }
 }
 
+$sql = "SELECT * FROM db_category WHERE status = 1";
+$result = executeResult($sql, false);
+if ($result != null) {
+    foreach ($result as $item) {
+        $category[] = $item;
+    }
+}
 
 ?>
 
@@ -127,7 +134,7 @@ if (!empty($_SESSION['cart'])) {
                                     </div>
                                     <div class="hearder-shop__box">
                                         <button class="hearder-shop__box-bottom">
-                                            <a href="<?= $baseUrl ?>cart/" class="hearder-shop__box-link">Xem giỏ
+                                            <a href="<?= $baseUrl ?>cart.php" class="hearder-shop__box-link">Xem giỏ
                                                 hàng</a>
                                         </button>
                                         <button class="hearder-shop__box-bottom">
@@ -150,7 +157,7 @@ if (!empty($_SESSION['cart'])) {
             <div class="hearder-from">
                 <ul class="hearder-footer__list">
                     <li class="hearder-footer__link ">
-                        <a href="../index.php" class="hearder-footer__href hearder-footer__black">
+                        <a href="./index.php" class="hearder-footer__href hearder-footer__black">
                             Trang chủ
                         </a>
                     </li>
@@ -161,15 +168,13 @@ if (!empty($_SESSION['cart'])) {
                         </span>
                         <div class="hearder-footer__sugget">
                             <ul class="hearder-footer__sugget-list">
-                                <a href="<?= $baseUrl ?>tuixach.html" class="hearder-footer__sugget-link">
-                                    <li class="hearder-footer__sugget-li">Túi Xách</li>
-                                </a>
-                                <a href="<?= $baseUrl ?>balo.html" class="hearder-footer__sugget-link">
-                                    <li class="hearder-footer__sugget-li">Balo</li>
-                                </a>
-                                <a href="<?= $baseUrl ?>vali.html" class="hearder-footer__sugget-link">
-                                    <li class="hearder-footer__sugget-li">Vali</li>
-                                </a>
+
+                                <?php foreach ($category as $key => $value) : ?>
+                                    <a href="./category.php?catid=<?= $value['id'] ?>" class="hearder-footer__sugget-link">
+                                        <li class="hearder-footer__sugget-li"><?= $value['name'] ?></li>
+                                    </a>
+                                <?php endforeach; ?>
+
                             </ul>
                         </div>
                     </li>

@@ -33,6 +33,7 @@ if (!empty($_GET['id'])) {
 <!DOCTYPE html>
 <html lang="en">
 <?php require_once('./layouts/head.php'); ?>
+
 <body>
     <div class="apps">
         <?php require_once($baseUrl . "layouts/top.php"); ?>
@@ -228,14 +229,16 @@ if (!empty($_GET['id'])) {
                 var id = <?= $product['id'] ?>;
                 var quantity = $('#numProducts').val();
                 $.ajax({
-                    url: './add-to-cart.php',
+                    url: './api/cart.php',
                     type: 'POST',
                     data: {
                         id: id,
-                        quantity: quantity
+                        quantity: quantity,
+                        action: 'add'
                     },
                     success: function(data) {
                         alert(data);
+                        location.reload();
                     }
                 });
             });
