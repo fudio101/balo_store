@@ -39,10 +39,10 @@ require_once("./utils/utility.php");
                                         <tr class="container-bank__table-tr">
                                             <td class="container-bank__table-td">
                                                 <div class="container-bank__table-flex">
-                                                    <i class="container-bank__table-icon far fa-times-circle" onclick="deleteItem(<?= $cart[$key]['id'] ?>)" style="margin:0 12px 0 -30px; cursor: pointer;"></i>
+                                                    <i class="container-bank__table-icon far fa-times-circle" onclick="deleteItem(<?= $cart[$key]['id'] ?>)" style="cursor: pointer;"></i>
                                                     <a href="<?= $baseUrl . 'product.php?id=' . $cart[$key]['id'] ?>" class="container-bank__link">
                                                         <img src="<?= fixUrl($product_['avatar'], $baseUrl) ?>" alt="" class="container-bank__link-img">
-                                                        <span class="container-bank__link-text" style="margin-left: 12px;">
+                                                        <span class="container-bank__link-text">
                                                             <?= $product_['name'] ?>
                                                         </span>
                                                     </a>

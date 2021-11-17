@@ -237,7 +237,8 @@ if (!empty($_GET['id'])) {
                         action: 'add'
                     },
                     success: function(data) {
-                        alert(data);
+                        if (data != '')
+                            alert(data);
                         location.reload();
                     }
                 });
