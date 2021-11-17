@@ -54,7 +54,8 @@ $producerItems = executeResult($sql);
 							</div>
 							<div class="form-group mt-3">
 								<label for="description">Content:</label>
-								<textarea class="form-control mt-2" rows="5" name="description" id="description"><?= $description ?></textarea>
+								<!-- <textarea class="form-control mt-2" rows="5" name="description" id="description"></textarea> -->
+								<textarea class="form-control summernote mt-2" name="description" id="description"><?= $description ?></textarea>
 							</div>
 
 							<button class="btn btn-success mt-3">Save</button>
@@ -126,6 +127,23 @@ $producerItems = executeResult($sql);
 	</div>
 </div>
 
+<script>
+
+	$('textarea.summernote').summernote({
+        placeholder: 'We need something here',
+        tabsize: 2,
+        height: 120,
+        toolbar: [
+          ['style', ['style']],
+          ['font', ['bold', 'underline', 'clear']],
+          ['color', ['color']],
+          ['para', ['ul', 'ol', 'paragraph']],
+          ['table', ['table']],
+          ['insert', ['link', 'picture', 'video']],
+          ['view', ['fullscreen', 'codeview', 'help']]
+        ]
+      });
+</script>
 <?php
 require_once('../layouts/footer.php');
 ?>
