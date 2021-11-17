@@ -33,8 +33,6 @@ if (!empty($_GET['id'])) {
 <!DOCTYPE html>
 <html lang="en">
 <?php require_once('./layouts/head.php'); ?>
-
-
 <body>
     <div class="apps">
         <?php require_once($baseUrl . "layouts/top.php"); ?>

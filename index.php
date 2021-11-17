@@ -1,7 +1,5 @@
 <?php
 
-//$baseUrl = './';
-
 require_once('./utils/utility.php');
 require_once('./database/dbhelper.php');
 
@@ -14,18 +12,18 @@ $curentPage = 1;
 if (isset($_GET['page'])) {
     $curentPage = (int)$_GET['page'];
 }
-$curentPage = $curentPage<1 ? 1 : $curentPage;
-$curentPage = $curentPage>$maxPage ? $maxPage : $curentPage;
+$curentPage = $curentPage < 1 ? 1 : $curentPage;
+$curentPage = $curentPage > $maxPage ? $maxPage : $curentPage;
 
 $pageStart = $curentPage - 2;
-$pageEnd = $curentPage + 2; 
+$pageEnd = $curentPage + 2;
 
-if($curentPage < 4){
+if ($curentPage < 4) {
     $pageStart = 1;
-    $pageEnd = $maxPage>5?($pageStart+4):$maxPage;
-} elseif($curentPage > $maxPage-3){
+    $pageEnd = $maxPage > 5 ? ($pageStart + 4) : $maxPage;
+} elseif ($curentPage > $maxPage - 3) {
     $pageEnd = $maxPage;
-    $pageStart = $maxPage>5?($pageEnd-4):1;
+    $pageStart = $maxPage > 5 ? ($pageEnd - 4) : 1;
 }
 
 //0->count-1
@@ -80,7 +78,7 @@ $products = executeResult($sqlGetProduct);
 
                         <?php foreach ($products as $product) : ?>
                             <div class="col l-2-4 m-4 c-6 container-shoping__culum">
-                                <a href="product.php?id=<?=$product['id']; ?>" class="container-home__fb">
+                                <a href="product.php?id=<?= $product['id']; ?>" class="container-home__fb">
                                     <div class="container-shoping">
                                         <div class="container-shoping__img">
                                             <img src="<?= fixUrl($product['avatar'], './'); ?>" alt="" class="container-shoping__img-image">
@@ -104,19 +102,17 @@ $products = executeResult($sqlGetProduct);
                     <div class="container-page">
                         <ul class="container-page__form">
                             <li class="container-page__list">
-                                <a href="index.php?page=<?=$curentPage>5?($curentPage-5):1;?>" class="container-page__link">
+                                <a href="index.php?page=<?= $curentPage > 5 ? ($curentPage - 5) : 1; ?>" class="container-page__link">
                                     <i class="container-page__icon fas fa-angle-double-left"></i>
                                 </a>
                             </li>
-                            <?php for($index = $pageStart; $index<=$pageEnd; $index++): ?>
-                            <li class="container-page__list <?=$index==$curentPage?'open-color':'';?>">
-                                <a href="index.php?page=<?=$index;?>"
-                                    class="container-page__link"
-                                    ><?=$index;?></a>
-                            </li>
+                            <?php for ($index = $pageStart; $index <= $pageEnd; $index++) : ?>
+                                <li class="container-page__list <?= $index == $curentPage ? 'open-color' : ''; ?>">
+                                    <a href="index.php?page=<?= $index; ?>" class="container-page__link"><?= $index; ?></a>
+                                </li>
                             <?php endfor; ?>
                             <li class="container-page__list">
-                                <a href="index.php?page=<?=$curentPage<($maxPage-5)?($curentPage+5):$maxPage;?>" class="container-page__link">
+                                <a href="index.php?page=<?= $curentPage < ($maxPage - 5) ? ($curentPage + 5) : $maxPage; ?>" class="container-page__link">
                                     <i class="container-page__icon fas fa-angle-double-right"></i>
                                 </a>
                             </li>
@@ -146,117 +142,66 @@ $products = executeResult($sqlGetProduct);
             <div class="container-voter">
                 <div class="grid wide">
                     <div class="container-section">
+                        <?php
+                            $getCategory = 'SELECT `id`,`name` FROM `db_category` WHERE `status`=1 ';
+                            $rowsCategory = executeResult($getCategory);
+                        ?>
+                        <?php foreach($rowsCategory as $rowCategory):
+                            $catid = $rowCategory['id'];
+                        ?>
                         <div class="container-sale__shop">
-                            <sapn class="container-sale__span">Vali</sapn>
+                            <sapn class="container-sale__span"><?=$rowCategory['name'];?></sapn>
                         </div>
                         <div class="row sm-gutter">
+                            <?php
+                                $sql = 'SELECT `id`,`avatar`,`name`,`price` FROM `db_product` WHERE `status`=1 ';
+                                $rows = executeResult("$sql AND `catid`=$catid ORDER BY `number_buy` DESC LIMIT 5");
+                            ?>
+                            <?php foreach ($rows as $row): ?>
                             <div class="col l-2-4 m-4 c-6 container-shoping__culum">
-                                <a href="" class="container-home__fb">
+                                <a href="product.php?id=<?=$row['id']?>" class="container-home__fb">
                                     <div class="container-vali">
                                         <div class="container-vali__img">
-                                            <img src="./assets/photos/163713747183715.jpg" alt="" class="container-vali__img-image">
+                                            <img src="<?=fixUrl($row['avatar'],'./');?>" alt="" class="container-vali__img-image">
                                         </div>
                                         <div class="container-vali__content">
                                             <span class="container-vali__content-span">
-                                                Túi Xách Cartinoe MIVIDA1071 Lamando 15.6
+                                                <?=$row['name']?>
                                             </span>
                                         </div>
                                         <div class="container-vali__money">
-                                            <span class="container-vali__money-line">480.000₫</span>
+                                            <span class="container-vali__money-line">
+                                                <?=$row['price']?>
+                                            </span>
                                         </div>
                                     </div>
                                 </a>
                             </div>
-                            <div class="col l-2-4 m-4 c-6 container-shoping__culum">
-                                <a href="" class="container-home__fb">
-                                    <div class="container-vali">
-                                        <div class="container-vali__img">
-                                            <img src="./assets/images/balo3.jpg" alt="" class="container-vali__img-image">
-                                        </div>
-                                        <div class="container-vali__content">
-                                            <span class="container-vali__content-span">
-                                                Túi Xách Cartinoe MIVIDA1071 Lamando 15.6
-                                            </span>
-                                        </div>
-                                        <div class="container-vali__money">
-                                            <span class="container-vali__money-line">480.000₫</span>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="col l-2-4 m-4 c-6 container-shoping__culum">
-                                <a href="" class="container-home__fb">
-                                    <div class="container-vali">
-                                        <div class="container-vali__img">
-                                            <img src="./assets/images/balo3.jpg" alt="" class="container-vali__img-image">
-                                        </div>
-                                        <div class="container-vali__content">
-                                            <span class="container-vali__content-span">
-                                                Túi Xách Cartinoe MIVIDA1071 Lamando 15.6
-                                            </span>
-                                        </div>
-                                        <div class="container-vali__money">
-                                            <span class="container-vali__money-line">480.000₫</span>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="col l-2-4 m-4 c-6 container-shoping__culum">
-                                <a href="" class="container-home__fb">
-                                    <div class="container-vali">
-                                        <div class="container-vali__img">
-                                            <img src="./assets/images/balo3.jpg" alt="" class="container-vali__img-image">
-                                        </div>
-                                        <div class="container-vali__content">
-                                            <span class="container-vali__content-span">
-                                                Túi Xách Cartinoe MIVIDA1071 Lamando 15.6
-                                            </span>
-                                        </div>
-                                        <div class="container-vali__money">
-                                            <span class="container-vali__money-line">480.000₫</span>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="col l-2-4 m-4 c-6 container-shoping__culum">
-                                <a href="" class="container-home__fb">
-                                    <div class="container-vali">
-                                        <div class="container-vali__img">
-                                            <img src="./assets/images/balo3.jpg" alt="" class="container-vali__img-image">
-                                        </div>
-                                        <div class="container-vali__content">
-                                            <span class="container-vali__content-span">
-                                                Túi Xách Cartinoe MIVIDA1071 Lamando 15.6
-                                            </span>
-                                        </div>
-                                        <div class="container-vali__money">
-                                            <span class="container-vali__money-line">480.000₫</span>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
+                            <?php endforeach; ?>
                         </div>
                         <div class="container-sale__shop-add">
-                            <a href="#" class="btn container-sale__shop-add-link">Xem thêm</a>
+                            <a href="category.php?id=<?=$catid;?>" class="btn container-sale__shop-add-link">Xem thêm</a>
                         </div>
-                        <div class="row sm-gutter">
-                            <div class="col l-6 m-6 c-12">
-                                <img src="./assets/images/anh3.jpg" alt="" class="container-section__img container-section__img-padding">
-                            </div>
-                            <div class="col l-6 m-6 c-12">
-                                <img src="./assets/images/anh4.jpg" alt="" class="container-section__img container-section__img-padding">
+                        <?php endforeach; ?>
+
+                            <div class="row sm-gutter">
+                                <div class="col l-6 m-6 c-12">
+                                    <img src="./assets/images/anh3.jpg" alt="" class="container-section__img container-section__img-padding">
+                                </div>
+                                <div class="col l-6 m-6 c-12">
+                                    <img src="./assets/images/anh4.jpg" alt="" class="container-section__img container-section__img-padding">
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <?php require_once($baseUrl . "layouts/bot.php"); ?>
-    </div>
-    <!-- javasprit -->
-    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-    <script src="./assets/js/balo.js"></script>
+            <?php require_once($baseUrl . "layouts/bot.php"); ?>
+        </div>
+        <!-- javasprit -->
+        <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+        <script src="./assets/js/balo.js"></script>
 </body>
 
 </html>

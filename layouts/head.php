@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="./assets/css/balo.css">
     <link rel="stylesheet" href="./assets/css/balobase.css">
     <link rel="stylesheet" href="./assets/css/sanpham.css">
+    <link rel="stylesheet" href="./assets/css/category.css">
     <link rel="stylesheet" href="./assets/css/gird.css">
     <link rel="stylesheet" href="./assets/css/responsive.css">
     <link rel="stylesheet" href="./assets/icon/fontawesome-free-5.15.3/css/all.min.css">
