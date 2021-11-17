@@ -1,4 +1,54 @@
 <?php
+require_once("./database/dbhelper.php");
+require_once("./utils/utility.php");
+
+$id = 1;
+if(!isset($_GET['id'])){
+    return header('Location: ./index.php');
+} else {
+    $id = (int)$_GET['id'];
+}
+
+$rowCategory = executeResult("select * from db_category where id=$id");
+if($rowCategory == null){
+    return header('Location: ./index.php');
+} else {
+    $rowCategory = $rowCategory[0];
+}
+
+///PHAN TRANG///
+//calculate
+$totalProduct = count(executeResult("select `id` from `db_product` where `status`=1  and `catid`=$id"));
+$numProductsPerPage = 6;
+$maxPage = (int)ceil($totalProduct / $numProductsPerPage);
+//get curent page
+$curentPage = 1;
+if (isset($_GET['page'])) {
+    $curentPage = (int)$_GET['page'];
+}
+$curentPage = $curentPage < 1 ? 1 : $curentPage;
+$curentPage = $curentPage > $maxPage ? $maxPage : $curentPage;
+
+$pageStart = $curentPage - 2;
+$pageEnd = $curentPage + 2;
+
+if ($curentPage < 4) {
+    $pageStart = 1;
+    $pageEnd = $maxPage > 5 ? ($pageStart + 4) : $maxPage;
+} elseif ($curentPage > $maxPage - 3) {
+    $pageEnd = $maxPage;
+    $pageStart = $maxPage > 5 ? ($pageEnd - 4) : 1;
+}
+$offset = ($curentPage - 1) * $numProductsPerPage;
+///END PHAN TRANG///
+
+
+$sql = "SELECT `id`,`avatar`,`name`,`price`
+        FROM `db_product`
+        WHERE `status`=1 AND `catid`=$id
+        ORDER BY `created` DESC
+        LIMIT $offset, $numProductsPerPage";
+$rowsProduct = executeResult($sql);
 
 ?>
 
@@ -15,16 +65,16 @@
                     <div class="container-wrapper__page">
                         <h1 class="container-wrapper__page-h1">Sản phẩm</h1>
                         <nav class="container-wrapper__page-nav">
-                            <a href="#" class="container-wrapper__page-link">Trang chủ</a>
+                            <a href="../" class="container-wrapper__page-link">Trang chủ</a>
                             <span class="container-wrapper__page-span">/</span>
                             <span class="container-wrapper__page-span">Sản phẩm</span>
                             <span class="container-wrapper__page-span">/</span>
-                            <span class="container-wrapper__page-span">Balo</span>
+                            <span class="container-wrapper__page-span"><?=$rowCategory['name'];?></span>
                         </nav>
                     </div>
                     <div class="container-wrapper__category">
-                        <p class="container-wrapper__category-p container-wrapper__category-none">Hiển thị tất cả
-                            <span class="container-wrapper__category-span">9</span>
+                        <p class="container-wrapper__category-p container-wrapper__category-none">Có tất cả
+                            <span class="container-wrapper__category-span"><?=$totalProduct;?></span>
                             kết quả
                         </p>
                         <div class="container-select">
@@ -38,93 +88,38 @@
                 </div>
                 <div class="container-small">
                     <div class="row sm-gutter">
-
-                    
-                    <div class="col l-3 m-6 c-12">
-                            <a href="../assets/sanpham.html" class="container-small__form">
-                                <img src="../assets/images/sanpham4.jpg" alt="" class="container-small__form-img">
-                                <div class="container-small__noti">
-                                    <p class="container-small__noti-p">Túi Xách Cartinoe MIVIDA1071 Lamando 15.6</p>
-                                    <div class="container-small__noti-div">
-                                        <p class="container-small__noti-p1">480.000₫</p>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    
+                        <?php foreach($rowsProduct as $product): ?>
                         <div class="col l-3 m-6 c-12">
-                            <a href="../assets/sanpham.html" class="container-small__form">
-                                <img src="../assets/images/sanpham4.jpg" alt="" class="container-small__form-img">
+                            <a href="product.php?id=<?=$product['id'];?>" class="container-small__form">
+                                <img src="<?=fixUrl($product['avatar'], './');?>" alt="" class="container-small__form-img">
                                 <div class="container-small__noti">
-                                    <p class="container-small__noti-p">Túi Xách Cartinoe MIVIDA1071 Lamando 15.6</p>
+                                    <p class="container-small__noti-p"><?=$product['name'];?></p>
                                     <div class="container-small__noti-div">
-                                        <p class="container-small__noti-p1">480.000₫</p>
+                                        <p class="container-small__noti-p1"><?=number_format($product['price'], 0, ',', '.');?>₫</p>
                                     </div>
                                 </div>
                             </a>
                         </div>
-                    
-                        <div class="col l-3 m-6 c-12">
-                            <a href="../assets/sanpham.html" class="container-small__form">
-                                <img src="../assets/images/sanpham4.jpg" alt="" class="container-small__form-img">
-                                <div class="container-small__noti">
-                                    <p class="container-small__noti-p">Túi Xách Cartinoe MIVIDA1071 Lamando 15.6</p>
-                                    <div class="container-small__noti-div">
-                                        <p class="container-small__noti-p1">480.000₫</p>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    
-                        <div class="col l-3 m-6 c-12">
-                            <a href="../assets/sanpham.html" class="container-small__form">
-                                <img src="../assets/images/sanpham4.jpg" alt="" class="container-small__form-img">
-                                <div class="container-small__noti">
-                                    <p class="container-small__noti-p">Túi Xách Cartinoe MIVIDA1071 Lamando 15.6</p>
-                                    <div class="container-small__noti-div">
-                                        <p class="container-small__noti-p1">480.000₫</p>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    
-                        <div class="col l-3 m-6 c-12">
-                            <a href="../assets/sanpham.html" class="container-small__form">
-                                <img src="../assets/images/sanpham4.jpg" alt="" class="container-small__form-img">
-                                <div class="container-small__noti">
-                                    <p class="container-small__noti-p">Túi Xách Cartinoe MIVIDA1071 Lamando 15.6</p>
-                                    <div class="container-small__noti-div">
-                                        <p class="container-small__noti-p1">480.000₫</p>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    
-                        <div class="col l-3 m-6 c-12">
-                            <a href="../assets/sanpham.html" class="container-small__form">
-                                <img src="../assets/images/sanpham4.jpg" alt="" class="container-small__form-img">
-                                <div class="container-small__noti">
-                                    <p class="container-small__noti-p">Túi Xách Cartinoe MIVIDA1071 Lamando 15.6</p>
-                                    <div class="container-small__noti-div">
-                                        <p class="container-small__noti-p1">480.000₫</p>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    
-                        <div class="col l-3 m-6 c-12">
-                            <a href="../assets/sanpham.html" class="container-small__form">
-                                <img src="../assets/images/sanpham4.jpg" alt="" class="container-small__form-img">
-                                <div class="container-small__noti">
-                                    <p class="container-small__noti-p">Túi Xách Cartinoe MIVIDA1071 Lamando 15.6</p>
-                                    <div class="container-small__noti-div">
-                                        <p class="container-small__noti-p1">480.000₫</p>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-
-
+                        <?php endforeach; ?>
+                    </div>
+                    <div class="container-page">
+                        <ul class="container-page__form">
+                            <li class="container-page__list">
+                                <a href="category.php?id=<?=$id;?>&page=<?= $curentPage > 5 ? ($curentPage - 5) : 1; ?>" class="container-page__link">
+                                    <i class="container-page__icon fas fa-angle-double-left"></i>
+                                </a>
+                            </li>
+                            <?php for ($index = $pageStart; $index <= $pageEnd; $index++) : ?>
+                                <li class="container-page__list <?= $index == $curentPage ? 'open-color' : ''; ?>">
+                                    <a href="category.php?id=<?=$id;?>&page=<?= $index; ?>" class="container-page__link"><?= $index; ?></a>
+                                </li>
+                            <?php endfor; ?>
+                            <li class="container-page__list">
+                                <a href="category.php?id=<?=$id;?>&page=<?= $curentPage < ($maxPage - 5) ? ($curentPage + 5) : $maxPage; ?>" class="container-page__link">
+                                    <i class="container-page__icon fas fa-angle-double-right"></i>
+                                </a>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>

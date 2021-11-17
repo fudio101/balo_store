@@ -171,7 +171,7 @@ $products = executeResult($sqlGetProduct);
                                         </div>
                                         <div class="container-vali__money">
                                             <span class="container-vali__money-line">
-                                                <?=$row['price']?>
+                                                <?=number_format($row['price'], 0, ',', '.');?>₫
                                             </span>
                                         </div>
                                     </div>
@@ -197,13 +197,6 @@ $products = executeResult($sqlGetProduct);
                 </div>
             </div>
 
-<<<<<<< HEAD
-            <?php require_once($baseUrl . "layouts/bot.php"); ?>
-        </div>
-        <!-- javasprit -->
-        <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-        <script src="./assets/js/balo.js"></script>
-=======
         <?php require_once($baseUrl . "layouts/bot.php"); ?>
     </div>
     <!-- javasprit -->
@@ -218,7 +211,6 @@ $products = executeResult($sqlGetProduct);
             }
         }, 4000);
     </script>
->>>>>>> c223c33e7280176abe1e192db6668a7753057aaf
 </body>
 
 </html>
