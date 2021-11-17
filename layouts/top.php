@@ -75,21 +75,6 @@ if ($result != null) {
                     <button class="header-seach__search-icon">
                         <i class="header-seach__search-icon-icon fas fa-search"></i>
                     </button>
-                    <!-- gợi ý -->
-                    <div class="hearder-sugges">
-                        <ul class="hearder-sugges__cart">
-                            <li class="hearder-sugges__cart-list">
-                                <a href="" class="hearder-sugges__cart-link">
-                                    Túi Xách
-                                </a>
-                            </li>
-                            <li class="hearder-sugges__cart-list">
-                                <a href="" class="hearder-sugges__cart-link">
-                                    Túi Xách Cartinoe MIVIDA1071 Lamando 15.6
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
                 </div>
                 <div class="hearder-seach__login">
                     <ul class="hearder-seach__login-list">

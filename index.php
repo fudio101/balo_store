@@ -171,7 +171,7 @@ $products = executeResult($sqlGetProduct);
                                         </div>
                                         <div class="container-vali__money">
                                             <span class="container-vali__money-line">
-                                                <?=$row['price']?>
+                                                <?=number_format($row['price'], 0, ',', '.');?>₫
                                             </span>
                                         </div>
                                     </div>
