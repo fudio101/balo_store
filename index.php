@@ -1,6 +1,6 @@
 <?php
 
-$baseUrl = './';
+//$baseUrl = './';
 
 require_once('./utils/utility.php');
 require_once('./database/dbhelper.php');
@@ -13,25 +13,7 @@ $products =  executeResult($sqlGetProduct);
 
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!--[if lt IE 9]>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.1/respond.js"></script>
-        <![endif]-->
-    <link rel="stylesheet" href="./assets/css/balo.css">
-    <link rel="stylesheet" href="./assets/css/balobase.css">
-    <link rel="stylesheet" href="./assets/css/gird.css">
-    <link rel="stylesheet" href="./assets/css/responsive.css">
-    <link rel="stylesheet" href="./assets/icon/fontawesome-free-5.15.3/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap" rel="stylesheet">
-    <title>Balo</title>
-</head>
-
+<?php require_once('./layouts/head.php'); ?>
 <body>
     <div class="apps">
         <?php require_once($baseUrl . "layouts/top.php"); ?>
@@ -66,10 +48,10 @@ $products =  executeResult($sqlGetProduct);
 
                         <?php foreach($products as $product): ?>
                         <div class="col l-2-4 m-4 c-6 container-shoping__culum">
-                            <a href="" class="container-home__fb">
+                            <a href="product.php?catid=<?='1';?>&id=<?='1';?>" class="container-home__fb">
                                 <div class="container-shoping">
                                     <div class="container-shoping__img">
-                                        <img src="./<?=$product['avatar'];?>" alt="" class="container-shoping__img-image">
+                                        <img src="<?= fixUrl($product['avatar'], './');?>" alt="" class="container-shoping__img-image">
                                     </div>
                                     <div class="container-shoping__content">
                                         <span class="container-shoping__content-span">
@@ -104,6 +86,33 @@ $products =  executeResult($sqlGetProduct);
                         </div>
 
                     </div>
+
+                    <div class="container-page">
+                            <ul class="container-page__form">
+                                <li class="container-page__list">
+                                    <a href="#" class="container-page__link"><i class="container-page__icon fas fa-angle-double-left"></i></a>
+                                </li>
+                                <li class="container-page__list open-color">
+                                    <a href="#" class="container-page__link">1</a>
+                                </li>
+                                <li class="container-page__list">
+                                    <a href="#" class="container-page__link">2</a>
+                                </li>
+                                <li class="container-page__list">
+                                    <a href="#" class="container-page__link">3</a>
+                                </li>
+                                <li class="container-page__list">
+                                    <a href="#" class="container-page__link">4</a>
+                                </li>
+                                <li class="container-page__list">
+                                    <a href="#" class="container-page__link">5</a>
+                                </li>
+                                <li class="container-page__list">
+                                    <a href="#" class="container-page__link"><i class="container-page__icon fas fa-angle-double-right"></i></a>
+                                </li>
+                            </ul>
+                        </div>
+
                     <div class="row sm-gutter">
                         <div class="col l-4 m-4 c-0 container-shoping__culum">
                             <div class="container-banner">
@@ -312,42 +321,7 @@ $products =  executeResult($sqlGetProduct);
     </div>
     <!-- javasprit -->
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-    <script>
-        /* làm bảng menu */
-        var clickMenu = document.querySelector('.js-menu__icon');
-        var clickDelete = document.querySelector('.js-hearder-modal');
-        var stopPropaga = document.querySelector('.js-list__menu');
-        var clickIcon = document.querySelector('.js-icon__times');
-        clickMenu.onclick = function() {
-            clickDelete.classList.add('open');
-        }
-        clickIcon.onclick = function() {
-            clickDelete.classList.remove('open');
-        }
-        clickDelete.onclick = function() {
-            clickDelete.classList.remove('open');
-        }
-        stopPropaga.onclick = function(event) {
-            event.stopPropagation();
-        }
-
-        /*làm thanh trở về màn hình */
-
-        $(document).ready(function() {
-            $(window).scroll(function() {
-                if ($(this).scrollTop()) {
-                    $('.backtop').fadeIn();
-                } else {
-                    $('.backtop').fadeOut();
-                }
-            });
-            $(".backtop").click(function() {
-                $('html,body').animate({
-                    scrollTop: 0
-                }, 50);
-            })
-        });
-    </script>
+    <script src="./assets/js/balo.js"></script>
 </body>
 
 </html>
