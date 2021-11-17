@@ -1,4 +1,5 @@
 <?php
+require_once("../database/dbhelper.php");
 session_start();
 
 if (!empty($_POST)) {
@@ -21,6 +22,10 @@ function update_cart()
     if (!empty($_POST['id']) && !empty($_POST['quantity'])) {
         $id = $_POST['id'];
         $quantity = $_POST['quantity'];
+        if (!is_valid_quantity($id, $quantity)) {
+            echo 'Không đủ số lượng sản phẩm';
+            return;
+        }
         $cart = $_SESSION['cart'];
         $index = -1;
         for ($i = 0; $i < count($cart); $i++) {
@@ -64,7 +69,10 @@ function delete_from_cart()
 function add_to_cart()
 {
     if (isset($_POST['id']) && isset($_POST['quantity'])) {
-
+        if (!is_valid_quantity($_POST['id'], $_POST['quantity'])) {
+            echo 'Không đủ số lượng sản phẩm';
+            return;
+        }
         //create array of array with id and quantity
         $item = array(
             'id' => intval($_POST['id']),
@@ -90,8 +98,30 @@ function add_to_cart()
             } else {
                 //if item is in cart, update quantity
                 $cart[$index]['quantity'] += $item['quantity'];
+                if (!is_valid_quantity($index, $cart[$index]['quantity'])) {
+                    echo 'Không đủ số lượng sản phẩm';
+                    return;
+                }
                 $_SESSION['cart'] = $cart;
             }
         }
     }
+}
+
+function get_Quantities()
+{
+    $sql = "SELECT `id`, (`number`-`number_buy`) AS `quantity` FROM `db_product` WHERE `status`=1";
+    $result = executeResult($sql);
+    return $result;
+}
+
+function is_valid_quantity($id, $quantity)
+{
+    $quantities = get_Quantities();
+    foreach ($quantities as $item) {
+        if ($item['id'] == $id && $item['quantity'] >= $quantity) {
+            return true;
+        }
+    }
+    return false;
 }

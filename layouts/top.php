@@ -123,7 +123,7 @@ if ($result != null) {
                                                 hàng</a>
                                         </button>
                                         <button class="hearder-shop__box-bottom">
-                                            <a href="<?= $baseUrl ?>pay" class="hearder-shop__box-pay">Thanh
+                                            <a href="<?= $baseUrl ?>pay.php" class="hearder-shop__box-pay">Thanh
                                                 toán</a>
                                         </button>
                                     </div>
