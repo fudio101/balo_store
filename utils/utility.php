@@ -154,3 +154,13 @@ function fixUrl($thumbnail, $rootPath = "../../")
 
 // 	return $thumbnail;
 // }
+
+function getImages($string, $number, $rootPath = "./")
+{
+	$arr = explode("#", $string, $number);
+	$return = [];
+	foreach ($arr as $key => $value) {
+		$return[] = fixUrl($value, $rootPath);
+	}
+	return $return;
+}
