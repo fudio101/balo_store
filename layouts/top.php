@@ -7,7 +7,7 @@ if (!empty($_SESSION['cart'])) {
     $cart = $_SESSION['cart'];
     foreach ($cart as $item) {
         $number++;
-        $sql = "SELECT * FROM db_product WHERE id = {$item['id']} and status = 1";
+        $sql = "SELECT `id`, `catid`, `name`, `avatar`, `number`, `number_buy`, `price` FROM db_product WHERE id = {$item['id']} and status = 1";
         $result = executeResult($sql, true);
         $cartList[] = $result;
         $total += $result['price'] * $item['quantity'];

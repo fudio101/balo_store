@@ -34,7 +34,7 @@ require_once("./utils/utility.php");
                                         <th class="container-bank__table-th hide-on-mobile">Tạm tính</th>
                                     </tr>
 
-                                    <?php if ($cartList != null) foreach ($cartList as $key => $product_) : ?>
+                                    <?php foreach ($cartList as $key => $product_) : ?>
 
                                         <tr class="container-bank__table-tr">
                                             <td class="container-bank__table-td">
