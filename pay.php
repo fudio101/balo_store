@@ -10,7 +10,7 @@ require_once('./database/dbhelper.php');
 <?php require_once('layouts/head.php'); ?>
 <body>
     <div class="apps">
-        <?php require_once($baseUrl . "layouts/top.php"); ?>
+        <?php require_once("layouts/top.php"); ?>
 
         <div class="container">
             <div class="grid wide">
@@ -81,59 +81,31 @@ require_once('./database/dbhelper.php');
                                             <span class="container-bill__noti-span">Tạm tính</span>
                                         </div>
                                         <ul class="container-bill__list">
+
+                                            <?php foreach($cartList as $sp): ?> 
                                             <li class="container-bill__item">
                                                 <div class="container-bill__item-flex">
                                                     <p class="container-bill__item-text">
-                                                        Túi Xách Cartinoe MIVIDA1071 Lamando 15.6
+                                                        <?=$sp['name'];?>
                                                         <span class="container-bill__item-sapn">x1</span>
                                                     </p>
-                                                    <p class="container-bill__item-money">480.000đ</p>
+                                                    <p class="container-bill__item-money"><?=number_format($sp['price']*$cart[$key]['quantity'], 0, ',', '.'); ?></p>
                                                 </div>
                                             </li>
-                                            <li class="container-bill__item">
-                                                <div class="container-bill__item-flex">
-                                                    <p class="container-bill__item-text">
-                                                        Túi Xách Cartinoe MIVIDA1071 Lamando 15.6
-                                                        <span class="container-bill__item-sapn">x1</span>
-                                                    </p>
-                                                    <p class="container-bill__item-money">480.000đ</p>
-                                                </div>
-                                            </li>
-                                            <li class="container-bill__item">
-                                                <div class="container-bill__item-flex">
-                                                    <p class="container-bill__item-text">
-                                                        Túi Xách Cartinoe MIVIDA1071 Lamando 15.6
-                                                        <span class="container-bill__item-sapn">x1</span>
-                                                    </p>
-                                                    <p class="container-bill__item-money">480.000đ</p>
-                                                </div>
-                                            </li>
-                                            <li class="container-bill__item">
-                                                <div class="container-bill__item-flex">
-                                                    <p class="container-bill__item-text">
-                                                        Túi Xách Cartinoe MIVIDA1071 Lamando 15.6
-                                                        <span class="container-bill__item-sapn">x1</span>
-                                                    </p>
-                                                    <p class="container-bill__item-money">480.000đ</p>
-                                                </div>
-                                            </li>
-                                            <li class="container-bill__item">
-                                                <div class="container-bill__item-flex">
-                                                    <p class="container-bill__item-text">
-                                                        Túi Xách Cartinoe MIVIDA1071 Lamando 15.6
-                                                        <span class="container-bill__item-sapn">x1</span>
-                                                    </p>
-                                                    <p class="container-bill__item-money">480.000đ</p>
-                                                </div>
-                                            </li>
+                                            <?php endforeach; ?>
+                                            
                                         </ul>
                                         <div class="container-bill__price">
                                             <span class="container-bill__price-text">Tạm tính:</span>
-                                            <span class="container-bill__price-text">10.000.000đ</span>
+                                            <span class="container-bill__price-text"><?=number_format($total,0,',','.');?>đ</span>
+                                        </div>
+                                        <div class="container-bill__price">
+                                            <span class="container-bill__price-text">Mã giảm giá:</span><?php $discount = 0000;?>
+                                            <span class="container-bill__price-text"><?=number_format(00000,0,',','.');?>đ</span>
                                         </div>
                                         <div class="container-bill__price">
                                             <span class="container-bill__price-text">Tổng:</span>
-                                            <span class="container-bill__price-text">10.000.000đ</span>
+                                            <span class="container-bill__price-text"><?=number_format($total-$discount,0,',','.');?>đ</span>
                                         </div>
                                         <form action="" class="container-bill__pay">
                                             <p class="container-bill__pay-text">
