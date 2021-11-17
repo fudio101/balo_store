@@ -131,6 +131,12 @@
         height: 233.33px;
         object-fit: contain;
     }
+    .container-vali__img-image
+    {
+        width: 100%;
+        height: 233.33px;
+        object-fit: contain;
+    }
 }
 /*mobille*/
 @media (max-width:739px){
@@ -255,6 +261,19 @@
         height: 190px;
         object-fit: contain;
     }
+    .container-vali__img-image
+    {
+        width: 100%;
+        height: 190px;
+        object-fit: contain;
+    }
+    /*chỉnh lỗi độ cao của chữ*/
+    .container-shoping__content-span{
+        height: 15px;
+    }
+    .container-vali__content-span{
+        height: 15px;
+    }
 }
 @media (max-width:280px) {
     .container-navigation-width{
@@ -274,6 +293,12 @@
         top: 5px;
     }
     .container-shoping__img-image {
+        width: 100%;
+        height: 132px;
+        object-fit: contain;
+    }
+    .container-vali__img-image
+    {
         width: 100%;
         height: 132px;
         object-fit: contain;

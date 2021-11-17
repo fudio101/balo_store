@@ -154,7 +154,7 @@ $products = executeResult($sqlGetProduct);
                                 <a href="" class="container-home__fb">
                                     <div class="container-vali">
                                         <div class="container-vali__img">
-                                            <img src="./assets/images/balo3.jpg" alt="" class="container-vali__img-image">
+                                            <img src="./assets/photos/163713747183715.jpg" alt="" class="container-vali__img-image">
                                         </div>
                                         <div class="container-vali__content">
                                             <span class="container-vali__content-span">
