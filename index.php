@@ -5,15 +5,44 @@
 require_once('./utils/utility.php');
 require_once('./database/dbhelper.php');
 
+//calculate
+$totalProduct = count(executeResult("select `id` from `db_product` where `status`=1"));
+$numProductsPerPage = 5;
+$maxPage = (int)ceil($totalProduct / $numProductsPerPage);
+//get curent page
+$curentPage = 1;
+if (isset($_GET['page'])) {
+    $curentPage = (int)$_GET['page'];
+}
+$curentPage = $curentPage<1 ? 1 : $curentPage;
+$curentPage = $curentPage>$maxPage ? $maxPage : $curentPage;
 
-$sqlGetProduct = "SELECT * FROM db_product";
-$products =  executeResult($sqlGetProduct);
+$pageStart = $curentPage - 2;
+$pageEnd = $curentPage + 2; 
+
+if($curentPage < 4){
+    $pageStart = 1;
+    $pageEnd = $maxPage>5?($pageStart+4):$maxPage;
+} elseif($curentPage > $maxPage-3){
+    $pageEnd = $maxPage;
+    $pageStart = $maxPage>5?($pageEnd-4):1;
+}
+
+echo "$pageStart -> $pageEnd";
+//0->count-1
+$offset = ($curentPage - 1) * $numProductsPerPage;
+$sqlGetProduct =    "SELECT *
+                    FROM `db_product`
+                    WHERE `status`=1
+                    LIMIT $offset, $numProductsPerPage";
+$products = executeResult($sqlGetProduct);
 
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <?php require_once('./layouts/head.php'); ?>
+
 <body>
     <div class="apps">
         <?php require_once($baseUrl . "layouts/top.php"); ?>
@@ -46,72 +75,50 @@ $products =  executeResult($sqlGetProduct);
                     </div>
                     <div class="row sm-gutter">
 
-                        <?php foreach($products as $product): ?>
-                        <div class="col l-2-4 m-4 c-6 container-shoping__culum">
-                            <a href="product.php?catid=<?='1';?>&id=<?='1';?>" class="container-home__fb">
-                                <div class="container-shoping">
-                                    <div class="container-shoping__img">
-                                        <img src="<?= fixUrl($product['avatar'], './');?>" alt="" class="container-shoping__img-image">
+                        <?php foreach ($products as $product) : ?>
+                            <div class="col l-2-4 m-4 c-6 container-shoping__culum">
+                                <a href="product.php?catid=<?= '1'; ?>&id=<?= '1'; ?>" class="container-home__fb">
+                                    <div class="container-shoping">
+                                        <div class="container-shoping__img">
+                                            <img src="<?= fixUrl($product['avatar'], './'); ?>" alt="" class="container-shoping__img-image">
+                                        </div>
+                                        <div class="container-shoping__content">
+                                            <span class="container-shoping__content-span">
+                                                <?= $product['name']; ?>
+                                            </span>
+                                        </div>
+                                        <div class="container-shoping__money">
+                                            <span class="container-shoping__money-line">
+                                                <?= number_format($product['price'], 0, ',', '.'); ?>₫
+                                            </span>
+                                        </div>
                                     </div>
-                                    <div class="container-shoping__content">
-                                        <span class="container-shoping__content-span">
-                                            <?=$product['name'];?>
-                                        </span>
-                                    </div>
-                                    <div class="container-shoping__money">
-                                        <span class="container-shoping__money-line">
-                                            <?=number_format($product['price'],0,',','.');?>₫
-                                        </span>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
+                                </a>
+                            </div>
                         <?php endforeach; ?>
-                        <div class="col l-2-4 m-4 c-6 container-shoping__culum">
-                            <a href="" class="container-home__fb">
-                                <div class="container-shoping">
-                                    <div class="container-shoping__img">
-                                        <img src="./assets/images/balo3.jpg" alt="" class="container-shoping__img-image">
-                                    </div>
-                                    <div class="container-shoping__content">
-                                        <span class="container-shoping__content-span">
-                                            Túi Xách Cartinoe MIVIDA1071 Lamando 15.6
-                                        </span>
-                                    </div>
-                                    <div class="container-shoping__money">
-                                        <span class="container-shoping__money-line">480.000₫</span>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-
                     </div>
 
                     <div class="container-page">
-                            <ul class="container-page__form">
-                                <li class="container-page__list">
-                                    <a href="#" class="container-page__link"><i class="container-page__icon fas fa-angle-double-left"></i></a>
-                                </li>
-                                <li class="container-page__list open-color">
-                                    <a href="#" class="container-page__link">1</a>
-                                </li>
-                                <li class="container-page__list">
-                                    <a href="#" class="container-page__link">2</a>
-                                </li>
-                                <li class="container-page__list">
-                                    <a href="#" class="container-page__link">3</a>
-                                </li>
-                                <li class="container-page__list">
-                                    <a href="#" class="container-page__link">4</a>
-                                </li>
-                                <li class="container-page__list">
-                                    <a href="#" class="container-page__link">5</a>
-                                </li>
-                                <li class="container-page__list">
-                                    <a href="#" class="container-page__link"><i class="container-page__icon fas fa-angle-double-right"></i></a>
-                                </li>
-                            </ul>
-                        </div>
+                        <ul class="container-page__form">
+                            <li class="container-page__list">
+                                <a href="index.php?page=<?=$curentPage>5?($curentPage-5):1;?>" class="container-page__link">
+                                    <i class="container-page__icon fas fa-angle-double-left"></i>
+                                </a>
+                            </li>
+                            <?php for($index = $pageStart; $index<=$pageEnd; $index++): ?>
+                            <li class="container-page__list <?=$index==$curentPage?'open-color':'';?>">
+                                <a href="index.php?page=<?=$index;?>"
+                                    class="container-page__link"
+                                    ><?=$index;?></a>
+                            </li>
+                            <?php endfor; ?>
+                            <li class="container-page__list">
+                                <a href="index.php?page=<?=$curentPage<($maxPage-5)?($curentPage+5):$maxPage;?>" class="container-page__link">
+                                    <i class="container-page__icon fas fa-angle-double-right"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
 
                     <div class="row sm-gutter">
                         <div class="col l-4 m-4 c-0 container-shoping__culum">
