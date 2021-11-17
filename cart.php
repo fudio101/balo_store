@@ -23,7 +23,6 @@ require_once("./utils/utility.php");
                         </p>
                     </div> -->
                     <div class="row sm-gutter">
-<<<<<<< HEAD
                         <div class="col l-7 m-12 c-12">
                             <table class="container-bank__table">
                                 <tr class="container-bank__table-tr container-bank__table-border">
@@ -60,17 +59,6 @@ require_once("./utils/utility.php");
                                         <td class="container-bank__table-td hide-on-mobile">
                                             <span class="container-bank__table-text">2.400.000đ</span>
                                         </td>
-=======
-                        <?php if ($cartList != null) : ?>
-
-                            <div class="col l-7 m-12 c-12">
-                                <table class="container-bank__table">
-                                    <tr class="container-bank__table-tr container-bank__table-border">
-                                        <th class="container-bank__table-th">Sản phẩm</th>
-                                        <th class="container-bank__table-th hide-on-mobile">Giá</th>
-                                        <th class="container-bank__table-th ">Số Lượng</th>
-                                        <th class="container-bank__table-th hide-on-mobile">Tạm tính</th>
->>>>>>> a3a26e08a387b4f99048b9d9e092b936fa84cd4a
                                     </tr>
 
                                     <?php if ($cartList != null) foreach ($cartList as $key => $product_) : ?>
