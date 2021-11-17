@@ -28,13 +28,13 @@ $data = executeResult($sql);
 
 	<!-- Table -->
 	<div class="col-md-8 table-responsive">
-		<table class="table table-bordered table-hover">
+		<table class="table table-striped table-hover">
 			<thead>
 				<tr>
 					<th scope="col">#</th>
 					<th scope="col">Name</th>
-					<th scope="col"></th>
-					<th scope="col"></th>
+					<th scope="col">Modify</th>
+					<th scope="col">Delete</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -46,10 +46,14 @@ $data = executeResult($sql);
 						<th scope="row"><?= ++$index ?></th>
 						<td><?= $item['name'] ?></td>
 						<td style="width: 50px">
-							<button onclick="modifyCategory(<?= $item['id'] ?>, '<?= $item['name'] ?>', '<?= $item['link'] ?>')" class="btn btn-warning">Modify</button>
+							<center>
+								<button onclick="modifyCategory(<?= $item['id'] ?>, '<?= $item['name'] ?>', '<?= $item['link'] ?>')" class="btn btn-warning"><i class="bi bi-pencil-fill"></i></button>
+							</center>
 						</td>
 						<td style="width: 50px">
-							<button onclick="deleteCategory(<?= $item['id'] ?>);" class="btn btn-danger">Delete</button>
+							<center>
+								<button onclick="deleteCategory(<?= $item['id'] ?>);" class="btn btn-danger"><i class="bi bi-x"></i></button>
+							</center>
 						</td>
 					</tr>
 

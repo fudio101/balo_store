@@ -58,22 +58,25 @@ function getSecurityMD5($pwd)
 
 function getUserToken()
 {
-	if (isset($_SESSION['user'])) {
-		return $_SESSION['user'];
-	}
 	$token = getCookie('token');
-	$sql = "select * from db_token where token = '$token'";
-	$item = executeResult($sql, true);
-	if ($item != null) {
-		$userId = $item['user_id'];
-		$sql = "select * from db_user where id = '$userId' and status = 1";
-		$item = executeResult($sql, true);
-		if ($item != null) {
-			$_SESSION['user'] = $item;
-			return $item;
+	if ($token != '') {
+		$sql = "select * from db_token where token = '$token'";
+		$result = executeResult($sql, true);
+		if ($result != null) {
+
+			$userId = $result['user_id'];
+			if (isset($_SESSION['user']) && $_SESSION['user']['username'] == $userId) {
+				return $_SESSION['user'];
+			}
+
+			$sql = "select * from db_user where id = '$userId' and status = 1";
+			$item = executeResult($sql, true);
+			if ($item != null) {
+				$_SESSION['user'] = $item;
+				return $item;
+			}
 		}
 	}
-
 	return null;
 }
 

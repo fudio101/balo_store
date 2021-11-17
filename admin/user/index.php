@@ -17,7 +17,7 @@ $data = executeResult($sql);
 
 		<a href="editor.php"><button class="btn btn-success">Add User</button></a>
 
-		<table class="table table-bordered table-hover" style="margin-top: 20px;">
+		<table class="table table-striped table-hover" style="margin-top: 20px;">
 			<thead>
 				<tr>
 					<th>#</th>
@@ -27,8 +27,8 @@ $data = executeResult($sql);
 					<th>Phone Number</th>
 					<th>Address</th>
 					<th>Role</th>
-					<th style="width: 50px"></th>
-					<th style="width: 50px"></th>
+					<th>Modify</th>
+					<th>Delete</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -44,11 +44,11 @@ $data = executeResult($sql);
 					<td>' . $item['address'] . '</td>
 					<td>' . $item['role_name'] . '</td>
 					<td style="width: 50px">
-						<a href="editor.php?id=' . $item['id'] . '"><button class="btn btn-warning">Modify</button></a>
+						<a href="editor.php?id=' . $item['id'] . '"><center><button class="btn btn-warning"><i class="bi bi-pencil-fill"></i></button></center></a>
 					</td>
 					<td style="width: 50px">';
 					if ($user['id'] != $item['id']) {
-						echo '<button onclick="deleteUser(' . $item['id'] . ')" class="btn btn-danger">Delete</button>';
+						echo '<center><button onclick="deleteUser(' . $item['id'] . ')" class="btn btn-danger"><i class="bi bi-x"></i></button></center>';
 					}
 					echo '
 					</td>

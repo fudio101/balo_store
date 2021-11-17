@@ -12,7 +12,7 @@ $data = executeResult($sql);
 	<div class="col-md-12 table-responsive">
 		<h3>Quản Lý Đơn Hàng</h3>
 
-		<table class="table table-bordered table-hover" style="margin-top: 20px;">
+		<table class="table table-striped table-hover" style="margin-top: 20px;">
 			<thead>
 				<tr>
 					<th>STT</th>

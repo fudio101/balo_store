@@ -14,7 +14,7 @@ $data = executeResult($sql);
 
         <a href="editor.php"><button class="btn btn-success">Add Product</button></a>
 
-        <table class="table table-bordered table-hover" style="margin-top: 20px;">
+        <table class="table table-striped table-hover" style="margin-top: 20px;">
             <thead>
                 <tr>
                     <th>#</th>
@@ -25,8 +25,8 @@ $data = executeResult($sql);
                     <th>Expiration date</th>
                     <th>Payment limit</th>
                     <th>Description</th>
-                    <th></th>
-                    <th></th>
+                    <th>Modify</th>
+                    <th>Delete</th>
                 </tr>
             </thead>
             <tbody>
@@ -43,9 +43,9 @@ $data = executeResult($sql);
 					<td>' . $item['payment_limit'] . '</td>
 					<td>' . $item['description'] . '</td>
                     <td style="width: 50px">
-						<a href="editor.php?id=' . $item['id'] . '"><button class="btn btn-warning">Modify</button></a>
+						<a href="editor.php?id=' . $item['id'] . '"><center><button class="btn btn-warning"><i class="bi bi-pencil-fill"></i></button></center></a>
                     <td style="width: 50px">
-                        <button onclick="deleteDiscount(' . $item['id'] . ')" class="btn btn-danger">Delete</button>
+                        <center><button onclick="deleteDiscount(' . $item['id'] . ')" class="btn btn-danger"><i class="bi bi-x"></i></button></center>
                     </td>
 				</tr>';
                 }
