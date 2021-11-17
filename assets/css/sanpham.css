@@ -373,7 +373,8 @@ html {
 
 .container-sp__cart-img {
     width: 100%;
-    overflow: hidden;
+    height: 208px;
+    object-fit: contain;
     transition: transform linear 0.3s;
     will-change: transform;
 }

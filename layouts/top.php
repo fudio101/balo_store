@@ -1,3 +1,22 @@
+<?php
+session_start();
+
+$total = $number = 0;
+$cart = $cartList = null;
+if (!empty($_SESSION['cart'])) {
+    $cart = $_SESSION['cart'];
+    foreach ($cart as $item) {
+        $number++;
+        $sql = "SELECT * FROM db_product WHERE id = {$item['id']} and status = 1";
+        $result = executeResult($sql, true);
+        $cartList[] = $result;
+        $total += $result['price'] * $item['quantity'];
+    }
+}
+
+
+?>
+
 <header class="hearder">
     <div class="hearder-top" id="hearder">
         <div class="grid wide">
@@ -45,8 +64,7 @@
                     </a>
                 </div>
                 <div class="hearder-seach__search">
-                    <input type="text" class="hearder-seach__search-input hearder-seach__search-hover"
-                        placeholder="Tìm kiếm...">
+                    <input type="text" class="hearder-seach__search-input hearder-seach__search-hover" placeholder="Tìm kiếm...">
                     <button class="header-seach__search-icon">
                         <i class="header-seach__search-icon-icon fas fa-search"></i>
                     </button>
@@ -68,165 +86,44 @@
                 </div>
                 <div class="hearder-seach__login">
                     <ul class="hearder-seach__login-list">
-                        <li id="login" class="hearder-seach__login-li js-hearder-seach hide-on-mobile-tablet">
-                            <a href="<?= $baseUrl ?>admin" class="hearder-seach__login-link">
-                                Đăng Nhập / Đăng Ký
-                            </a>
-                        </li>
 
                         <li class="hearder-seach__login-li hearder-seach__login-shoping">
                             <a href="" class="hearder-seach__login-link hide-on-mobile-tablet">
-                                Giỏ Hàng / <span>15.500.000đ</span>
+                                Giỏ Hàng / <span><?= number_format($total, 0, ',', '.') ?>đ</span>
                             </a>
                             <div class="hearder-seach__login-link-cart">
                                 <i class="hearder-seach__login-cart fas fa-shopping-cart"></i>
-                                <span class="hearder-seach__login-pay hearder-seach__login-pay-cart">1</span>
+                                <span class="hearder-seach__login-pay hearder-seach__login-pay-cart"><?= $number ?></span>
                             </div>
 
                             <!-- hiện đã có sản phẩm -->
                             <div class="hearder-shoping hearder-cart">
                                 <div class="hearder-shop">
                                     <ul class="hearder-shop__list">
-                                        <li class="hearder-shop__li">
-                                            <a href="" class="hearder-shop__notifi-link">
-                                                <img src="<?= $baseUrl ?>assets/images/balo1.jpg" alt="" class="hearder-shop__img">
-                                            </a>
-                                            <div class="hearder-shop__notifi">
-                                                <p class="hearder-shop__notifi-item">
-                                                    <a href="" class="hearder-shop__notifi-link">
-                                                        Túi Xách Siêu Nhân Gao Đỏ gap xanh gao vàng
-                                                    </a>
-                                                </p>
-                                                <div class="hearder-shop__mini">
-                                                    <span class="hearder-shop__mini-span">1 x</span>
-                                                    <span class="hearder-shop__mini-money">1.500.000₫</span>
+
+                                        <?php if ($cartList != null) foreach ($cartList as $key => $product_) : ?>
+                                            <li class="hearder-shop__li">
+                                                <a href="<?= $baseUrl . 'product.php?id=' . $cart[$key]['id'] ?>" class="hearder-shop__notifi-link">
+                                                    <img src="<?= fixUrl($product_['avatar'], $baseUrl) ?>" alt="" class="hearder-shop__img">
+                                                </a>
+                                                <div class="hearder-shop__notifi">
+                                                    <p class="hearder-shop__notifi-item">
+                                                        <a href="<?= $baseUrl . 'product.php?id=' . $cart[$key]['id'] ?>" class="hearder-shop__notifi-link">
+                                                            <?= $product_['name'] ?>
+                                                        </a>
+                                                    </p>
+                                                    <div class="hearder-shop__mini">
+                                                        <span class="hearder-shop__mini-span"><?= $cart[$key]['quantity'] ?> x</span>
+                                                        <span class="hearder-shop__mini-money"><?= number_format($product_['price'], 0, ',', '.') ?>₫</span>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <i class="hearder-shop__li-icon fas fa-times"></i>
-                                        </li>
-                                        <li class="hearder-shop__li">
-                                            <a href="" class="hearder-shop__notifi-link">
-                                                <img src="<?= $baseUrl ?>assets/images/balo2.jpg" alt="" class="hearder-shop__img">
-                                            </a>
-                                            <div class="hearder-shop__notifi">
-                                                <p class="hearder-shop__notifi-item">
-                                                    <a href="" class="hearder-shop__notifi-link">
-                                                        Túi Xách Cartinoe MIVIDA088 Starry 12
-                                                    </a>
-                                                </p>
-                                                <div class="hearder-shop__mini">
-                                                    <span class="hearder-shop__mini-span">1 x</span>
-                                                    <span class="hearder-shop__mini-money">2.500.000₫</span>
-                                                </div>
-                                            </div>
-                                            <i class="hearder-shop__li-icon fas fa-times"></i>
-                                        </li>
-                                        <li class="hearder-shop__li">
-                                            <a href="" class="hearder-shop__notifi-link">
-                                                <img src="<?= $baseUrl ?>assets/images/balo1.jpg" alt="" class="hearder-shop__img">
-                                            </a>
-                                            <div class="hearder-shop__notifi">
-                                                <p class="hearder-shop__notifi-item">
-                                                    <a href="" class="hearder-shop__notifi-link">
-                                                        Túi Xách Siêu Nhân Gao Đỏ gap xanh gao vàng
-                                                    </a>
-                                                </p>
-                                                <div class="hearder-shop__mini">
-                                                    <span class="hearder-shop__mini-span">1 x</span>
-                                                    <span class="hearder-shop__mini-money">1.500.000₫</span>
-                                                </div>
-                                            </div>
-                                            <i class="hearder-shop__li-icon fas fa-times"></i>
-                                        </li>
-                                        <li class="hearder-shop__li">
-                                            <a href="" class="hearder-shop__notifi-link">
-                                                <img src="<?= $baseUrl ?>assets/images/balo2.jpg" alt="" class="hearder-shop__img">
-                                            </a>
-                                            <div class="hearder-shop__notifi">
-                                                <p class="hearder-shop__notifi-item">
-                                                    <a href="" class="hearder-shop__notifi-link">
-                                                        Túi Xách Cartinoe MIVIDA088 Starry 12
-                                                    </a>
-                                                </p>
-                                                <div class="hearder-shop__mini">
-                                                    <span class="hearder-shop__mini-span">1 x</span>
-                                                    <span class="hearder-shop__mini-money">2.500.000₫</span>
-                                                </div>
-                                            </div>
-                                            <i class="hearder-shop__li-icon fas fa-times"></i>
-                                        </li>
-                                        <li class="hearder-shop__li">
-                                            <a href="" class="hearder-shop__notifi-link">
-                                                <img src="<?= $baseUrl ?>assets/images/balo1.jpg" alt="" class="hearder-shop__img">
-                                            </a>
-                                            <div class="hearder-shop__notifi">
-                                                <p class="hearder-shop__notifi-item">
-                                                    <a href="" class="hearder-shop__notifi-link">
-                                                        Túi Xách Siêu Nhân Gao Đỏ gap xanh gao vàng
-                                                    </a>
-                                                </p>
-                                                <div class="hearder-shop__mini">
-                                                    <span class="hearder-shop__mini-span">1 x</span>
-                                                    <span class="hearder-shop__mini-money">1.500.000₫</span>
-                                                </div>
-                                            </div>
-                                            <i class="hearder-shop__li-icon fas fa-times"></i>
-                                        </li>
-                                        <li class="hearder-shop__li">
-                                            <a href="" class="hearder-shop__notifi-link">
-                                                <img src="<?= $baseUrl ?>assets/images/balo2.jpg" alt="" class="hearder-shop__img">
-                                            </a>
-                                            <div class="hearder-shop__notifi">
-                                                <p class="hearder-shop__notifi-item">
-                                                    <a href="" class="hearder-shop__notifi-link">
-                                                        Túi Xách Cartinoe MIVIDA088 Starry 12
-                                                    </a>
-                                                </p>
-                                                <div class="hearder-shop__mini">
-                                                    <span class="hearder-shop__mini-span">1 x</span>
-                                                    <span class="hearder-shop__mini-money">2.500.000₫</span>
-                                                </div>
-                                            </div>
-                                            <i class="hearder-shop__li-icon fas fa-times"></i>
-                                        </li>
-                                        <li class="hearder-shop__li">
-                                            <a href="" class="hearder-shop__notifi-link">
-                                                <img src="<?= $baseUrl ?>assets/images/balo1.jpg" alt="" class="hearder-shop__img">
-                                            </a>
-                                            <div class="hearder-shop__notifi">
-                                                <p class="hearder-shop__notifi-item">
-                                                    <a href="" class="hearder-shop__notifi-link">
-                                                        Túi Xách Siêu Nhân Gao Đỏ gap xanh gao vàng
-                                                    </a>
-                                                </p>
-                                                <div class="hearder-shop__mini">
-                                                    <span class="hearder-shop__mini-span">1 x</span>
-                                                    <span class="hearder-shop__mini-money">1.500.000₫</span>
-                                                </div>
-                                            </div>
-                                            <i class="hearder-shop__li-icon fas fa-times"></i>
-                                        </li>
-                                        <li class="hearder-shop__li">
-                                            <a href="" class="hearder-shop__notifi-link">
-                                                <img src="<?= $baseUrl ?>assets/images/balo2.jpg" alt="" class="hearder-shop__img">
-                                            </a>
-                                            <div class="hearder-shop__notifi">
-                                                <p class="hearder-shop__notifi-item">
-                                                    <a href="" class="hearder-shop__notifi-link">
-                                                        Túi Xách Cartinoe MIVIDA088 Starry 12
-                                                    </a>
-                                                </p>
-                                                <div class="hearder-shop__mini">
-                                                    <span class="hearder-shop__mini-span">1 x</span>
-                                                    <span class="hearder-shop__mini-money">2.500.000₫</span>
-                                                </div>
-                                            </div>
-                                            <i class="hearder-shop__li-icon fas fa-times"></i>
-                                        </li>
+                                            </li>
+                                        <?php endforeach; ?>
+
                                     </ul>
                                     <div class="hearder-shop__sumoney">
                                         <span class="hearder-shop__sumoney-noti">Tổng số tiền:</span>
-                                        <span class="hearder-shop__sumoney-money">15.500.000đ</span>
+                                        <span class="hearder-shop__sumoney-money"><?= number_format($total, 0, ',', '.') ?>đ</span>
                                     </div>
                                     <div class="hearder-shop__box">
                                         <button class="hearder-shop__box-bottom">
@@ -240,6 +137,8 @@
                                     </div>
                                 </div>
                             </div>
+
+
                         </li>
                     </ul>
                 </div>
@@ -293,11 +192,6 @@
             </div>
         </div>
     </div>
-    <!-- <div class="hearder-footer__top">
-            <a href="#hearder" class="hearder-footer__top-link">
-             <i class="hearder-footer__top-icon fas fa-angle-down"></i>
-            </a>
-        </div> -->
 </header>
 
 <div class="hearder-from hearder-modal js-hearder-modal">
