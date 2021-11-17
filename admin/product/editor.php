@@ -26,9 +26,9 @@ if ($id != '' && $id > 0) {
 	$id = 0;
 }
 
-$sql = "select * from db_category";
+$sql = "select * from db_category where status = 1";
 $categoryItems = executeResult($sql);
-$sql = "select * from db_producer";
+$sql = "select * from db_producer  where status = 1";
 $producerItems = executeResult($sql);
 ?>
 <!-- include summernote css/js -->
