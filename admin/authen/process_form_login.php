@@ -13,7 +13,7 @@ if (!empty($_POST)) {
 	} else {
 		//login thanh cong
 		$token = getSecurityMD5($userExist['username'] . time());
-		setcookie('token', $token, time() + 4 * 60 * 60 * 1000, '/');
+		setcookie('token', $token, time() + 60 * 60, '/');
 		$created_at = date('Y-m-d H:i:s');
 
 		$_SESSION['user'] = $userExist;
