@@ -197,11 +197,28 @@ $products = executeResult($sqlGetProduct);
                 </div>
             </div>
 
+<<<<<<< HEAD
             <?php require_once($baseUrl . "layouts/bot.php"); ?>
         </div>
         <!-- javasprit -->
         <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
         <script src="./assets/js/balo.js"></script>
+=======
+        <?php require_once($baseUrl . "layouts/bot.php"); ?>
+    </div>
+    <!-- javasprit -->
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script>
+        let counter = 1;
+        setInterval(function() {
+            document.getElementById('bottom_' + counter).checked = true;
+            counter++;
+            if (counter > 2) {
+                counter = 1;
+            }
+        }, 4000);
+    </script>
+>>>>>>> c223c33e7280176abe1e192db6668a7753057aaf
 </body>
 
 </html>

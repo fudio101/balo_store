@@ -23,7 +23,7 @@ if (!empty($_GET['id'])) {
     $products = executeResult($sql, false);
 
     //select random 4 products in db_product and status = 1
-    $sql = "SELECT * FROM db_product WHERE status = 1 ORDER BY RAND() LIMIT 4";
+    $sql = "SELECT * FROM db_product WHERE status = 1 AND catid = {$product['catid']} ORDER BY RAND() LIMIT 4";
     $products2 = executeResult($sql, false);
 } else {
     header('location: index.php');
@@ -102,10 +102,10 @@ if (!empty($_GET['id'])) {
                                                 <div class="container-form__add">
                                                     <div class="container-form__add-number">
                                                         <input type="button" class="container-form__add-sub" value="-">
-                                                        <input type="number" class="container-form__add-cart fix-number" min="1" max="1000" value="1">
+                                                        <input type="number" class="container-form__add-cart fix-number" id="numProducts" min="1" max="1000" value="1">
                                                         <input type="button" class="container-form__add-sub1" value="+">
                                                     </div>
-                                                    <button type="" class="btn btn--green container-form__add-button">Thêm vào giỏ hàng</button>
+                                                    <button class="btn btn--green container-form__add-button" id="addToCart">Thêm vào giỏ hàng</button>
                                                 </div>
                                                 <a href="./Thanhtoan.html" type="" class="btn btn--blue container-form_pay">Mua ngay</a>
                                             </form>
@@ -140,7 +140,7 @@ if (!empty($_GET['id'])) {
                                                     <div class="container-sp__noti">
                                                         <p class="container-sp__noti-p"><?= $product_['name'] ?></p>
                                                         <div class="container-sp__noti-div">
-                                                            <p class="container-sp__noti-p1"><?= $product_['price'] ?>₫</p>
+                                                            <p class="container-sp__noti-p1"><?= number_format($product_['price'], 0, ',', '.') ?>₫</p>
                                                         </div>
                                                     </div>
                                                 </a>
@@ -200,7 +200,7 @@ if (!empty($_GET['id'])) {
                                                             <?= $product_['name'] ?>
                                                         </span>
                                                         <div class="container-silebar__group-list">
-                                                            <span class="container-sidebar__group-span" style="font-weight: 700; color: black;"><?= $product_['price'] ?>₫</span>
+                                                            <span class="container-sidebar__group-span" style="font-weight: 700; color: black;"><?= number_format($product_['price'], 0, ',', '.') ?>₫</span>
                                                         </div>
                                                     </div>
                                                 </a>
@@ -221,8 +221,71 @@ if (!empty($_GET['id'])) {
 
     </div>
     <!-- javasprit -->
-    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <script src="./assets/js/sanpham.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#addToCart').click(function() {
+                var id = <?= $product['id'] ?>;
+                var quantity = $('#numProducts').val();
+                $.ajax({
+                    url: './add-to-cart.php',
+                    type: 'POST',
+                    data: {
+                        id: id,
+                        quantity: quantity
+                    },
+                    success: function(data) {
+                        alert(data);
+                    }
+                });
+            });
+        })
+
+        var slideIndex = 1;
+        showSlides(slideIndex);
+
+        function showSlides(n) {
+            var i;
+            var slides = document.getElementsByClassName("js-myslide");
+            var dots = document.getElementsByClassName("js-hiden");
+            if (n > slides.length) {
+                slideIndex = 1;
+            }
+            if (n < 1) {
+                slideIndex = slides.length;
+            }
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+                // console.log(slides[i])
+            }
+            for (i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" active", "");
+            }
+            slides[slideIndex - 1].style.display = "block";
+            dots[slideIndex - 1].className += " active";
+        }
+
+        // Next/previous controls
+        function plusSlides(n) {
+            showSlides((slideIndex += n));
+        }
+
+        // Thumbnail image controls
+        function currentSlide(n) {
+            showSlides((slideIndex = n));
+        }
+
+        $(".container-form__add-sub").click(() => {
+            var val = $(".fix-number").val();
+            if (val > 1) {
+                $(".fix-number").val(parseInt(val - 1), 10);
+            }
+        });
+
+        $(".container-form__add-sub1").click(() => {
+            $(".fix-number").val(parseInt($(".fix-number").val(), 10) + 1);
+        });
+    </script>
 </body>
 
 </html>
