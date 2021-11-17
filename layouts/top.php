@@ -155,7 +155,7 @@ if ($result != null) {
                             <ul class="hearder-footer__sugget-list">
 
                                 <?php foreach ($category as $key => $value) : ?>
-                                    <a href="./category.php?catid=<?= $value['id'] ?>" class="hearder-footer__sugget-link">
+                                    <a href="./category.php?id=<?= $value['id'] ?>" class="hearder-footer__sugget-link">
                                         <li class="hearder-footer__sugget-li"><?= $value['name'] ?></li>
                                     </a>
                                 <?php endforeach; ?>
