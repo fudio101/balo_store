@@ -32,8 +32,7 @@ require_once("./utils/utility.php");
                                     <th class="container-bank__table-th hide-on-mobile">Tạm tính</th>
                                 </tr>
 
-                                <?php $i = 0;
-                                if ($cartList != null) foreach ($cartList as $key => $product_) : ?>
+                                <?php if ($cartList != null) foreach ($cartList as $key => $product_) : ?>
 
                                     <tr class="container-bank__table-tr">
                                         <td class="container-bank__table-td">
@@ -52,9 +51,9 @@ require_once("./utils/utility.php");
                                         </td>
                                         <td class="container-bank__table-td container-bank__table-sum">
                                             <div class="container-form__add-number container-bank__form">
-                                                <input type="button" class="container-form__add-sub" onclick="subValue(<?= $i ?>)" value="-">
-                                                <input type="number" class="container-form__add-cart" id="fix-number-<?= $i ?>" min="1" max="1000" style="width: 40px;" value="<?= $cart[$key]['quantity'] ?>">
-                                                <input type="button" class="container-form__add-sub1" onclick="addValue(<?= $i++ ?>)" value="+">
+                                                <input type="button" class="container-form__add-sub" onclick="subValue(<?= $cart[$key]['id'] ?>)" value="-">
+                                                <input type="number" class="container-form__add-cart" id="fix-number-<?= $cart[$key]['id'] ?>" onchange="updateItem(<?= $cart[$key]['id'] ?>)" min="1" max="1000" style="width: 40px;" value="<?= $cart[$key]['quantity'] ?>">
+                                                <input type="button" class="container-form__add-sub1" onclick="addValue(<?= $cart[$key]['id'] ?>)" value="+">
                                             </div>
                                         </td>
                                         <td class="container-bank__table-td hide-on-mobile">
@@ -108,13 +107,31 @@ require_once("./utils/utility.php");
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <script src="./assets/js/balo.js"></script>
     <script>
-        function deleteItem(n) {
+        function deleteItem(id) {
             $.ajax({
                 url: './api/cart.php',
                 type: 'POST',
                 data: {
-                    id: n,
+                    id: id,
                     action: 'delete'
+                },
+                success: function(data) {
+                    if (data != '')
+                        alert(data);
+                    location.reload();
+                }
+            })
+        }
+
+        function updateItem(id) {
+            var number = $('#fix-number-' + id).val();
+            $.ajax({
+                url: './api/cart.php',
+                type: 'POST',
+                data: {
+                    id: id,
+                    action: 'update',
+                    number: number
                 },
                 success: function(data) {
                     if (data != '')
