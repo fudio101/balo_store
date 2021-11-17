@@ -653,12 +653,16 @@ input[name="bottom"]{
     width: 25%;
 	transition: 0.6s;
 }
-.container-slide__list-img{
+/* .container-slide__list-img{
 	background-image: url(../images/slider_1.jpg);
     padding-top: 33.45%;
     background-size: 100%;
     background-repeat: no-repeat;
+} */
+.container-slide__list-img-slide{
+    width: 100%;
 }
+
 
 #bottom_1:checked ~ .container-slide__id{
 	margin-left: 0;
@@ -810,16 +814,6 @@ input[name="bottom"]{
 
 /*sản phẩm nỗi bật*/
 
-
-.container-voter__img
-{
-    background-image: url("../images/anh1.jpg");
-    background-repeat: no-repeat;
-    /* background-size: cover; */
-    background-position: 50%;
-    position: relative;
-    
-}
 /*làm phần discount*/
 .container-voter__contai
 {
@@ -845,52 +839,6 @@ input[name="bottom"]{
 }
 
 
-/*tiếp sản phẩm nổi bật*/
-.container-star{
-    text-decoration: none;
-}
-.container-star__shop-span{
-    font-size: 0.9rem;
-    color: var(--blue-text);
-    text-align: center;
-    display: block;
-    height: 32px;
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-}
-.container-star__shop-span:hover{
-    color: var(--yellow-color);
-}
-.container-star__shop-money{
-    color: var(--text-color);
-    font-size: 1rem;
-    font-weight: 600;
-    text-align: center;
-}
-.container-star__shop-money-no{
-    color: #9d9d9d;
-    text-decoration: line-through;
-    font-weight: 200;
-}
-.container-star__shop-img{
-    position: relative;
-}
-.container-star__shop-sale{
-    position: absolute;
-    top: 10px;
-    left: 2px;
-    height: 36px;
-    width: 36px;
-    background-color: var(--yellow-color);
-    border-radius: 50%;
-}
-.container-star__shop-noti{
-    line-height: 36px;
-    font-size: 0.9rem;
-    color: var(--white-color);
-}
 
 
 
@@ -1509,6 +1457,13 @@ input[name="bottom"]{
     font-weight: 100;
     font-size: 0.9rem;
     color: var(--blue-text);
+    height: 30px;
+    overflow: hidden;
+    display: block;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+
 }
 .container-vali__content-span:hover
 {
@@ -1522,14 +1477,6 @@ input[name="bottom"]{
     margin-top: 8px;
     align-items: center;
     justify-content: center;
-}
-.container-vali__money-no
-{
-    font-size: 0.9rem;
-    font-weight: 100;
-    text-decoration: line-through;
-    color: #9d9d9d;
-    margin-right: 4px;
 }
 .container-vali__money-line
 {
@@ -1549,10 +1496,6 @@ input[name="bottom"]{
     padding-left: 0;
 }
 .container-page__list{
-    height: 30px;
-    width: 40px;
-    line-height: 30px;
-    text-align: center;
     margin: 0 10px;
     cursor: pointer;
 }
@@ -1575,4 +1518,28 @@ input[name="bottom"]{
     color: var(--menu-text-color);
     font-size: 1rem;
     font-weight: 600;
+    height: 30px;
+    width: 40px;
+    line-height: 30px;
+    text-align: center;
+    display: block;
+}
+
+
+/* làm xem thêm sản phẩm vali,balo,tuixach*/
+.container-sale__shop-add{
+    margin: 0 0 15px 0;
+    display: flex;
+    justify-content: center;
+}
+.container-sale__shop-add-link{
+    display: block;
+    background-color: var(--yellow-color);
+    width: 120px;
+    text-decoration: none;
+    border-radius: 4px !important;
+    text-align: center;
+}
+.container-sale__shop-add-link:hover{
+    background-color:#fcb10e;
 }

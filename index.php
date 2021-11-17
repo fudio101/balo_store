@@ -25,10 +25,14 @@ $products =  executeResult($sqlGetProduct);
                     <input type="radio" name="bottom" id="bottom_1">
                     <input type="radio" name="bottom" id="bottom_2">
                     <div class="container-slide__list container-slide__id">
-                        <div class="container-slide__list-img"></div>
+                        <div class="container-slide__list-img">
+                            <img src="./assets/images/slider_1.jpg" alt="" class="container-slide__list-img-slide">
+                        </div>
                     </div>
                     <div class="container-slide__list">
-                        <div class="container-slide__list-img"></div>
+                        <div class="container-slide__list-img">
+                            <img src="./assets/images/slider_1.jpg" alt="" class="container-slide__list-img-slide">
+                        </div>
                     </div>
                 </div>
                 <div class="container-navigation">
@@ -41,7 +45,7 @@ $products =  executeResult($sqlGetProduct);
             <div class="container-menu">
                 <div class="grid wide">
                     <div class="container-sale">
-                        <sapn class="container-sale__notifi">Tất cả sản phẩm</sapn>
+                        <sapn class="container-sale__notifi">Sản phẩm mới</sapn>
                         <img src="./assets/images/flash_sale.jpg" alt="" class="container-sale__img">
                     </div>
                     <div class="row sm-gutter">
@@ -134,58 +138,10 @@ $products =  executeResult($sqlGetProduct);
                 </div>
             </div>
             <div class="container-voter">
-                <div class="container-voter__img">
-                    <div class="container-voter__contai">
-                        <div class="grid wide">
-                            <div class="container-voter__contai-noti container-sale__shop">
-                                <sapn class="container-sale__span container-voter__contai-span container-voter__contai-none">
-                                    Sản Phẩm Nổi Bật</sapn>
-                                <div class="container-sale__shop-notifi container-voter__contai-none">
-                                    <sapn class="container-sale__shop-span container-voter__contai-name">Balo</sapn>
-                                    <sapn class="container-sale__shop-span container-voter__contai-name">Vali</sapn>
-                                </div>
-                            </div>
-                            <div class="row sm-gutter">
-                                <div class="col l-3 m-3 c-12 container-shoping__culum">
-                                    <img src="./assets/images/anh2.jpg" alt="" class="container-voter__discount">
-                                </div>
-                                <div class="col l-9 m-9 c-12 container-shoping__culum-75">
-                                    <div class="row sm-gutter">
-
-                                        <div class="col l-4 m-6 c-6 container-shoping__culum-75">
-                                            <a href="#" class="container-star">
-                                                <div class="container-star__shop container-discount__flex">
-                                                    <div class="container-star__shop-img container-voter__discount-three">
-                                                        <img src="./assets/images/balo1.jpg" alt="" class="container-voter__discount-img">
-                                                    </div>
-                                                    <div class="container-star__shop-isplay container-voter__discount-six">
-                                                        <div class="container-star__shop-text">
-                                                            <span class="container-star__shop-span container-discount__text-span">
-                                                                Túi Xách Cartinoe MIVIDA1071 Lamando 15.6
-                                                            </span>
-                                                        </div>
-                                                        <div class="container-star__shop-money container-discount__text-culum">
-                                                            <span class="container-star__shop-money-line">480.000₫</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <div class="grid wide">
                     <div class="container-section">
                         <div class="container-sale__shop">
                             <sapn class="container-sale__span">Vali</sapn>
-                            <div class="container-sale__shop-notifi">
-                                <sapn class="container-sale__shop-span">Balo</sapn>
-                                <sapn class="container-sale__shop-span">Vali</sapn>
-                            </div>
                         </div>
                         <div class="row sm-gutter">
                             <div class="col l-2-4 m-4 c-6 container-shoping__culum">
@@ -193,11 +149,6 @@ $products =  executeResult($sqlGetProduct);
                                     <div class="container-vali">
                                         <div class="container-vali__img">
                                             <img src="./assets/images/balo3.jpg" alt="" class="container-vali__img-image">
-                                            <div class="container-vali__sale">
-                                                <span class="container-vali__sale-noti">
-                                                    -11%
-                                                </span>
-                                            </div>
                                         </div>
                                         <div class="container-vali__content">
                                             <span class="container-vali__content-span">
@@ -205,7 +156,6 @@ $products =  executeResult($sqlGetProduct);
                                             </span>
                                         </div>
                                         <div class="container-vali__money">
-                                            <span class="container-vali__money-no">540.000₫</span>
                                             <span class="container-vali__money-line">480.000₫</span>
                                         </div>
                                     </div>
@@ -216,11 +166,6 @@ $products =  executeResult($sqlGetProduct);
                                     <div class="container-vali">
                                         <div class="container-vali__img">
                                             <img src="./assets/images/balo3.jpg" alt="" class="container-vali__img-image">
-                                            <div class="container-vali__sale">
-                                                <span class="container-vali__sale-noti">
-                                                    -11%
-                                                </span>
-                                            </div>
                                         </div>
                                         <div class="container-vali__content">
                                             <span class="container-vali__content-span">
@@ -228,7 +173,6 @@ $products =  executeResult($sqlGetProduct);
                                             </span>
                                         </div>
                                         <div class="container-vali__money">
-                                            <span class="container-vali__money-no">540.000₫</span>
                                             <span class="container-vali__money-line">480.000₫</span>
                                         </div>
                                     </div>
@@ -239,11 +183,6 @@ $products =  executeResult($sqlGetProduct);
                                     <div class="container-vali">
                                         <div class="container-vali__img">
                                             <img src="./assets/images/balo3.jpg" alt="" class="container-vali__img-image">
-                                            <div class="container-vali__sale">
-                                                <span class="container-vali__sale-noti">
-                                                    -11%
-                                                </span>
-                                            </div>
                                         </div>
                                         <div class="container-vali__content">
                                             <span class="container-vali__content-span">
@@ -251,7 +190,6 @@ $products =  executeResult($sqlGetProduct);
                                             </span>
                                         </div>
                                         <div class="container-vali__money">
-                                            <span class="container-vali__money-no">540.000₫</span>
                                             <span class="container-vali__money-line">480.000₫</span>
                                         </div>
                                     </div>
@@ -262,11 +200,6 @@ $products =  executeResult($sqlGetProduct);
                                     <div class="container-vali">
                                         <div class="container-vali__img">
                                             <img src="./assets/images/balo3.jpg" alt="" class="container-vali__img-image">
-                                            <div class="container-vali__sale">
-                                                <span class="container-vali__sale-noti">
-                                                    -11%
-                                                </span>
-                                            </div>
                                         </div>
                                         <div class="container-vali__content">
                                             <span class="container-vali__content-span">
@@ -274,7 +207,6 @@ $products =  executeResult($sqlGetProduct);
                                             </span>
                                         </div>
                                         <div class="container-vali__money">
-                                            <span class="container-vali__money-no">540.000₫</span>
                                             <span class="container-vali__money-line">480.000₫</span>
                                         </div>
                                     </div>
@@ -285,11 +217,6 @@ $products =  executeResult($sqlGetProduct);
                                     <div class="container-vali">
                                         <div class="container-vali__img">
                                             <img src="./assets/images/balo3.jpg" alt="" class="container-vali__img-image">
-                                            <div class="container-vali__sale">
-                                                <span class="container-vali__sale-noti">
-                                                    -11%
-                                                </span>
-                                            </div>
                                         </div>
                                         <div class="container-vali__content">
                                             <span class="container-vali__content-span">
@@ -297,12 +224,14 @@ $products =  executeResult($sqlGetProduct);
                                             </span>
                                         </div>
                                         <div class="container-vali__money">
-                                            <span class="container-vali__money-no">540.000₫</span>
                                             <span class="container-vali__money-line">480.000₫</span>
                                         </div>
                                     </div>
                                 </a>
                             </div>
+                        </div>
+                        <div class="container-sale__shop-add">
+                            <a href="#" class="btn container-sale__shop-add-link">Xem thêm</a>
                         </div>
                         <div class="row sm-gutter">
                             <div class="col l-6 m-6 c-12">
