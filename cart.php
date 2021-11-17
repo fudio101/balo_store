@@ -23,42 +23,15 @@ require_once("./utils/utility.php");
                         </p>
                     </div> -->
                     <div class="row sm-gutter">
-                        <div class="col l-7 m-12 c-12">
-                            <table class="container-bank__table">
-                                <tr class="container-bank__table-tr container-bank__table-border">
-                                    <th class="container-bank__table-th">Sản phẩm</th>
-                                    <th class="container-bank__table-th hide-on-mobile">Giá</th>
-                                    <th class="container-bank__table-th ">Số Lượng</th>
-                                    <th class="container-bank__table-th hide-on-mobile">Tạm tính</th>
-                                </tr>
+                        <?php if ($cartList != null) : ?>
 
-                                <?php if ($cartList != null) foreach ($cartList as $key => $product_) : ?>
-
-                                    <tr class="container-bank__table-tr">
-                                        <td class="container-bank__table-td">
-                                            <div class="container-bank__table-flex">
-                                                <i class="container-bank__table-icon far fa-times-circle" onclick="deleteItem(<?= $cart[$key]['id'] ?>)" style="margin:0 12px 0 -12px; cursor: pointer;"></i>
-                                                <a href="<?= $baseUrl . 'product.php?id=' . $cart[$key]['id'] ?>" class="container-bank__link">
-                                                    <img src="<?= fixUrl($product_['avatar'], $baseUrl) ?>" alt="" class="container-bank__link-img">
-                                                    <span class="container-bank__link-text" style="margin-left: 12px;">
-                                                        <?= $product_['name'] ?>
-                                                    </span>
-                                                </a>
-                                            </div>
-                                        </td>
-                                        <td class="container-bank__table-td hide-on-mobile">
-                                            <span class="container-bank__table-text"><?= number_format($product_['price'], 0, ',', '.') ?>đ</span>
-                                        </td>
-                                        <td class="container-bank__table-td container-bank__table-sum">
-                                            <div class="container-form__add-number container-bank__form">
-                                                <input type="button" class="container-form__add-sub" onclick="subValue(<?= $cart[$key]['id'] ?>)" value="-">
-                                                <input type="number" class="container-form__add-cart fix-number" id="fix-number-<?= $cart[$key]['id'] ?>" onchange="updateItem(<?= $cart[$key]['id'] ?>)" min="1" max="1000" style="width: 40px;" value="<?= $cart[$key]['quantity'] ?>">
-                                                <input type="button" class="container-form__add-sub1" onclick="addValue(<?= $cart[$key]['id'] ?>)" value="+">
-                                            </div>
-                                        </td>
-                                        <td class="container-bank__table-td hide-on-mobile">
-                                            <span class="container-bank__table-text">2.400.000đ</span>
-                                        </td>
+                            <div class="col l-7 m-12 c-12">
+                                <table class="container-bank__table">
+                                    <tr class="container-bank__table-tr container-bank__table-border">
+                                        <th class="container-bank__table-th">Sản phẩm</th>
+                                        <th class="container-bank__table-th hide-on-mobile">Giá</th>
+                                        <th class="container-bank__table-th ">Số Lượng</th>
+                                        <th class="container-bank__table-th hide-on-mobile">Tạm tính</th>
                                     </tr>
 
                                     <?php if ($cartList != null) foreach ($cartList as $key => $product_) : ?>
@@ -193,16 +166,16 @@ require_once("./utils/utility.php");
         }
     </script>
     <script>
-           /*làm áp dụng phiếu ưu đãi */
+        /*làm áp dụng phiếu ưu đãi */
         let bankInput = $('.js-bank-input');
         let bankSubmit = $('.js-bank-submit');
+
         function myFunction() {
-           if(bankInput.val().trim().length>0){
-               bankSubmit.addClass('open');
-           }
-           else{
-               bankSubmit.removeClass('open');
-           }
+            if (bankInput.val().trim().length > 0) {
+                bankSubmit.addClass('open');
+            } else {
+                bankSubmit.removeClass('open');
+            }
         }
     </script>
 
