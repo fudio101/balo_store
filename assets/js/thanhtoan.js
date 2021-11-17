@@ -28,6 +28,5 @@ paySubmit.addEventListener('click',function(){
 })
 //đóng thanh toán
 modalClose.addEventListener('click',function(){
-    modalTurnOn.classList.remove('open');
-    // windown.location ='';
+    window.location.href='./index.php';
 })

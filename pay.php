@@ -160,11 +160,11 @@ require_once('./database/dbhelper.php');
             <div class="modal-pay__over"></div>
             <div class="modal-pay__form">
                 <div class="modal-form__list">
-                    <img src="../assets/images/MoMo.png" alt="" class="modal-form__img-list">
+                    <img src="./assets/images/MoMo.png" alt="" class="modal-form__img-list">
                     <p class="modal-form__list-text">Quét mã QR Code để thanh toán</p>
                 </div>
                 <div class="modal-form__img">
-                    <img src="../assets/images/qr.jpg" alt="" class="modal-form__img-last">
+                    <img src="./assets/images/qr.jpg" alt="" class="modal-form__img-last">
                     <p class="modal-form__list-span js-modal-number"></p>
                     <p class="modal-form__list-span js-modal-sucsess"></p>
                 </div>
@@ -178,7 +178,7 @@ require_once('./database/dbhelper.php');
     </div>
     <!-- javasprit -->
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-    <script src="../assets/js/thanhtoan.js"></script>
+    <script src="./assets/js/thanhtoan.js"></script>
 </body>
 
 </html>
