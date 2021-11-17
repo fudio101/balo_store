@@ -71,7 +71,7 @@ $products = executeResult($sqlGetProduct);
             <div class="container-menu">
                 <div class="grid wide">
                     <div class="container-sale">
-                        <sapn class="container-sale__notifi">Sản phẩm mới</sapn>
+                        <sapn class="container-sale__notifi" >Sản phẩm mới</sapn>
                         <img src="./assets/images/flash_sale.jpg" alt="" class="container-sale__img">
                     </div>
                     <div class="row sm-gutter">
