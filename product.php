@@ -1,31 +1,6 @@
-<?php
-$baseUrl = '../';
-
-?>
-
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!--[if lt IE 9]>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.1/respond.js"></script>
-        <![endif]-->
-    <link rel="stylesheet" href="../assets/css/balo.css">
-    <link rel="stylesheet" href="../assets/css/balobase.css">
-    <link rel="stylesheet" href="../assets/css/sanpham.css">
-    <link rel="stylesheet" href="../assets/css/gird.css">
-    <link rel="stylesheet" href="../assets/css/responsive.css">
-    <link rel="stylesheet" href="../assets/icon/fontawesome-free-5.15.3/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap" rel="stylesheet">
-    <title>Balo</title>
-</head>
-
+<?php require_once('./layouts/head.php'); ?>
 <body>
     <div class="apps">
         <?php require_once($baseUrl . "layouts/top.php"); ?>
@@ -52,16 +27,16 @@ $baseUrl = '../';
                                     <div class="col l-5 m-12 c-12">
                                         <div class="container-cart">
                                             <div class="container-cart__myslide js-myslide">
-                                                <img src="../assets/images/sanpham1.jpg" alt="" class="container-cart__img">
+                                                <img src="./assets/images/sanpham1.jpg" alt="" class="container-cart__img">
                                             </div>
                                             <div class="container-cart__myslide js-myslide">
-                                                <img src="../assets/images/sanpham2.jpg" alt="" class="container-cart__img">
+                                                <img src="./assets/images/sanpham2.jpg" alt="" class="container-cart__img">
                                             </div>
                                             <div class="container-cart__myslide js-myslide">
-                                                <img src="../assets/images/sanpham3.jpg" alt="" class="container-cart__img">
+                                                <img src="./assets/images/sanpham3.jpg" alt="" class="container-cart__img">
                                             </div>
                                             <div class="container-cart__myslide js-myslide">
-                                                <img src="../assets/images/sanpham4.jpg" alt="" class="container-cart__img">
+                                                <img src="./assets/images/sanpham4.jpg" alt="" class="container-cart__img">
                                             </div>
                                             <!-- Next and previous buttons -->
                                             <a class="container-cart__prev container-cart__none" onclick="plusSlides(-1)">❮</a>
@@ -71,22 +46,22 @@ $baseUrl = '../';
                                                 <div class="row sm-gutter">
                                                     <div class="col l-3 m-3 c-3">
                                                         <div class="container-list__hiden js-hiden" onclick="currentSlide(1)">
-                                                            <img class="container-list__demo container-list__cursor js-demo" src="../assets/images/sanpham1.jpg" alt="">
+                                                            <img class="container-list__demo container-list__cursor js-demo" src="./assets/images/sanpham1.jpg" alt="">
                                                         </div>
                                                     </div>
                                                     <div class="col l-3 m-3 c-3">
                                                         <div class="container-list__hiden js-hiden" onclick="currentSlide(2)">
-                                                            <img class="container-list__demo container-list__cursor js-demo" src="../assets/images/sanpham2.jpg" alt="">
+                                                            <img class="container-list__demo container-list__cursor js-demo" src="./assets/images/sanpham2.jpg" alt="">
                                                         </div>
                                                     </div>
                                                     <div class="col l-3 m-3 c-3">
                                                         <div class="container-list__hiden js-hiden" onclick="currentSlide(3)">
-                                                            <img class="container-list__demo container-list__cursor js-demo" src="../assets/images/sanpham3.jpg" alt="">
+                                                            <img class="container-list__demo container-list__cursor js-demo" src="./assets/images/sanpham3.jpg" alt="">
                                                         </div>
                                                     </div>
                                                     <div class="col l-3 m-3 c-3">
                                                         <div class="container-list__hiden js-hiden" onclick="currentSlide(4)">
-                                                            <img class="container-list__demo container-list__cursor js-demo" src="../assets/images/sanpham4.jpg" alt="">
+                                                            <img class="container-list__demo container-list__cursor js-demo" src="./assets/images/sanpham4.jpg" alt="">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -160,7 +135,7 @@ $baseUrl = '../';
                                     <div class="row sm-gutter">
                                         <div class="col l-3 m-4 c-6">
                                             <a href="" class="container-sp__cart">
-                                                <img src="../assets/images/sanpham4.jpg" alt="" class="container-sp__cart-img">
+                                                <img src="./assets/images/sanpham4.jpg" alt="" class="container-sp__cart-img">
                                                 <div class="container-sp__cart-postion">
                                                     <span class="container-sp__cart-postion-span">-11%</span>
                                                 </div>
@@ -175,7 +150,7 @@ $baseUrl = '../';
                                         </div>
                                         <div class="col l-3 m-4 c-6">
                                             <a href="" class="container-sp__cart">
-                                                <img src="../assets/images/sanpham1.jpg" alt="" class="container-sp__cart-img">
+                                                <img src="./assets/images/sanpham1.jpg" alt="" class="container-sp__cart-img">
                                                 <div class="container-sp__cart-postion">
                                                     <span class="container-sp__cart-postion-span">-11%</span>
                                                 </div>
@@ -190,7 +165,7 @@ $baseUrl = '../';
                                         </div>
                                         <div class="col l-3 m-4 c-6">
                                             <a href="" class="container-sp__cart">
-                                                <img src="../assets/images/sanpham1.jpg" alt="" class="container-sp__cart-img">
+                                                <img src="./assets/images/sanpham1.jpg" alt="" class="container-sp__cart-img">
                                                 <div class="container-sp__cart-postion">
                                                     <span class="container-sp__cart-postion-span">-11%</span>
                                                 </div>
@@ -205,7 +180,7 @@ $baseUrl = '../';
                                         </div>
                                         <div class="col l-3 m-4 c-6">
                                             <a href="" class="container-sp__cart">
-                                                <img src="../assets/images/sanpham1.jpg" alt="" class="container-sp__cart-img">
+                                                <img src="./assets/images/sanpham1.jpg" alt="" class="container-sp__cart-img">
                                                 <div class="container-sp__cart-postion">
                                                     <span class="container-sp__cart-postion-span">-11%</span>
                                                 </div>
@@ -226,28 +201,28 @@ $baseUrl = '../';
                         <div class="col l-3 m-0 c-0">
                             <div class="container-last">
                                 <div class="container-last__list">
-                                    <img src="../assets/images/policy_images_1.png" alt="" class="container-last__list-img">
+                                    <img src="./assets/images/policy_images_1.png" alt="" class="container-last__list-img">
                                     <div class="container-last__list-div">
                                         <span class="container-last__list-span">Miễn phí vận chuyển</span>
                                         <span class="container-last__list-span">Cho các đơn hàng > 5tr</span>
                                     </div>
                                 </div>
                                 <div class="container-last__list">
-                                    <img src="../assets/images/policy_images_4.png" alt="" class="container-last__list-img">
+                                    <img src="./assets/images/policy_images_4.png" alt="" class="container-last__list-img">
                                     <div class="container-last__list-div">
                                         <span class="container-last__list-span">Thanh toán</span>
                                         <span class="container-last__list-span">Được bảo mật 100%</span>
                                     </div>
                                 </div>
                                 <div class="container-last__list">
-                                    <img src="../assets/images/policy_images_2.png" alt="" class="container-last__list-img">
+                                    <img src="./assets/images/policy_images_2.png" alt="" class="container-last__list-img">
                                     <div class="container-last__list-div">
                                         <span class="container-last__list-span">Hỗ trợ 24/7.</span>
                                         <span class="container-last__list-span">Liên hệ hỗ trợ 24h/ngày</span>
                                     </div>
                                 </div>
                                 <div class="container-last__list">
-                                    <img src="../assets/images/policy_images_3.png" alt="" class="container-last__list-img">
+                                    <img src="./assets/images/policy_images_3.png" alt="" class="container-last__list-img">
                                     <div class="container-last__list-div">
                                         <span class="container-last__list-span">Hoàn tiền 100%</span>
                                         <span class="container-last__list-span">Nếu sản phẩm bị lỗi, hư hỏng</span>
@@ -262,7 +237,7 @@ $baseUrl = '../';
                                     <div class="row sm-gutter">
                                         <div class="col l-12 m-12 c-12 abc">
                                             <a href="" class="container-sidebar__group-flex">
-                                                <img src="../assets/images/sanpham2.jpg" alt="" class="container-sidebar__group-img">
+                                                <img src="./assets/images/sanpham2.jpg" alt="" class="container-sidebar__group-img">
                                                 <div class="container-sidebar__group-div">
                                                     <span class="container-sidebar__group-noti">
                                                         Túi Xách Cartinoe MIVIDA1071 Lamando 15.6
@@ -276,7 +251,7 @@ $baseUrl = '../';
                                         </div>
                                         <div class="col l-12 m-12 c-12 abc">
                                             <a href="" class="container-sidebar__group-flex">
-                                                <img src="../assets/images/sanpham2.jpg" alt="" class="container-sidebar__group-img">
+                                                <img src="./assets/images/sanpham2.jpg" alt="" class="container-sidebar__group-img">
                                                 <div class="container-sidebar__group-div">
                                                     <span class="container-sidebar__group-noti">
                                                         Túi Xách Cartinoe MIVIDA1071 Lamando 15.6
@@ -290,7 +265,7 @@ $baseUrl = '../';
                                         </div>
                                         <div class="col l-12 m-12 c-12 abc">
                                             <a href="" class="container-sidebar__group-flex">
-                                                <img src="../assets/images/sanpham2.jpg" alt="" class="container-sidebar__group-img">
+                                                <img src="./assets/images/sanpham2.jpg" alt="" class="container-sidebar__group-img">
                                                 <div class="container-sidebar__group-div">
                                                     <span class="container-sidebar__group-noti">
                                                         Túi Xách Cartinoe MIVIDA1071 Lamando 15.6
@@ -304,7 +279,7 @@ $baseUrl = '../';
                                         </div>
                                         <div class="col l-12 m-12 c-12 abc">
                                             <a href="" class="container-sidebar__group-flex">
-                                                <img src="../assets/images/sanpham2.jpg" alt="" class="container-sidebar__group-img">
+                                                <img src="./assets/images/sanpham2.jpg" alt="" class="container-sidebar__group-img">
                                                 <div class="container-sidebar__group-div">
                                                     <span class="container-sidebar__group-noti">
                                                         Túi Xách Cartinoe MIVIDA1071 Lamando 15.6
@@ -318,7 +293,7 @@ $baseUrl = '../';
                                         </div>
                                         <div class="col l-12 m-12 c-12 abc">
                                             <a href="" class="container-sidebar__group-flex">
-                                                <img src="../assets/images/sanpham2.jpg" alt="" class="container-sidebar__group-img">
+                                                <img src="./assets/images/sanpham2.jpg" alt="" class="container-sidebar__group-img">
                                                 <div class="container-sidebar__group-div">
                                                     <span class="container-sidebar__group-noti">
                                                         Túi Xách Cartinoe MIVIDA1071 Lamando 15.6
@@ -344,7 +319,7 @@ $baseUrl = '../';
     </div>
     <!-- javasprit -->
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-    <script src="../assets/js/sanpham.js"></script>
+    <script src="./assets/js/sanpham.js"></script>
 </body>
 
 </html>

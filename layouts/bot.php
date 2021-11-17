@@ -129,7 +129,7 @@
                 </div>
             </div>
             <p class="footer-hearder__footer footer-hearder__span-p">
-                Copyright 2021 © | Giao diện web đẹp | Lịch CKT
+                Copyright 2021 © | Giao diện web đẹp | Staskoverflow19
             </p>
         </div>
     </div>

@@ -17,6 +17,9 @@ if (!empty($_POST)) {
 		case 'delete':
 			deleteProduct();
 			break;
+		case 'import':
+			importProduct();
+			break;
 	}
 }
 
@@ -24,7 +27,17 @@ function deleteProduct()
 {
 	global $user_;
 	$id = getPost('id');
-	$updated_at = date("Y-m-d H:i:s");
 	$sql = "UPDATE `db_product` SET `modified_by`='$user_',`status`=0 WHERE `id`=$id";
+	execute($sql);
+}
+
+function importProduct()
+{
+	global $user_;
+	$id = getPost('id');
+	$sql = "SELECT number FROM `db_product` WHERE `id`=$id";
+	$result = executeResult($sql, true);
+	$quantity = getPost('quantity') + $result['number'];
+	$sql = "UPDATE `db_product` SET `modified_by`='$user_',`number`=$quantity WHERE `id`=$id";
 	execute($sql);
 }

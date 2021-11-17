@@ -13,7 +13,7 @@ $data = executeResult($sql);
 
 		<a href="editor.php"><button class="btn btn-success">Add Product</button></a>
 
-		<table class="table table-bordered table-hover" style="margin-top: 20px;">
+		<table class="table table-striped table-hover" style="margin-top: 20px;">
 			<thead>
 				<tr>
 					<th>STT</th>
@@ -23,8 +23,9 @@ $data = executeResult($sql);
 					<th>Category</th>
 					<th>Quantity</th>
 					<th>Quantity Sold</th>
-					<th style="width: 50px"></th>
-					<th style="width: 50px"></th>
+					<th>Import</th>
+					<th>Modify</th>
+					<th>Delete</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -33,17 +34,28 @@ $data = executeResult($sql);
 				foreach ($data as $item) {
 					echo '<tr>
 					<th>' . (++$index) . '</th>
-					<td><img src="' . fixUrl($item['avatar']) . '" style="height: 100px"/></td>
+					<td><center><img src="' . fixUrl($item['avatar']) . '" style="height: 100px; object-fit: contain;"/></center></td>
 					<td>' . $item['name'] . '</td>
 					<td>' . $item['price'] . '</td>
 					<td>' . $item['category_name'] . '</td>
 					<td>' . $item['number'] . '</td>
 					<td>' . $item['number_buy'] . '</td>
 					<td style="width: 50px">
-						<a href="editor.php?id=' . $item['id'] . '"><button class="btn btn-warning">Modify</button></a>
+						<center>
+							<button onclick="importGoods(' . $item['id'] . ')" class="btn btn-primary"><i class="bi bi-plus-lg"></i></button>
+						<center>
 					</td>
 					<td style="width: 50px">
-						<button onclick="deleteProduct(' . $item['id'] . ')" class="btn btn-danger">Delete</button>
+						<a href="editor.php?id=' . $item['id'] . '">
+							<center>
+								<button class="btn btn-warning"><i class="bi bi-pencil-fill"></i></button>
+							</center>
+						</a>
+					</td>
+					<td style="width: 50px">
+						<center>
+							<button onclick="deleteProduct(' . $item['id'] . ')" class="btn btn-danger"><i class="bi bi-x"></i></button>
+						<center>
 					</td>
 				</tr>';
 				}
@@ -61,6 +73,19 @@ $data = executeResult($sql);
 		$.post('form_api.php', {
 			'id': id,
 			'action': 'delete'
+		}, function(data) {
+			location.reload()
+		})
+	}
+
+	function importGoods(id) {
+		quantity = prompt('How many products do you want to import?')
+		if (!quantity) return;
+
+		$.post('form_api.php', {
+			'id': id,
+			'action': 'import',
+			'quantity': quantity
 		}, function(data) {
 			location.reload()
 		})
