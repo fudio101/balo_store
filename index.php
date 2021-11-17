@@ -71,7 +71,7 @@ $products = executeResult($sqlGetProduct);
             <div class="container-menu">
                 <div class="grid wide">
                     <div class="container-sale">
-                        <sapn class="container-sale__notifi">Sản phẩm mới</sapn>
+                        <sapn class="container-sale__notifi" >Sản phẩm mới</sapn>
                         <img src="./assets/images/flash_sale.jpg" alt="" class="container-sale__img">
                     </div>
                     <div class="row sm-gutter">
@@ -197,13 +197,6 @@ $products = executeResult($sqlGetProduct);
                 </div>
             </div>
 
-<<<<<<< HEAD
-            <?php require_once($baseUrl . "layouts/bot.php"); ?>
-        </div>
-        <!-- javasprit -->
-        <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-        <script src="./assets/js/balo.js"></script>
-=======
         <?php require_once($baseUrl . "layouts/bot.php"); ?>
     </div>
     <!-- javasprit -->
@@ -218,7 +211,6 @@ $products = executeResult($sqlGetProduct);
             }
         }, 4000);
     </script>
->>>>>>> c223c33e7280176abe1e192db6668a7753057aaf
 </body>
 
 </html>

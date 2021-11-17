@@ -16,12 +16,12 @@ require_once("./utils/utility.php");
         <div class="container" style="min-height: 512px;">
             <div class="grid wide" style="margin-top:64px">
                 <div class="container-bank">
-                    <div class="container-bank__message">
+                    <!-- <div class="container-bank__message">
                         <i class="container-bank__message-icon far fa-check-circle"></i>
                         <p class="container-bank__noti">
                             Túi Xách Cartinoe MIVIDA1071 Lamando 15.6” xóa khỏi giỏ hàng
                         </p>
-                    </div>
+                    </div> -->
                     <div class="row sm-gutter">
                         <div class="col l-7 m-12 c-12">
                             <table class="container-bank__table">
@@ -38,7 +38,7 @@ require_once("./utils/utility.php");
                                     <tr class="container-bank__table-tr">
                                         <td class="container-bank__table-td">
                                             <div class="container-bank__table-flex">
-                                                <i class="container-bank__table-icon far fa-times-circle" style="margin:0 12px 0 -12px; cursor: pointer;"></i>
+                                                <i class="container-bank__table-icon far fa-times-circle" onclick="deleteItem(<?= $cart[$key]['id'] ?>)" style="margin:0 12px 0 -12px; cursor: pointer;"></i>
                                                 <a href="<?= $baseUrl . 'product.php?id=' . $cart[$key]['id'] ?>" class="container-bank__link">
                                                     <img src="<?= fixUrl($product_['avatar'], $baseUrl) ?>" alt="" class="container-bank__link-img">
                                                     <span class="container-bank__link-text" style="margin-left: 12px;">
@@ -108,6 +108,22 @@ require_once("./utils/utility.php");
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <script src="./assets/js/balo.js"></script>
     <script>
+        function deleteItem(n) {
+            $.ajax({
+                url: './api/cart.php',
+                type: 'POST',
+                data: {
+                    id: n,
+                    action: 'delete'
+                },
+                success: function(data) {
+                    if (data != '')
+                        alert(data);
+                    location.reload();
+                }
+            })
+        }
+
         function addValue(value) {
             $('#fix-number-' + value).val(parseInt($('#fix-number-' + value).val()) + 1);
         }
