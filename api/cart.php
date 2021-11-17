@@ -93,7 +93,5 @@ function add_to_cart()
                 $_SESSION['cart'] = $cart;
             }
         }
-
-        echo "Thêm sảm phẩm thành công";
     }
 }
