@@ -10,6 +10,31 @@ if (!empty($_POST)) {
         case 'delete':
             delete_from_cart();
             break;
+        case 'update':
+            update_cart();
+            break;
+    }
+}
+
+function update_cart()
+{
+    if (!empty($_POST['id']) && !empty($_POST['quantity'])) {
+        $id = $_POST['id'];
+        $quantity = $_POST['quantity'];
+        $cart = $_SESSION['cart'];
+        $index = -1;
+        for ($i = 0; $i < count($cart); $i++) {
+            if ($cart[$i]['id'] == $id) {
+                $index = $i;
+                break;
+            }
+        }
+        if ($index != -1) {
+            $cart[$index]['quantity'] = $quantity;
+            $_SESSION['cart'] = $cart;
+        } else {
+            echo 'Sản phẩm không tồn tại!';
+        }
     }
 }
 
@@ -30,6 +55,8 @@ function delete_from_cart()
             unset($cart[$index]);
             $cart = array_values($cart);
             $_SESSION['cart'] = $cart;
+        } else {
+            echo "Sản phẩm không tồn tại!";
         }
     }
 }
@@ -66,7 +93,5 @@ function add_to_cart()
                 $_SESSION['cart'] = $cart;
             }
         }
-
-        echo "Thêm sảm phẩm thành công";
     }
 }
