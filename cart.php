@@ -52,7 +52,7 @@ require_once("./utils/utility.php");
                                         <td class="container-bank__table-td container-bank__table-sum">
                                             <div class="container-form__add-number container-bank__form">
                                                 <input type="button" class="container-form__add-sub" onclick="subValue(<?= $cart[$key]['id'] ?>)" value="-">
-                                                <input type="number" class="container-form__add-cart" id="fix-number-<?= $cart[$key]['id'] ?>" onchange="updateItem(<?= $cart[$key]['id'] ?>)" min="1" max="1000" style="width: 40px;" value="<?= $cart[$key]['quantity'] ?>">
+                                                <input type="number" class="container-form__add-cart fix-number" id="fix-number-<?= $cart[$key]['id'] ?>" onchange="updateItem(<?= $cart[$key]['id'] ?>)" min="1" max="1000" style="width: 40px;" value="<?= $cart[$key]['quantity'] ?>">
                                                 <input type="button" class="container-form__add-sub1" onclick="addValue(<?= $cart[$key]['id'] ?>)" value="+">
                                             </div>
                                         </td>
@@ -86,8 +86,8 @@ require_once("./utils/utility.php");
                                 <button type="" class="btn btn--green container-bank__cart-btn">Tiến hành thanh toán</button>
                                 <form action="" class="container-bank__form-list">
                                     <label for="" class="container-bank__lable">Phiếu ưu đãi</label>
-                                    <input type="text" class="container-bank__input">
-                                    <button class="container-bank__submit">Áp dụng</button>
+                                    <input type="text" class="container-bank__input js-bank-input" onchange="myFunction()">
+                                    <button class="container-bank__submit js-bank-submit">Áp dụng</button>
                                 </form>
                             </div>
                         </div>
@@ -149,6 +149,19 @@ require_once("./utils/utility.php");
             if ($('#fix-number-' + value).val() > 1) {
                 $('#fix-number-' + value).val(parseInt($('#fix-number-' + value).val()) - 1);
             }
+        }
+    </script>
+    <script>
+           /*làm áp dụng phiếu ưu đãi */
+        let bankInput = $('.js-bank-input');
+        let bankSubmit = $('.js-bank-submit');
+        function myFunction() {
+           if(bankInput.val().trim().length>0){
+               bankSubmit.addClass('open');
+           }
+           else{
+               bankSubmit.removeClass('open');
+           }
         }
     </script>
 
