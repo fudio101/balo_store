@@ -7,7 +7,7 @@ require_once('./database/dbhelper.php');
 
 //calculate
 $totalProduct = count(executeResult("select `id` from `db_product` where `status`=1"));
-$numProductsPerPage = 5;
+$numProductsPerPage = 10;
 $maxPage = (int)ceil($totalProduct / $numProductsPerPage);
 //get curent page
 $curentPage = 1;
@@ -28,7 +28,6 @@ if($curentPage < 4){
     $pageStart = $maxPage>5?($pageEnd-4):1;
 }
 
-echo "$pageStart -> $pageEnd";
 //0->count-1
 $offset = ($curentPage - 1) * $numProductsPerPage;
 $sqlGetProduct =    "SELECT *
