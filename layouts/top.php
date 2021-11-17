@@ -126,13 +126,14 @@ if (!empty($_SESSION['cart'])) {
                                         <span class="hearder-shop__sumoney-money"><?= number_format($total, 0, ',', '.') ?>đ</span>
                                     </div>
                                     <div class="hearder-shop__box">
-                                        <bottom class="btn btn--blue hearder-shop__box-bottom">
-                                            <a href="<?= $baseUrl ?>cart.php" class="hearder-shop__box-link">Xem giỏ hàng</a>
-                                        </bottom>
-                                        <bottom class="btn btn--green hearder-shop__box-bottom">
+                                        <button class="hearder-shop__box-bottom">
+                                            <a href="<?= $baseUrl ?>cart/" class="hearder-shop__box-link">Xem giỏ
+                                                hàng</a>
+                                        </button>
+                                        <button class="hearder-shop__box-bottom">
                                             <a href="<?= $baseUrl ?>pay" class="hearder-shop__box-pay">Thanh
                                                 toán</a>
-                                        </bottom>
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -149,7 +150,7 @@ if (!empty($_SESSION['cart'])) {
             <div class="hearder-from">
                 <ul class="hearder-footer__list">
                     <li class="hearder-footer__link ">
-                        <a href="" class="hearder-footer__href hearder-footer__black">
+                        <a href="../index.php" class="hearder-footer__href hearder-footer__black">
                             Trang chủ
                         </a>
                     </li>

@@ -1,7 +1,5 @@
 <?php
 
-//$baseUrl = './';
-
 require_once('./utils/utility.php');
 require_once('./database/dbhelper.php');
 
@@ -144,112 +142,68 @@ $products = executeResult($sqlGetProduct);
             <div class="container-voter">
                 <div class="grid wide">
                     <div class="container-section">
+                        <?php
+                            $getCategory = 'SELECT `id`,`name` FROM `db_category` WHERE `status`=1 ';
+                            $rowsCategory = executeResult($getCategory);
+                        ?>
+                        <?php foreach($rowsCategory as $rowCategory):
+                            $catid = $rowCategory['id'];
+                        ?>
                         <div class="container-sale__shop">
-                            <sapn class="container-sale__span">Vali</sapn>
+                            <sapn class="container-sale__span"><?=$rowCategory['name'];?></sapn>
                         </div>
                         <div class="row sm-gutter">
+                            <?php
+                                $sql = 'SELECT `id`,`avatar`,`name`,`price` FROM `db_product` WHERE `status`=1 ';
+                                $rows = executeResult("$sql AND `catid`=$catid ORDER BY `number_buy` DESC LIMIT 5");
+                            ?>
+                            <?php foreach ($rows as $row): ?>
                             <div class="col l-2-4 m-4 c-6 container-shoping__culum">
-                                <a href="" class="container-home__fb">
+                                <a href="product.php?id=<?=$row['id']?>" class="container-home__fb">
                                     <div class="container-vali">
                                         <div class="container-vali__img">
-                                            <img src="./assets/photos/163713747183715.jpg" alt="" class="container-vali__img-image">
+                                            <img src="<?=fixUrl($row['avatar'],'./');?>" alt="" class="container-vali__img-image">
                                         </div>
                                         <div class="container-vali__content">
                                             <span class="container-vali__content-span">
-                                                Túi Xách Cartinoe MIVIDA1071 Lamando 15.6
+                                                <?=$row['name']?>
                                             </span>
                                         </div>
                                         <div class="container-vali__money">
-                                            <span class="container-vali__money-line">480.000₫</span>
+                                            <span class="container-vali__money-line">
+                                                <?=$row['price']?>
+                                            </span>
                                         </div>
                                     </div>
                                 </a>
                             </div>
-                            <div class="col l-2-4 m-4 c-6 container-shoping__culum">
-                                <a href="" class="container-home__fb">
-                                    <div class="container-vali">
-                                        <div class="container-vali__img">
-                                            <img src="./assets/images/balo3.jpg" alt="" class="container-vali__img-image">
-                                        </div>
-                                        <div class="container-vali__content">
-                                            <span class="container-vali__content-span">
-                                                Túi Xách Cartinoe MIVIDA1071 Lamando 15.6
-                                            </span>
-                                        </div>
-                                        <div class="container-vali__money">
-                                            <span class="container-vali__money-line">480.000₫</span>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="col l-2-4 m-4 c-6 container-shoping__culum">
-                                <a href="" class="container-home__fb">
-                                    <div class="container-vali">
-                                        <div class="container-vali__img">
-                                            <img src="./assets/images/balo3.jpg" alt="" class="container-vali__img-image">
-                                        </div>
-                                        <div class="container-vali__content">
-                                            <span class="container-vali__content-span">
-                                                Túi Xách Cartinoe MIVIDA1071 Lamando 15.6
-                                            </span>
-                                        </div>
-                                        <div class="container-vali__money">
-                                            <span class="container-vali__money-line">480.000₫</span>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="col l-2-4 m-4 c-6 container-shoping__culum">
-                                <a href="" class="container-home__fb">
-                                    <div class="container-vali">
-                                        <div class="container-vali__img">
-                                            <img src="./assets/images/balo3.jpg" alt="" class="container-vali__img-image">
-                                        </div>
-                                        <div class="container-vali__content">
-                                            <span class="container-vali__content-span">
-                                                Túi Xách Cartinoe MIVIDA1071 Lamando 15.6
-                                            </span>
-                                        </div>
-                                        <div class="container-vali__money">
-                                            <span class="container-vali__money-line">480.000₫</span>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="col l-2-4 m-4 c-6 container-shoping__culum">
-                                <a href="" class="container-home__fb">
-                                    <div class="container-vali">
-                                        <div class="container-vali__img">
-                                            <img src="./assets/images/balo3.jpg" alt="" class="container-vali__img-image">
-                                        </div>
-                                        <div class="container-vali__content">
-                                            <span class="container-vali__content-span">
-                                                Túi Xách Cartinoe MIVIDA1071 Lamando 15.6
-                                            </span>
-                                        </div>
-                                        <div class="container-vali__money">
-                                            <span class="container-vali__money-line">480.000₫</span>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
+                            <?php endforeach; ?>
                         </div>
                         <div class="container-sale__shop-add">
-                            <a href="#" class="btn container-sale__shop-add-link">Xem thêm</a>
+                            <a href="category.php?id=<?=$catid;?>" class="btn container-sale__shop-add-link">Xem thêm</a>
                         </div>
-                        <div class="row sm-gutter">
-                            <div class="col l-6 m-6 c-12">
-                                <img src="./assets/images/anh3.jpg" alt="" class="container-section__img container-section__img-padding">
-                            </div>
-                            <div class="col l-6 m-6 c-12">
-                                <img src="./assets/images/anh4.jpg" alt="" class="container-section__img container-section__img-padding">
+                        <?php endforeach; ?>
+
+                            <div class="row sm-gutter">
+                                <div class="col l-6 m-6 c-12">
+                                    <img src="./assets/images/anh3.jpg" alt="" class="container-section__img container-section__img-padding">
+                                </div>
+                                <div class="col l-6 m-6 c-12">
+                                    <img src="./assets/images/anh4.jpg" alt="" class="container-section__img container-section__img-padding">
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
 
+<<<<<<< HEAD
+            <?php require_once($baseUrl . "layouts/bot.php"); ?>
+        </div>
+        <!-- javasprit -->
+        <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+        <script src="./assets/js/balo.js"></script>
+=======
         <?php require_once($baseUrl . "layouts/bot.php"); ?>
     </div>
     <!-- javasprit -->
@@ -264,6 +218,7 @@ $products = executeResult($sqlGetProduct);
             }
         }, 4000);
     </script>
+>>>>>>> c223c33e7280176abe1e192db6668a7753057aaf
 </body>
 
 </html>

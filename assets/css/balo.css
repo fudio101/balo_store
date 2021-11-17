@@ -306,7 +306,7 @@ html
     list-style: none;
     display: block;
     padding: 0;
-    max-height: 30vh;
+    max-height: 35vh;
     overflow-y: auto;
     background-color: var(--white-color);
 }
@@ -404,32 +404,39 @@ html
     display: flex;
     flex-direction: column;
 }
-.hearder-shop__box-bottom:hover
-{
-    opacity: 0.8;
-}
-.hearder-shop__box-bottom:nth-child(1)
-{
+.hearder-shop__box-bottom{
+    padding: 0;
     width: 100%;
-}
-.hearder-shop__box-bottom:nth-child(2)
-{
-    margin-top: 3px;
-    width: 100%;
+    border: none;
+    margin: 3px 0;
 }
 .hearder-shop__box-link
 {
     text-decoration: none;
     text-align: center;
     color: var(--white-color);
-    margin-left: 23%;
+    background-color: var(--blue-text);
+    padding: 15px 0;
+    display: block;
+    width: 100%;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 0.95rem;
 }
 .hearder-shop__box-pay
 {
     text-decoration: none;
     text-align: center;
     color: var(--white-color);
-    margin-left: 25%;
+    background-color: var(--yellow-color);
+    padding: 15px 0;
+    display: block;
+    width: 100%;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 0.95rem;
 }
 /*hết*/
 
