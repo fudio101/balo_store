@@ -238,6 +238,7 @@ if (!empty($_GET['id'])) {
                     },
                     success: function(data) {
                         alert(data);
+                        location.reload();
                     }
                 });
             });
