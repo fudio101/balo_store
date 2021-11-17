@@ -126,6 +126,11 @@
     {
         margin-right:10px;
     }
+    .container-shoping__img-image {
+        width: 100%;
+        height: 233.33px;
+        object-fit: contain;
+    }
 }
 /*mobille*/
 @media (max-width:739px){
@@ -245,6 +250,11 @@
         margin: 0;
         margin-bottom: 10px;
     }
+    .container-shoping__img-image {
+        width: 100%;
+        height: 190px;
+        object-fit: contain;
+    }
 }
 @media (max-width:280px) {
     .container-navigation-width{
@@ -262,5 +272,10 @@
     .hearder-modal__over-time{
         right: 5px;
         top: 5px;
+    }
+    .container-shoping__img-image {
+        width: 100%;
+        height: 132px;
+        object-fit: contain;
     }
 }
