@@ -555,9 +555,9 @@ html
 {
     position: absolute;
     content: " ";
-    top: -13%;
+    top: -19%;
     left: 0;
-    height: 20px;
+    height: 27px;
     width: 100%;
 }
 .hearder-footer__sugget-list
@@ -1536,4 +1536,43 @@ input[name="bottom"]{
     font-size: 1rem;
     font-weight: 550;
     color: var(--text-color);
+}
+/*làm phân trang*/
+.container-page{
+    padding-bottom: 10px;
+}
+.container-page__form{
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: 0;
+}
+.container-page__list{
+    height: 30px;
+    width: 40px;
+    line-height: 30px;
+    text-align: center;
+    margin: 0 10px;
+    cursor: pointer;
+}
+.container-page__list.open-color{
+    background-color: rgb(250, 151, 58);
+    border-radius: 3px;
+}
+.container-page__list:first-child{
+    margin-left: 0;
+}
+.container-page__list:last-child{
+    margin-right: 0;
+}
+.container-page__list:hover{
+    background-color: rgb(250, 151, 58);
+    border-radius: 3px;
+}
+.container-page__link{
+    text-decoration: none;
+    color: var(--menu-text-color);
+    font-size: 1rem;
+    font-weight: 600;
 }

@@ -139,3 +139,15 @@ function fixUrl($thumbnail, $rootPath = "../../")
 
 	return $thumbnail;
 }
+
+// nếu không phải link http thì thêm rootPath để điểu hướng đến thư mục
+// function asset($thumbnail)
+// {
+// 	$nameProject = "balostore";
+// 	if (stripos($thumbnail, 'http://') !== false || stripos($thumbnail, 'https://') !== false) {
+// 	} elseif ($thumbnail != "") {
+// 		$thumbnail = '/'  . $nameProject . "/assets/photos/" . $thumbnail;
+// 	}
+
+// 	return $thumbnail;
+// }
