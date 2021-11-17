@@ -14,18 +14,18 @@ $curentPage = 1;
 if (isset($_GET['page'])) {
     $curentPage = (int)$_GET['page'];
 }
-$curentPage = $curentPage<1 ? 1 : $curentPage;
-$curentPage = $curentPage>$maxPage ? $maxPage : $curentPage;
+$curentPage = $curentPage < 1 ? 1 : $curentPage;
+$curentPage = $curentPage > $maxPage ? $maxPage : $curentPage;
 
 $pageStart = $curentPage - 2;
-$pageEnd = $curentPage + 2; 
+$pageEnd = $curentPage + 2;
 
-if($curentPage < 4){
+if ($curentPage < 4) {
     $pageStart = 1;
-    $pageEnd = $maxPage>5?($pageStart+4):$maxPage;
-} elseif($curentPage > $maxPage-3){
+    $pageEnd = $maxPage > 5 ? ($pageStart + 4) : $maxPage;
+} elseif ($curentPage > $maxPage - 3) {
     $pageEnd = $maxPage;
-    $pageStart = $maxPage>5?($pageEnd-4):1;
+    $pageStart = $maxPage > 5 ? ($pageEnd - 4) : 1;
 }
 
 //0->count-1
@@ -80,7 +80,7 @@ $products = executeResult($sqlGetProduct);
 
                         <?php foreach ($products as $product) : ?>
                             <div class="col l-2-4 m-4 c-6 container-shoping__culum">
-                                <a href="product.php?id=<?=$product['id']; ?>" class="container-home__fb">
+                                <a href="product.php?id=<?= $product['id']; ?>" class="container-home__fb">
                                     <div class="container-shoping">
                                         <div class="container-shoping__img">
                                             <img src="<?= fixUrl($product['avatar'], './'); ?>" alt="" class="container-shoping__img-image">
@@ -104,19 +104,17 @@ $products = executeResult($sqlGetProduct);
                     <div class="container-page">
                         <ul class="container-page__form">
                             <li class="container-page__list">
-                                <a href="index.php?page=<?=$curentPage>5?($curentPage-5):1;?>" class="container-page__link">
+                                <a href="index.php?page=<?= $curentPage > 5 ? ($curentPage - 5) : 1; ?>" class="container-page__link">
                                     <i class="container-page__icon fas fa-angle-double-left"></i>
                                 </a>
                             </li>
-                            <?php for($index = $pageStart; $index<=$pageEnd; $index++): ?>
-                            <li class="container-page__list <?=$index==$curentPage?'open-color':'';?>">
-                                <a href="index.php?page=<?=$index;?>"
-                                    class="container-page__link"
-                                    ><?=$index;?></a>
-                            </li>
+                            <?php for ($index = $pageStart; $index <= $pageEnd; $index++) : ?>
+                                <li class="container-page__list <?= $index == $curentPage ? 'open-color' : ''; ?>">
+                                    <a href="index.php?page=<?= $index; ?>" class="container-page__link"><?= $index; ?></a>
+                                </li>
                             <?php endfor; ?>
                             <li class="container-page__list">
-                                <a href="index.php?page=<?=$curentPage<($maxPage-5)?($curentPage+5):$maxPage;?>" class="container-page__link">
+                                <a href="index.php?page=<?= $curentPage < ($maxPage - 5) ? ($curentPage + 5) : $maxPage; ?>" class="container-page__link">
                                     <i class="container-page__icon fas fa-angle-double-right"></i>
                                 </a>
                             </li>
@@ -256,7 +254,16 @@ $products = executeResult($sqlGetProduct);
     </div>
     <!-- javasprit -->
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-    <script src="./assets/js/balo.js"></script>
+    <script>
+        let counter = 1;
+        setInterval(function() {
+            document.getElementById('bottom_' + counter).checked = true;
+            counter++;
+            if (counter > 2) {
+                counter = 1;
+            }
+        }, 4000);
+    </script>
 </body>
 
 </html>

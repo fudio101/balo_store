@@ -1,14 +1,20 @@
+<?php
+require_once("./database/dbhelper.php");
+require_once("./utils/utility.php");
+?>
+
 <!DOCTYPE html>
 <html lang="en">
-<?php require_once('./layouts/head.php'); ?>
+
+<?php require_once("./layouts/head.php") ?>
 
 <body>
     <div class="apps">
 
         <?php require_once('./layouts/top.php') ?>
 
-        <div class="container">
-            <div class="grid wide">
+        <div class="container" style="min-height: 512px;">
+            <div class="grid wide" style="margin-top:64px">
                 <div class="container-bank">
                     <div class="container-bank__message">
                         <i class="container-bank__message-icon far fa-check-circle"></i>
@@ -25,84 +31,38 @@
                                     <th class="container-bank__table-th ">Số Lượng</th>
                                     <th class="container-bank__table-th hide-on-mobile">Tạm tính</th>
                                 </tr>
-                                <tr class="container-bank__table-tr">
-                                    <td class="container-bank__table-td">
-                                        <div class="container-bank__table-flex">
-                                            <i class="container-bank__table-icon far fa-times-circle"></i>
-                                            <a href="" class="container-bank__link">
-                                                <img src="./imger/sanpham1.jpg" alt="" class="container-bank__link-img">
-                                                <span class="container-bank__link-text">
-                                                    Vali Rovigo Revo BD_24 M Light Blue
-                                                </span>
-                                            </a>
-                                        </div>
-                                    </td>
-                                    <td class="container-bank__table-td hide-on-mobile">
-                                        <span class="container-bank__table-text">2.500.000đ</span>
-                                    </td>
-                                    <td class="container-bank__table-td container-bank__table-sum">
-                                        <div class="container-form__add-number container-bank__form">
-                                            <input type="button" class="container-form__add-sub" value="-">
-                                            <input type="number" class="container-form__add-cart fix-number" min="1" max="1000" value="1">
-                                            <input type="button" class="container-form__add-sub1" value="+">
-                                        </div>
-                                    </td>
-                                    <td class="container-bank__table-td hide-on-mobile">
-                                        <span class="container-bank__table-text">2.400.000đ</span>
-                                    </td>
-                                </tr>
-                                <tr class="container-bank__table-tr">
-                                    <td class="container-bank__table-td">
-                                        <div class="container-bank__table-flex">
-                                            <i class="container-bank__table-icon far fa-times-circle"></i>
-                                            <a href="" class="container-bank__link">
-                                                <img src="./imger/sanpham1.jpg" alt="" class="container-bank__link-img">
-                                                <span class="container-bank__link-text">
-                                                    Vali Rovigo Revo BD_24 M Light Blue
-                                                </span>
-                                            </a>
-                                        </div>
-                                    </td>
-                                    <td class="container-bank__table-td hide-on-mobile">
-                                        <span class="container-bank__table-text">2.500.000đ</span>
-                                    </td>
-                                    <td class="container-bank__table-td container-bank__table-sum">
-                                        <div class="container-form__add-number container-bank__form">
-                                            <input type="button" class="container-form__add-sub" value="-">
-                                            <input type="number" class="container-form__add-cart fix-number" min="1" max="1000" value="1">
-                                            <input type="button" class="container-form__add-sub1" value="+">
-                                        </div>
-                                    </td>
-                                    <td class="container-bank__table-td hide-on-mobile">
-                                        <span class="container-bank__table-text">2.400.000đ</span>
-                                    </td>
-                                </tr>
-                                <tr class="container-bank__table-tr">
-                                    <td class="container-bank__table-td">
-                                        <div class="container-bank__table-flex">
-                                            <i class="container-bank__table-icon far fa-times-circle"></i>
-                                            <a href="" class="container-bank__link">
-                                                <img src="./imger/sanpham1.jpg" alt="" class="container-bank__link-img">
-                                                <span class="container-bank__link-text">
-                                                    Vali Rovigo Revo BD_24 M Light Blue
-                                                </span>
-                                            </a>
-                                        </div>
-                                    </td>
-                                    <td class="container-bank__table-td hide-on-mobile">
-                                        <span class="container-bank__table-text">2.500.000đ</span>
-                                    </td>
-                                    <td class="container-bank__table-td container-bank__table-sum">
-                                        <div class="container-form__add-number container-bank__form">
-                                            <input type="button" class="container-form__add-sub" value="-">
-                                            <input type="number" class="container-form__add-cart fix-number" min="1" max="1000" value="1">
-                                            <input type="button" class="container-form__add-sub1" value="+">
-                                        </div>
-                                    </td>
-                                    <td class="container-bank__table-td hide-on-mobile">
-                                        <span class="container-bank__table-text">2.400.000đ</span>
-                                    </td>
-                                </tr>
+
+                                <?php if ($cartList != null) foreach ($cartList as $key => $product_) : ?>
+
+                                    <tr class="container-bank__table-tr">
+                                        <td class="container-bank__table-td">
+                                            <div class="container-bank__table-flex">
+                                                <i class="container-bank__table-icon far fa-times-circle" style="margin:0 12px 0 -12px; cursor: pointer;"></i>
+                                                <a href="<?= $baseUrl . 'product.php?id=' . $cart[$key]['id'] ?>" class="container-bank__link">
+                                                    <img src="<?= fixUrl($product_['avatar'], $baseUrl) ?>" alt="" class="container-bank__link-img">
+                                                    <span class="container-bank__link-text" style="margin-left: 12px;">
+                                                        <?= $product_['name'] ?>
+                                                    </span>
+                                                </a>
+                                            </div>
+                                        </td>
+                                        <td class="container-bank__table-td hide-on-mobile">
+                                            <span class="container-bank__table-text"><?= number_format($product_['price'], 0, ',', '.') ?>đ</span>
+                                        </td>
+                                        <td class="container-bank__table-td container-bank__table-sum">
+                                            <div class="container-form__add-number container-bank__form">
+                                                <input type="button" class="container-form__add-sub" value="-">
+                                                <input type="number" class="container-form__add-cart fix-number" min="1" max="1000" value="<?= $cart[$key]['quantity'] ?>">
+                                                <input type="button" class="container-form__add-sub1" value="+">
+                                            </div>
+                                        </td>
+                                        <td class="container-bank__table-td hide-on-mobile">
+                                            <span class="container-bank__table-text">2.400.000đ</span>
+                                        </td>
+                                    </tr>
+
+                                <?php endforeach; ?>
+
                             </table>
                             <div class="container-bank__btn">
                                 <a class="container-bank__btn-link1">
@@ -252,7 +212,7 @@
                                     Được chứng nhận
                                 </p>
                                 <a href="" class="footer-hearder__flex-list-link">
-                                    <img src="./imger/anh7.png" alt="" class="footer-hearder__flex-list-img">
+                                    <img src="./assets/images/anh7.png" alt="" class="footer-hearder__flex-list-img">
                                 </a>
                                 <p class="footer-hearder__span-p">
                                     Cách thức thanh toán
@@ -311,7 +271,7 @@
             </div>
             <ul class="hearder-footer__list hearder-footer__list-culumn hearder-modal-footer js-list__menu">
                 <li class="hearder-footer__link hearder-footer__menu-seach">
-                    <img src="./imger/logo.png" alt="">
+                    <img src="./assets/images/logo.png" alt="">
                 </li>
                 <li class="hearder-footer__link hearder-footer__menu ">
                     <a href="./index.html" class="hearder-footer__href hearder-footer__black">
@@ -358,8 +318,20 @@
     </div>
     <!-- javasprit -->
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-    <script src="./Js/balo.js"></script>
-    <script src="./Js/sanpham.js"></script>
+    <script src="./assets/js/balo.js"></script>
+    <script>
+        $(".container-form__add-sub").click(() => {
+            var val = $(".fix-number").val();
+            if (val > 1) {
+                $(".fix-number").val(parseInt(val - 1), 10);
+            }
+        });
+
+        $(".container-form__add-sub1").click(() => {
+            $(".fix-number").val(parseInt($(".fix-number").val(), 10) + 1);
+        });
+    </script>
+
 </body>
 
 </html>

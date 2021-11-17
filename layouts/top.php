@@ -127,8 +127,7 @@ if (!empty($_SESSION['cart'])) {
                                     </div>
                                     <div class="hearder-shop__box">
                                         <bottom class="btn btn--blue hearder-shop__box-bottom">
-                                            <a href="<?= $baseUrl ?>cart.php" class="hearder-shop__box-link">Xem giỏ
-                                                hàng</a>
+                                            <a href="<?= $baseUrl ?>cart.php" class="hearder-shop__box-link">Xem giỏ hàng</a>
                                         </bottom>
                                         <bottom class="btn btn--green hearder-shop__box-bottom">
                                             <a href="<?= $baseUrl ?>pay" class="hearder-shop__box-pay">Thanh
@@ -192,11 +191,6 @@ if (!empty($_SESSION['cart'])) {
             </div>
         </div>
     </div>
-    <!-- <div class="hearder-footer__top">
-            <a href="#hearder" class="hearder-footer__top-link">
-             <i class="hearder-footer__top-icon fas fa-angle-down"></i>
-            </a>
-        </div> -->
 </header>
 
 <div class="hearder-from hearder-modal js-hearder-modal">
