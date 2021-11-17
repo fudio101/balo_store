@@ -37,7 +37,7 @@ if (!empty($_POST)) {
 
 		execute($sql);
 
-		// header('Location: ./');
+		header('Location: ./');
 	} else {
 		//insert
 		$sql = "INSERT INTO `db_product`(`catid`, `name`, `avatar`, `img`, `detail`, `producer`, `price`, `created_by`) 

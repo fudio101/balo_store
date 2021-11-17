@@ -128,21 +128,27 @@ $producerItems = executeResult($sql);
 </div>
 
 <script>
-
 	$('textarea.summernote').summernote({
-        placeholder: 'We need something here',
-        tabsize: 2,
-        height: 120,
-        toolbar: [
-          ['style', ['style']],
-          ['font', ['bold', 'underline', 'clear']],
-          ['color', ['color']],
-          ['para', ['ul', 'ol', 'paragraph']],
-          ['table', ['table']],
-          ['insert', ['link', 'picture', 'video']],
-          ['view', ['fullscreen', 'codeview', 'help']]
-        ]
-      });
+		placeholder: 'We need something here',
+		tabsize: 2,
+		height: 512,
+		color: [
+			['Orginal', 'red', 'green', 'blue'],
+			['#155593', '#c4b540', '#1dd381', '#ba1cd2']
+		],
+		toolbar: [
+			['style', ['style']],
+			['font', ['bold', 'underline', 'clear']],
+			[
+				'color',
+				['color']
+			],
+			['para', ['ul', 'ol', 'paragraph']],
+			['table', ['table']],
+			['insert', ['link', 'picture', 'video']],
+			['view', ['fullscreen', 'codeview', 'help']]
+		]
+	});
 </script>
 <?php
 require_once('../layouts/footer.php');
