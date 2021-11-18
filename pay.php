@@ -15,7 +15,7 @@ require_once('./database/dbhelper.php');
         <?php
         require_once("layouts/top.php");
         //Nếu giỏ hàng trống thì cho về trang chủ
-        if ($cartList == NULL) return header('Location: index.php');
+        if ($cartList == NULL) return header('Location: ./index.php');
         ?>
 
         <div class="container">
