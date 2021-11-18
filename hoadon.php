@@ -1,3 +1,24 @@
+<?php
+    require_once("./database/dbhelper.php");
+    require_once("./utils/utility.php");
+    
+    $orderCode = '';
+    if(!isset($_GET['ordercode'])){
+        return header('Location: ./index.php');
+    } else {
+        $orderCode = fixSqlInject($_GET['ordercode']);
+    }
+    
+    $order = executeResult("SELECT * FROM `db_order` WHERE `orderCode`='$orderCode';", true);
+    if($order == null){
+        return header('Location: ./index.php');
+    }
+    
+    $customer = executeResult("select * from `db_customer` where `phone`={$order['phone']};", true);
+    $products = executeResult("select * from `db_orderdetail` where `orderid`={$order['id']};");
+    
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,6 +38,11 @@
     <title>Phiếu thanh toán</title>
 </head>
 <body>
+    <pre>
+        <?php print_r($order); ?>
+        <?php print_r($customer); ?>
+        <?php print_r($products); ?>
+    </pre>
     <div class="gird wide">
         <div class="row sm-gutter">
             <div class="col l-12 m-12 c-12">
@@ -27,23 +53,19 @@
                             <table class="bill-slip__table">
                                 <tr>
                                     <td><label for="" class="bill-ship__label">Họ Tên:</label></td>
-                                    <td><span class="bill-slip__span">Thanh Tâm</span></td>
-                                </tr>
-                                <tr>
-                                    <td><label for="" class="bill-ship__label">Tên công ty:</label></td>
-                                    <td><span class="bill-slip__span">Công ty 3anhem</span></td>
+                                    <td><span class="bill-slip__span"><?=$order['fullname'];?></span></td>
                                 </tr>
                                 <tr>
                                    <td><label for="" class="bill-ship__label">Email:</label></td>
-                                   <td><span class="bill-slip__span">1951120136@sv.ut.edu.vn</span></td>
+                                   <td><span class="bill-slip__span"><?=$customer['email'];?></span></td>
                                 </tr>
                                 <tr>
                                     <td><label for="" class="bill-ship__label">Điện thoại:</label></td>
-                                    <td><span class="bill-slip__span">0773367309</span></td>
+                                    <td><span class="bill-slip__span"><?=$order['phone'];?></span></td>
                                 </tr>
                                 <tr>
                                     <td><label for="" class="bill-ship__label">Địa chỉ:</label></td>
-                                    <td><span class="bill-slip__span">Thạch Hà, Quận 2, Thành phố Hồ Chí Minh</span></td>
+                                    <td><span class="bill-slip__span"><?=$customer['address'];?></span></td>
                                 </tr>
                             </table>
                         </form>
@@ -51,8 +73,8 @@
                     <div class="bill-product">
                         <h2 class="bill-product__text">Thông tin đơn hàng</h2>
                         <div class="bill-product__noti">
-                            <p class="bill-product__noti-code">Mã đơn hàng: <span class="bill-product__noti-text">#cqsvyXjZ</span></p>
-                            <p class="bill-product__noti-code">Ngày tạo: <span>2021-07-06 15:22:38</span></p>
+                            <p class="bill-product__noti-code">Mã đơn hàng: <span class="bill-product__noti-text">#<?=$order['orderCode'];?></span></p>
+                            <p class="bill-product__noti-code">Ngày tạo: <span class="bill-product__noti-text"><?=date('H:i:s d/m/Y', strtotime($order['created']));?></span></p>
                         </div>
                         <form action="" method="">
                             <table class="bill-product__table-1">
@@ -62,18 +84,16 @@
                                     <th><label for="" class="bill-product__th">Đơn giá</label></th>
                                     <th><label for="" class="bill-product__th">Tổng</label></th>
                                 </tr>
+
+                                <?php foreach($products as $products): ?>
                                 <tr>
                                    <td><span class="bbill-product__span-text">(8GB DDR4 1x8G 3000) RAM G.SKILL Trident Z RGB CL16-18-18-38</span></td>
                                    <td><span class="bbill-product__span-text text-cent">1</span></td>
                                    <td><span class="bbill-product__span-text">1,550,000 VNĐ</span></td>
                                    <td><span class="bbill-product__span-text">1,550,000</span></td>
                                 </tr>
-                                <tr>
-                                    <td><span class="bbill-product__span-text">(8GB DDR4 1x8G 3000) RAM G.SKILL Trident Z RGB CL16-18-18-38</span></td>
-                                    <td><span class="bbill-product__span-text text-cent">1</span></td>
-                                    <td><span class="bbill-product__span-text">1,550,000 VNĐ</span></td>
-                                    <td><span class="bbill-product__span-text">1,550,000</span></td>
-                                 </tr>
+                                <?php endforeach; ?>
+
                                 <tr>
                                     <td>
                                         <tr>

@@ -27,9 +27,8 @@ paySubmit.addEventListener('click',function(){
     },3000)
 })
 //đóng thanh toán
-modalClose.addEventListener('click',function(){
-    
+// modalClose.addEventListener('click',function(){
 
-//  window.location.href='./index.php';
+// window.location.href='./index.php';
 
-})
+// })
