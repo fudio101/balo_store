@@ -18,7 +18,7 @@ if ($user != null) {
 <head>
 	<title>Đăng Nhập</title>
 	<meta charset="utf-8">
-	<link rel="icon" type="image/png" href="../../assets/images/icon.png" />
+	<link rel="icon" type="image/png" href="../../assets/images/store-solid.svg" />
 
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
