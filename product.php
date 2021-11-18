@@ -108,7 +108,7 @@ if (!empty($_GET['id'])) {
                                                     </div>
                                                     <button class="btn btn--green container-form__add-button" id="addToCart">Thêm vào giỏ hàng</button>
                                                 </div>
-                                                <a href="./Thanhtoan.html" type="" class="btn btn--blue container-form_pay">Mua ngay</a>
+                                                <button class="btn btn--blue container-form_pay" onclick="buyNow()">Mua ngay</button>
                                             </form>
                                             <p class="container-info__noti">
                                                 Mọi sản phẩm của chúng tôi đều được chăm chút tỉ mỉ đến từng chi tiết – Đặt mua ngay trước khi hết hàng nhé bạn!
@@ -244,6 +244,28 @@ if (!empty($_GET['id'])) {
                 });
             });
         })
+
+        function buyNow() {
+            var id = <?= $product['id'] ?>;
+            var quantity = $('#numProducts').val();
+            $.ajax({
+                url: './api/cart.php',
+                type: 'POST',
+                data: {
+                    id: id,
+                    quantity: quantity,
+                    action: 'add'
+                },
+                success: function(data) {
+                    if (data != '')
+                        alert(data);
+                    if (data != 'Không đủ số lượng sản phẩm')
+                        location.href = './cart.php';
+                    else
+                        location.reload();
+                }
+            });
+        }
 
         var slideIndex = 1;
         showSlides(slideIndex);
