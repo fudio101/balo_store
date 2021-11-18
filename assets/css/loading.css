@@ -5,14 +5,15 @@
 }
 
 .container-loader {
-    display:flex;
-    align-items:center;
+    display: flex;
+    align-items: center;
     height: 100vh;
-    display:flex;
+    display: flex;
     position: fixed;
     left: 50%;
-    top: 0%;
-    z-index: 1000;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
 }
 
 .loader {
@@ -21,6 +22,7 @@
     margin: 0 auto;
     animation: move-all 2s ease-in-out infinite;
 }
+
 
 /* #19A68C, #F63D3A, #FDA543, #193B48 */
 
@@ -32,57 +34,92 @@
 }
 
 .point-1 {
-    background-color: #19A68C;
+    background-color: #19a68c;
     left: 0;
     top: 0;
     animation: move-1 0.5s ease-in-out infinite;
 }
 
 .point-2 {
-    background-color: #F63D3A;
+    background-color: #f63d3a;
     right: 0;
     top: 0;
     animation: move-2 0.5s ease-in-out infinite;
 }
 
 .point-3 {
-    background-color: #FDA543;
+    background-color: #fda543;
     right: 0;
     bottom: 0;
     animation: move-3 0.5s ease-in-out infinite;
 }
 
 .point-4 {
-    background-color: #193B48;
+    background-color: #193b48;
     left: 0;
     bottom: 0;
     animation: move-4 0.5s ease-in-out infinite;
 }
 
 @keyframes move-1 {
-    0%      { transform: translate(0, 0); }
-    50%     { transform: translate(8px, 8px); }
+    0% {
+        transform: translate(0, 0);
+    }
+    50% {
+        transform: translate(8px, 8px);
+    }
 }
+
 @keyframes move-2 {
-    0%      { transform: translate(0, 0); }
-    50%     { transform: translate(-8px, 8px); }
+    0% {
+        transform: translate(0, 0);
+    }
+    50% {
+        transform: translate(-8px, 8px);
+    }
 }
+
 @keyframes move-3 {
-    0%      { transform: translate(0, 0); }
-    50%     { transform: translate(-8px, -8px); }
+    0% {
+        transform: translate(0, 0);
+    }
+    50% {
+        transform: translate(-8px, -8px);
+    }
 }
+
 @keyframes move-4 {
-    0%      { transform: translate(0, 0); }
-    50%     { transform: translate(8px, -8px); }
+    0% {
+        transform: translate(0, 0);
+    }
+    50% {
+        transform: translate(8px, -8px);
+    }
 }
+
 @keyframes move-4 {
-    0%      { transform: translate(0, 0); }
-    50%     { transform: translate(8px, -8px); }
+    0% {
+        transform: translate(0, 0);
+    }
+    50% {
+        transform: translate(8px, -8px);
+    }
 }
+
 @keyframes move-all {
-    0%      { transform: rotate(0deg);}
-    25%     { transform: rotate(90deg);}
-    50%     { transform: rotate(180deg);}
-    75%     { transform: rotate(270deg);}
-    100%    { transform: rotate(360deg);}
+    0% {
+        transform: rotate(0deg);
+    }
+    25% {
+        transform: rotate(90deg);
+    }
+    50% {
+        transform: rotate(180deg);
+    }
+    75% {
+        transform: rotate(270deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }
