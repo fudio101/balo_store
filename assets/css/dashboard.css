@@ -7,3 +7,13 @@
 .navbar-custom {
     height: 48px;
 }
+
+.col-md-3.shadow-lg.mb-5.bg-body.rounded.px-3 {
+    display: flex;
+    align-items: center;
+}
+
+.col-md-3.shadow-lg.mb-5.bg-body.rounded.px-3:hover {
+    background-color: rgba(216, 216, 216, 0.247) !important;
+    cursor: default;
+}
