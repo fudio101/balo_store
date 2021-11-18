@@ -5,19 +5,19 @@
                 <div class="col l-3 m-12 c-12 container-shoping__culum-75">
                     <div class="footer-hearder__list">
                         <p class="footer-hearder__span-p">
-                            Macinsta.vn – Kênh mua sắm đồ công nghệ cao cấp
+                           Staskoverflow19 – Kênh mua sắm đồ công nghệ cao cấp
                         </p>
                         <p class="footer-hearder__span-p">
-                            Địa chỉ: Ngõ 56 Hoàng Văn Thái, Hà Nội.
+                            Địa chỉ: 556/191 Nguyễn thái sơn, Phường 5, Gò Vấp.
                         </p>
                         <span class="footer-hearder__span footer-hearder__span-h2">
-                            Hotline 1: 0906035225
+                            Hotline 1: 0999999999
                         </span>
                         <span class="footer-hearder__span footer-hearder__span-h2">
-                            CSKH: 0906095225
+                            CSKH: 0999999999
                         </span>
                         <p class="footer-hearder__span-p">
-                            Copyright © 2016 Macinsta.vn
+                            Copyright © 2016 Staskoverflow19
                         </p>
                     </div>
                 </div>
@@ -56,10 +56,10 @@
                         <p class="footer-hearder__list-noti">
                             (Phản hồi trong thời gian sớm nhất)
                         </p>
-                        <h2>VỀ MACINSTA</h2>
+                        <h2>VỀ  Staskoverflow19</h2>
                         <span class="footer-hearder__span">
                             <a href="" class="footer-hearder__link">
-                                Giới thiệu về MacInsta
+                                Giới thiệu về  Staskoverflow19
                             </a>
                         </span>
                         <span class="footer-hearder__span">
@@ -74,12 +74,12 @@
                         </span>
                         <span class="footer-hearder__span">
                             <a href="" class="footer-hearder__link">
-                                Sản phẩm ở MacInsta
+                                Sản phẩm ở  Staskoverflow19
                             </a>
                         </span>
                         <span class="footer-hearder__span">
                             <a href="" class="footer-hearder__link">
-                                Vì sao chọn MacInsta?
+                                Vì sao chọn  Staskoverflow19?
                             </a>
                         </span>
                         <span class="footer-hearder__span">

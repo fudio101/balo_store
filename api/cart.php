@@ -20,6 +20,9 @@ if (!empty($_POST)) {
         case 'create_order':
             create_order();
             break;
+        case 'addcoupon':
+            add_coupon();
+            break;
     }
 }
 
@@ -76,7 +79,7 @@ function add_to_cart()
 {
     if (isset($_POST['id']) && isset($_POST['quantity'])) {
         if (!is_valid_quantity($_POST['id'], $_POST['quantity'])) {
-            echo 'Không đủ số lượng sản phẩm';
+            echo 'Không đủ số lượng sản phẩm1';
             return;
         }
         //create array of array with id and quantity
@@ -104,8 +107,8 @@ function add_to_cart()
             } else {
                 //if item is in cart, update quantity
                 $cart[$index]['quantity'] += $item['quantity'];
-                if (!is_valid_quantity($index, $cart[$index]['quantity'])) {
-                    echo 'Không đủ số lượng sản phẩm';
+                if (!is_valid_quantity($item['id'], $cart[$index]['quantity'])) {
+                    echo 'Không đủ số lượng sản phẩm ';
                     return;
                 }
                 $_SESSION['cart'] = $cart;
@@ -135,13 +138,23 @@ function is_valid_quantity($id, $quantity)
 function get_discount()
 {
     $couponCode = isset($_POST['couponcode']) ? $_POST['couponcode'] : '';
-    $sql = "SELECT `code`, `discount`, `limit_number`, `number_used`, `expiration_date`, `payment_limit`
-            FROM `db_discount`
-            WHERE status=1 AND `code`='$couponCode';";
-    $discount = executeResult($sql);
+
+    $total = isset($_POST['total']) ? $_POST['total'] : 0;
+    $sql = "SELECT * FROM `db_discount` 
+        WHERE `status`=1 AND `expiration_date`>=CURDATE() AND (`limit_number`-`number_used`)>0 AND `code`='$couponCode' AND `payment_limit`<$total";
+    $discount = executeResult($sql, true);
     if ($discount != null) {
-        echo json_encode($discount[0]);
+        echo json_encode($discount);
     } else echo json_encode(array('message' => 'Mã giảm giá không hợp lệ'));
+}
+
+function add_coupon()
+{
+    $coupon = isset($_POST['coupon']) ? $_POST['coupon'] : '';
+    $discount = json_decode($coupon, true);
+
+    $_SESSION['coupon'] = $discount;
+    echo $coupon;
 }
 
 function get_odercode()
@@ -172,7 +185,7 @@ function create_order()
 
     $checkPhoneNumber = executeResult("select * from `db_customer` where `phone`='$phoneNumber'", true);
     if ($checkPhoneNumber == null) {
-        $fullAddress = $address.', '.$districtName.', '.$provinceName.'.';
+        $fullAddress = $address . ', ' . $districtName . ', ' . $provinceName . '.';
         $sqlAddCustomer =   "INSERT INTO `db_customer`(`phone`, `fullname`, `address`, `email`)
                             VALUES ('$phoneNumber','$fullname','$fullAddress','$email');";
         execute($sqlAddCustomer);

@@ -1,3 +1,15 @@
+
+@media(max-width:1335px){
+    *{
+        box-sizing: border-box;
+    }
+    .hide-on-pc{
+        display: none;
+    }
+    .bill{
+        margin-left: 60px;
+    }
+}
 /*pc*/
 @media (min-width:1024px){
     *{
@@ -10,6 +22,9 @@
     {
         margin-right:10px;
     }
+    /* .bill{
+        margin-left: 400px;
+    } */
 }
 /*mobile-tablet*/
 @media (max-width:1023px){
@@ -137,6 +152,9 @@
         width: 100%;
         height: 233.33px;
         object-fit: contain;
+    }
+    .bill{
+        margin-left: 30px;
     }
 }
 /*mobille*/
@@ -275,6 +293,16 @@
     .container-vali__content-span{
         height: 15px;
     }
+    .bill{
+        margin-left: 0px;
+    }
+    .bill-slip__text {
+        font-size: 1.5rem;
+    }
+    .bill-product__text {
+        font-size: 1.5rem;
+    }
+
 }
 @media (max-width:280px) {
     .container-navigation-width{
@@ -303,5 +331,8 @@
         width: 100%;
         height: 132px;
         object-fit: contain;
+    }
+    .bill{
+        margin-left: 0px;
     }
 }
