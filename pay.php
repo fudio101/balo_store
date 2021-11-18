@@ -276,7 +276,7 @@ require_once('./database/dbhelper.php');
             var email = $('#email').val();
             var products = $('#products').val();
             var cart = $('#cart').val();
-            var priceShip = priceShip;
+            var priceShip = <?=$priceShip;?>;
             var discount_price = discount;
             var amount_pay = amountPayTemp;
 
@@ -303,10 +303,12 @@ require_once('./database/dbhelper.php');
                 success: (data) => {
                     console.log(data);
                     var urlHoaDon = './hoadon.php?ordercode=' + data;
-
                     console.log(urlHoaDon);
-                    window.open(urlHoaDon, '_blank');
-                    window.location.href = './index.php';
+                    setTimeout(()=>{
+                        window.open(urlHoaDon, '_blank');
+                        window.location.href = './index.php';
+                    },2000);
+                    
                 }
             });
         });
