@@ -3,6 +3,7 @@ require_once('./utils/utility.php');
 require_once('./database/dbhelper.php');
 
 
+
 ?>
 
 <!DOCTYPE html>
@@ -10,7 +11,11 @@ require_once('./database/dbhelper.php');
 <?php require_once('layouts/head.php'); ?>
 <body>
     <div class="apps">
-        <?php require_once("layouts/top.php"); ?>
+        <?php
+        require_once("layouts/top.php");
+        //Nếu giỏ hàng trống thì cho về trang chủ
+        if($cartList==NULL) return header('Location: index.php');
+        ?>
 
         <div class="container">
             <div class="grid wide">
@@ -52,13 +57,22 @@ require_once('./database/dbhelper.php');
                                             <p class="container-client__last-span">....</p>
                                         </div>
                                         <div class="container-client__last">
-                                            <label for="" class="container-client__last-text">Địa chỉ*</label>
-                                            <input type="text" class="container-client__last-input">
+                                            <label for="" class="container-client__last-text">Tỉnh/Thành phố*</label>
+                                            <select class="container-client__last-input" id="province" required>
+                                                <option selected>Choose...</option>
+                                            </select>
                                             <p class="container-client__last-span">...</p>
                                         </div>
                                         <div class="container-client__last">
-                                            <label for="" class="container-client__last-text">Tỉnh/Thành phố*</label>
-                                            <input type="text" class="container-client__last-input">
+                                            <label for="" class="container-client__last-text">Quận/Huyện/Trị Trấn</label>
+                                            <select class="container-client__last-input" id="district" required>
+                                                <option selected>Choose...</option>
+                                            </select>
+                                            <p class="container-client__last-span">...</p>
+                                        </div>
+                                        <div class="container-client__last">
+                                            <label for="" class="container-client__last-text">Địa chỉ*</label>
+                                            <input type="text" class="container-client__last-input" required>
                                             <p class="container-client__last-span">...</p>
                                         </div>
                                         <div class="container-client__last">
@@ -81,13 +95,12 @@ require_once('./database/dbhelper.php');
                                             <span class="container-bill__noti-span">Tạm tính</span>
                                         </div>
                                         <ul class="container-bill__list">
-
-                                            <?php foreach($cartList as $sp): ?> 
+                                            <?php foreach($cartList as $key => $sp): ?> 
                                             <li class="container-bill__item">
                                                 <div class="container-bill__item-flex">
                                                     <p class="container-bill__item-text">
                                                         <?=$sp['name'];?>
-                                                        <span class="container-bill__item-sapn">x1</span>
+                                                        <span class="container-bill__item-sapn">x<?=$cart[$key]['quantity'];?></span>
                                                     </p>
                                                     <p class="container-bill__item-money"><?=number_format($sp['price']*$cart[$key]['quantity'], 0, ',', '.'); ?></p>
                                                 </div>
@@ -100,12 +113,17 @@ require_once('./database/dbhelper.php');
                                             <span class="container-bill__price-text"><?=number_format($total,0,',','.');?>đ</span>
                                         </div>
                                         <div class="container-bill__price">
+                                            <?php $priceShip = executeResult('SELECT `priceShip` FROM `db_config`')[0]['priceShip']; ?>
+                                            <span class="container-bill__price-text">Phí vận chuyển:</span>
+                                            <span class="container-bill__price-text"><?=number_format($priceShip,0,',','.');?>đ</span>
+                                        </div>
+                                        <div class="container-bill__price">
                                             <span class="container-bill__price-text">Mã giảm giá:</span><?php $discount = 0000;?>
                                             <span class="container-bill__price-text"><?=number_format(00000,0,',','.');?>đ</span>
                                         </div>
                                         <div class="container-bill__price">
-                                            <span class="container-bill__price-text">Tổng:</span>
-                                            <span class="container-bill__price-text"><?=number_format($total-$discount,0,',','.');?>đ</span>
+                                            <span class="container-bill__price-text">Thanh toán:</span>
+                                            <span class="container-bill__price-text"><?=number_format($total+$priceShip-$discount,0,',','.');?>đ</span>
                                         </div>
                                         <form action="" class="container-bill__pay">
                                             <p class="container-bill__pay-text">
@@ -151,6 +169,44 @@ require_once('./database/dbhelper.php');
     <!-- javasprit -->
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <script src="./assets/js/thanhtoan.js"></script>
-</body>
+    <script>
+        $.ajax({
+            url: './api/address.php',
+            type: 'POST',
+            data: {
+                action: 'getprovince'
+            },
+            success: (data) => {
+                if (data!=''){
+                    var list = jQuery.parseJSON(data);
+                    list = list.map(
+                        (res) => $('<option>', {value: res.id, text: res.name})
+                    );
+                    $('#province').append(list);
+                }
+            }
+        });
 
+        $('#province').on('change', () =>{
+            $.ajax({
+                url: './api/address.php',
+                type: 'POST',
+                data: {
+                    action: 'getdistrict',
+                    provinceid: $('#province').val()
+                },
+                success: (data) => {
+                    if (data!=''){
+                        var list = jQuery.parseJSON(data);
+                        list = list.map(
+                            (res) => $('<option>', {value: res.id, text: res.name})
+                        );
+                        $('#district').empty().append($('<option>', {text: 'Choose...'})).append(list);
+                    }
+                }
+            })
+        });
+        
+    </script>
+</body>
 </html>
