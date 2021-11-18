@@ -71,12 +71,7 @@ if ($result != null) {
                     </a>
                 </div>
                 <div class="hearder-seach__search">
-                    <input
-                        type="text"
-                        class="hearder-seach__search-input hearder-seach__search-hover"
-                        id="searchBox"
-                        value="<?=isset($_GET['key'])?$_GET['key']:'';?>"
-                        placeholder="Tìm kiếm...">
+                    <input type="text" class="hearder-seach__search-input hearder-seach__search-hover" id="searchBox" value="<?= isset($_GET['key']) ? $_GET['key'] : ''; ?>" placeholder="Tìm kiếm...">
                     <button class="header-seach__search-icon" id="submitSearchBox">
                         <i class="header-seach__search-icon-icon fas fa-search"></i>
                     </button>
@@ -85,8 +80,16 @@ if ($result != null) {
                 <script>
                     $('#submitSearchBox').on('click', () => {
                         var keyword = $('#searchBox').val();
-                        var linkToSearch = './search.php?key='+keyword;
+                        var linkToSearch = './search.php?key=' + keyword;
                         window.location.href = linkToSearch;
+                    });
+                    $("#searchBox").keyup(function(e) {
+                        var code = e.key; // recommended to use e.key, it's normalized across devices and languages
+                        if (code === "Enter") {
+                            var keyword = $('#searchBox').val();
+                            var linkToSearch = './search.php?key=' + keyword;
+                            window.location.href = linkToSearch;
+                        }
                     });
                 </script>
 
