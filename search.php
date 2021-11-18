@@ -137,7 +137,7 @@ $rowsProduct = executeResult($sql);
     <script>
         $('#sort').change(function() {
             var sort = $('#sort option:selected').val();
-            window.location.href = "category.php?id=<?= $id; ?>&sort=" + sort;
+            window.location.href = "search.php?key=<?= $keyword; ?>&sort=" + sort;
         });
     </script>
 </body>
