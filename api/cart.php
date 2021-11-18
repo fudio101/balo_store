@@ -17,6 +17,9 @@ if (!empty($_POST)) {
         case 'getdiscount':
             get_discount();
             break;
+        case 'create_order':
+            create_order();
+            break;
     }
 }
 
@@ -131,12 +134,70 @@ function is_valid_quantity($id, $quantity)
 
 function get_discount()
 {
-    $couponCode = isset($_POST['couponcode'])?$_POST['couponcode']:'';
+    $couponCode = isset($_POST['couponcode']) ? $_POST['couponcode'] : '';
     $sql = "SELECT `code`, `discount`, `limit_number`, `number_used`, `expiration_date`, `payment_limit`
             FROM `db_discount`
             WHERE status=1 AND `code`='$couponCode';";
     $discount = executeResult($sql);
-    if($discount != null) {
-        echo json_encode($discount[0]); 
+    if ($discount != null) {
+        echo json_encode($discount[0]);
     } else echo json_encode(array('message' => 'Mã giảm giá không hợp lệ'));
+}
+
+function get_odercode()
+{
+    return time() . str_pad(mt_rand(1, 99999), 5, '0', STR_PAD_LEFT);
+}
+
+function create_order()
+{
+    print_r($_POST);
+    $firstname      = isset($_POST['firstname']) ? $_POST['firstname'] : '';
+    $lastname       = isset($_POST['lastname']) ? $_POST['lastname'] : '';
+    $fullname       = "$firstname $lastname";
+    $company        = isset($_POST['company']) ? $_POST['company'] : '';
+    $province       = isset($_POST['province']) ? $_POST['province'] : '';
+    $provinceName   = executeResult("select * from `db_province` where `id`=$province", true);
+    $district       = isset($_POST['district']) ? $_POST['district'] : '';
+    $districtName   = executeResult("select * from `db_district` where `id`=$district", true);
+    $address        = isset($_POST['address']) ? $_POST['address'] : '';
+    $phoneNumber    = isset($_POST['phoneNumber']) ? $_POST['phoneNumber'] : '';
+    $email          = isset($_POST['email']) ? $_POST['email'] : '';
+    $totalCost      = (int)(isset($_POST['totalCost']) ? $_POST['totalCost'] : '');
+    $products       = isset($_POST['products']) ? $_POST['products'] : '';
+    $cart           = isset($_POST['cart']) ? $_POST['cart'] : '';
+    $priceShip      = (int)(isset($_POST['priceShip']) ? $_POST['priceShip'] : '');
+    $discount_price = (int)(isset($_POST['discount_price']) ? $_POST['discount_price'] : '');
+    $amount_pay     = (int)(isset($_POST['amount_pay']) ? $_POST['amount_pay'] : '');
+
+    $checkPhoneNumber = executeResult("select * from `db_customer` where `phone`='$phoneNumber'", true);
+    if ($checkPhoneNumber == null) {
+        $fullAddress = $address.', '.$districtName.', '.$provinceName.'.';
+        $sqlAddCustomer =   "INSERT INTO `db_customer`(`phone`, `fullname`, `address`, `email`)
+                            VALUES ('$phoneNumber','$fullname','$fullAddress','$email');";
+        execute($sqlAddCustomer);
+    } else {
+        $orderCode = get_odercode();
+        $sqlAddOrder    =   "INSERT INTO `db_order`(`orderCode`, `fullname`, `phone`, `money`, `price_ship`, `coupon`, `province`, `district`, `address`)
+        VALUES ('$orderCode','$fullname','$phoneNumber',$totalCost,$priceShip,$discount_price,$province,$district,'$address');";
+
+        execute($sqlAddOrder);
+
+        $sql = "SELECT `id` FROM `db_order` WHERE `orderCode`='$orderCode'";
+
+        $getId = executeResult($sql, true);
+        $idOrder = $getId['id'];
+
+
+        $cartDecode = json_decode($cart);
+        foreach ($cartDecode as $product) {
+            //echo "|||| $sql ||||";
+            $productId = $product->id;
+            $productQuantity = $product->quantity;
+            $price = executeResult("select * from db_product where id=$productId", true)['price'];
+            $sqlAddDetail = "INSERT INTO `db_orderdetail`(`orderid`, `productid`, `number`, `price`)
+                            VALUES ($idOrder,$productId,$productQuantity,'$price');";
+            execute($sqlAddDetail);
+        }
+    }
 }
