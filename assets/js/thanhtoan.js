@@ -6,7 +6,7 @@ onClik.addEventListener('click',function(){
 
 
 
-/*sư lý thanh toán */
+/*xư lý thanh toán */
 var paySubmit = document.querySelector('.js-pay-submit');
 var modalNumber = document.querySelector('.js-modal-number');
 var modalSucsess =document.querySelector('.js-modal-sucsess');
@@ -24,9 +24,12 @@ paySubmit.addEventListener('click',function(){
         modalNumber.innerHTML = "";
         modalSucsess.innerHTML= "Quá trình thanh toán thành công. Cảm ơn bạn";
         modalClose.classList.add('open');
-    },10000)
+    },3000)
 })
 //đóng thanh toán
 modalClose.addEventListener('click',function(){
-    window.location.href='./index.php';
+    
+
+//  window.location.href='./index.php';
+
 })
