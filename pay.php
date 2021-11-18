@@ -3,7 +3,6 @@ require_once('./utils/utility.php');
 require_once('./database/dbhelper.php');
 
 
-
 ?>
 
 <!DOCTYPE html>
@@ -15,7 +14,15 @@ require_once('./database/dbhelper.php');
         <?php
         require_once("layouts/top.php");
         //Nếu giỏ hàng trống thì cho về trang chủ
-        if ($cartList == NULL) return header('Location: ./index.php');
+        if ($cartList == NULL){
+            echo "<script>window.location.href='./index.php';</script>";
+        }
+        $discount = 0;
+        if (!empty($_SESSION['coupon'])) {
+            $coupon = $_SESSION['coupon'];
+            $discount = $coupon['discount'];
+        }
+
         ?>
 
         <div class="container">
@@ -43,47 +50,47 @@ require_once('./database/dbhelper.php');
                                         <div class="container-client__flex">
                                             <div class="container-client__flex-name">
                                                 <label for="" class="container-client__flex-text">Tên*</label>
-                                                <input type="text" class="container-client__flex-input">
-                                                <p class="container-client__flex-span">...</p>
+                                                <input type="text" class="container-client__flex-input" id="firstname">
+                                                <p class="container-client__flex-span"></p>
                                             </div>
                                             <div class="container-client__flex-name">
                                                 <label for="" class="container-client__flex-text">Họ*</label>
-                                                <input type="text" class="container-client__flex-input">
+                                                <input type="text" class="container-client__flex-input" id="lastname">
                                                 <p class="container-client__flex-span"></p>
                                             </div>
                                         </div>
                                         <div class="container-client__last">
                                             <label for="" class="container-client__last-text">Tên công ty</label>
-                                            <input type="text" class="container-client__last-input">
-                                            <p class="container-client__last-span">....</p>
+                                            <input type="text" class="container-client__last-input" id="company">
+                                            <p class="container-client__last-span"></p>
                                         </div>
                                         <div class="container-client__last">
                                             <label for="" class="container-client__last-text">Tỉnh/Thành phố*</label>
                                             <select class="container-client__last-input" id="province" required>
                                                 <option selected>Choose...</option>
                                             </select>
-                                            <p class="container-client__last-span">...</p>
+                                            <p class="container-client__last-span"></p>
                                         </div>
                                         <div class="container-client__last">
                                             <label for="" class="container-client__last-text">Quận/Huyện/Trị Trấn</label>
                                             <select class="container-client__last-input" id="district" required>
                                                 <option selected>Choose...</option>
                                             </select>
-                                            <p class="container-client__last-span">...</p>
+                                            <p class="container-client__last-span"></p>
                                         </div>
                                         <div class="container-client__last">
                                             <label for="" class="container-client__last-text">Địa chỉ*</label>
-                                            <input type="text" class="container-client__last-input" required>
-                                            <p class="container-client__last-span">...</p>
+                                            <input type="text" class="container-client__last-input" id="address" required>
+                                            <p class="container-client__last-span"></p>
                                         </div>
                                         <div class="container-client__last">
                                             <label for="" class="container-client__last-text">Số điện thoại*</label>
-                                            <input type="text" class="container-client__last-input">
-                                            <p class="container-client__last-span">...</p>
+                                            <input type="text" class="container-client__last-input" id="phoneNumber" required>
+                                            <p class="container-client__last-span"></p>
                                         </div>
                                         <div class="container-client__last">
                                             <label for="" class="container-client__last-text">Địa chỉ Email*</label>
-                                            <input type="text" class="container-client__last-input">
+                                            <input type="text" class="container-client__last-input" id="email">
                                             <p class="container-client__last-span"></p>
                                         </div>
                                     </form>
@@ -96,6 +103,8 @@ require_once('./database/dbhelper.php');
                                             <span class="container-bill__noti-span">Tạm tính</span>
                                         </div>
                                         <ul class="container-bill__list">
+                                            <input type="hidden" id="products" value='<?= json_encode($cartList); ?>'>
+                                            <input type="hidden" id="cart" value='<?= json_encode($cart); ?>'>
                                             <?php foreach ($cartList as $key => $sp) : ?>
                                                 <li class="container-bill__item">
                                                     <div class="container-bill__item-flex">
@@ -116,11 +125,11 @@ require_once('./database/dbhelper.php');
                                         <div class="container-bill__price">
                                             <?php $priceShip = executeResult('SELECT `priceShip` FROM `db_config`')[0]['priceShip']; ?>
                                             <span class="container-bill__price-text">Phí vận chuyển:</span>
-                                            <span class="container-bill__price-text" id='discount'><?= number_format($priceShip, 0, ',', '.'); ?>đ</span>
+                                            <span class="container-bill__price-text" id='priceShip'><?= number_format($priceShip, 0, ',', '.'); ?>đ</span>
                                         </div>
                                         <div class="container-bill__price">
-                                            <span class="container-bill__price-text">Mã giảm giá:</span><?php $discount = 0; ?>
-                                            <span class="container-bill__price-text" id="discount_price">0đ</span>
+                                            <span class="container-bill__price-text">Mã giảm giá:</span>
+                                            <span class="container-bill__price-text" id="discount_price"><?=number_format($discount, 0, ',', '.');?>đ</span>
                                         </div>
                                         <div class="container-bill__price">
                                             <span class="container-bill__price-text">Thanh toán:</span>
@@ -161,7 +170,7 @@ require_once('./database/dbhelper.php');
                 </div>
                 <div class="modal-form__pays">
                     <!-- <button class="modal-form__pays-submit js-modal-pays">Đồng ý thanh toán</button> -->
-                    <button class="modal-form__pays-close js-modal-close">Trở về</button>
+                    <button class="modal-form__pays-close js-modal-close" id="paydone">Xem hóa đơn</button>
                 </div>
             </div>
         </div>
@@ -216,12 +225,19 @@ require_once('./database/dbhelper.php');
             })
         });
 
+        const totalCost = <?= $total; ?>;
+        const amountPay = <?= ($total + $priceShip - $discount); ?>;
+        const priceShip = <?= $priceShip; ?>;
+        var amountPayTemp = <?= ($total + $priceShip - $discount); ?>;
+        var discount = 0;
+
         $('#submit-coupon').on('click', () => {
             $.ajax({
                 url: './api/cart.php',
                 type: 'POST',
                 data: {
                     action: 'getdiscount',
+                    total: totalCost,
                     couponcode: $('#coupon-code').val()
                 },
                 success: (data) => {
@@ -233,21 +249,66 @@ require_once('./database/dbhelper.php');
                     }
                 }
             });
-            const totalCost = <?= $total; ?>;
-            const amountPay = <?= ($total + $priceShip - $discount); ?>;
-
             function upadateDiscountPrice(res) {
+                discount = res.discount;
                 $('#discount_price').text(new Intl.NumberFormat('vi-VN', {
                     style: 'currency',
                     currency: 'VND'
-                }).format(res.discount));
-                var amountPayNew = amountPay - res.discount;
+                }).format(discount));
+                var amountPayNew = amountPay - discount;
+                amountPayTemp = amountPayNew;
                 $('#amount_pay').text(new Intl.NumberFormat('vi-VN', {
                     style: 'currency',
                     currency: 'VND'
                 }).format(amountPayNew));
             }
-        })
+        });
+
+        $('#paydone').on('click', () => {
+            var firstname = $('#firstname').val();
+            var lastname = $('#lastname').val();
+            var company = $('#company').val();
+            var province = $('#province').val();
+            var district = $('#district').val();
+            var address = $('#address').val();
+            var phoneNumber = $('#phoneNumber').val();
+            var email = $('#email').val();
+            var products = $('#products').val();
+            var cart = $('#cart').val();
+            var priceShip = priceShip;
+            var discount_price = discount;
+            var amount_pay = amountPayTemp;
+
+            $.ajax({
+                url: './api/cart.php',
+                type: 'POST',
+                data: {
+                    action: 'create_order',
+                    firstname: firstname,
+                    lastname: lastname,
+                    company: company,
+                    province: province,
+                    district: district,
+                    address: address,
+                    phoneNumber: phoneNumber,
+                    email: email,
+                    products: products,
+                    cart: cart,
+                    totalCost: totalCost,
+                    priceShip: priceShip,
+                    discount_price: discount_price,
+                    amount_pay: amount_pay
+                },
+                success: (data) => {
+                    console.log(data);
+                    var urlHoaDon = './hoadon.php?ordercode='+data;
+                    
+                    console.log(urlHoaDon);
+                    window.open(urlHoaDon, '_blank');
+                    window.location.href='./index.php';
+                }
+            });
+        });
     </script>
 </body>
 
