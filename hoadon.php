@@ -1,31 +1,33 @@
 <?php
-    require_once("./database/dbhelper.php");
-    require_once("./utils/utility.php");
-    
-    $orderCode = '';
-    if(!isset($_GET['ordercode'])){
-        return header('Location: ./index.php');
-    } else {
-        $orderCode = fixSqlInject($_GET['ordercode']);
-    }
-    
-    $order = executeResult("SELECT * FROM `db_order` WHERE `orderCode`='$orderCode';", true);
-    if($order == null){
-        return header('Location: ./index.php');
-    }
-    
-    $customer = executeResult("select * from `db_customer` where `phone`={$order['phone']};", true);
-    $products = executeResult("select * from `db_orderdetail` where `orderid`={$order['id']};");
-    $orderstatus = executeResult("select * from `db_orderstatus` where `id`={$order['order_status']};", true);
-    
+require_once("./database/dbhelper.php");
+require_once("./utils/utility.php");
+
+$orderCode = '';
+if (!isset($_GET['ordercode'])) {
+    return header('Location: ./index.php');
+} else {
+    $orderCode = fixSqlInject($_GET['ordercode']);
+}
+
+$order = executeResult("SELECT * FROM `db_order` WHERE `orderCode`='$orderCode';", true);
+if ($order == null) {
+    return header('Location: ./index.php');
+}
+
+$customer = executeResult("select * from `db_customer` where `phone`={$order['phone']};", true);
+$products = executeResult("select * from `db_orderdetail` where `orderid`={$order['id']};");
+$orderstatus = executeResult("select * from `db_orderstatus` where `id`={$order['order_status']};", true);
+
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="./assets/images/store-solid.svg" />
     <link rel="stylesheet" href="./assets/css/balo.css">
     <link rel="stylesheet" href="./assets/css/balobase.css">
     <link rel="stylesheet" href="./assets/css/phieupay.css">
@@ -38,6 +40,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap" rel="stylesheet">
     <title>Phiếu thanh toán</title>
 </head>
+
 <body>
     <!-- <pre>
         <?php print_r($order); ?>
@@ -55,19 +58,19 @@
                             <table class="bill-slip__table">
                                 <tr>
                                     <td><label for="" class="bill-ship__label">Họ Tên:</label></td>
-                                    <td><span class="bill-slip__span"><?=$order['fullname'];?></span></td>
+                                    <td><span class="bill-slip__span"><?= $order['fullname']; ?></span></td>
                                 </tr>
                                 <tr>
-                                   <td><label for="" class="bill-ship__label">Email:</label></td>
-                                   <td><span class="bill-slip__span"><?=$customer['email'];?></span></td>
+                                    <td><label for="" class="bill-ship__label">Email:</label></td>
+                                    <td><span class="bill-slip__span"><?= $customer['email']; ?></span></td>
                                 </tr>
                                 <tr>
                                     <td><label for="" class="bill-ship__label">Điện thoại:</label></td>
-                                    <td><span class="bill-slip__span"><?=$order['phone'];?></span></td>
+                                    <td><span class="bill-slip__span"><?= $order['phone']; ?></span></td>
                                 </tr>
                                 <tr>
                                     <td><label for="" class="bill-ship__label">Địa chỉ:</label></td>
-                                    <td><span class="bill-slip__span"><?=$customer['address'];?></span></td>
+                                    <td><span class="bill-slip__span"><?= $customer['address']; ?></span></td>
                                 </tr>
                             </table>
                         </form>
@@ -75,8 +78,8 @@
                     <div class="bill-product">
                         <h2 class="bill-product__text">Thông tin đơn hàng</h2>
                         <div class="bill-product__noti">
-                            <p class="bill-product__noti-code">Mã đơn hàng: <span class="bill-product__noti-text">#<?=$order['orderCode'];?></span></p>
-                            <p class="bill-product__noti-code">Ngày tạo: <span class="bill-product__noti-text"><?=date('H:i:s d/m/Y', strtotime($order['created']));?></span></p>
+                            <p class="bill-product__noti-code">Mã đơn hàng: <span class="bill-product__noti-text">#<?= $order['orderCode']; ?></span></p>
+                            <p class="bill-product__noti-code">Ngày tạo: <span class="bill-product__noti-text"><?= date('H:i:s d/m/Y', strtotime($order['created'])); ?></span></p>
                         </div>
                         <form action="" method="">
                             <table class="bill-product__table-1">
@@ -87,49 +90,50 @@
                                     <th><label for="" class="bill-product__th">Tổng</label></th>
                                 </tr>
 
-                                <?php foreach($products as $product): ?>
-                                <?php $inforProduct = executeResult("select `name` from `db_product` where `id`={$product['productid']}", true); ?>
-                                <tr>
-                                   <td><span class="bbill-product__span-text"><?=$inforProduct['name'];?></span></td>
-                                   <td><span class="bbill-product__span-text text-cent"><?=$product['number'];?></span></td>
-                                   <td><span class="bbill-product__span-text text-cent"><?= number_format($product['price'], 0, ',', '.'); ?> VNĐ</span></td>
-                                   <td><span class="bbill-product__span-text text-cent"><?= number_format($product['price']*$product['number'], 0, ',', '.'); ?> VNĐ</span></td>
-                                </tr>
+                                <?php foreach ($products as $product) : ?>
+                                    <?php $inforProduct = executeResult("select `name` from `db_product` where `id`={$product['productid']}", true); ?>
+                                    <tr>
+                                        <td><span class="bbill-product__span-text"><?= $inforProduct['name']; ?></span></td>
+                                        <td><span class="bbill-product__span-text text-cent"><?= $product['number']; ?></span></td>
+                                        <td><span class="bbill-product__span-text text-cent"><?= number_format($product['price'], 0, ',', '.'); ?> VNĐ</span></td>
+                                        <td><span class="bbill-product__span-text text-cent"><?= number_format($product['price'] * $product['number'], 0, ',', '.'); ?> VNĐ</span></td>
+                                    </tr>
                                 <?php endforeach; ?>
 
                                 <tr>
                                     <td>
-                                        <tr>
-                                            <td><span class="bbill-product__pay-text">Tổng cộng:</span></td>
-                                            <td><span class="bbill-product__pay-sum"><?= number_format($order['money'], 0, ',', '.'); ?> VNĐ</span></td>
-                                        </tr>
-                                    </td>
-                                    <td>
-                                        <tr>
-                                            <td><span class="bbill-product__pay-text">Phí vận chuyển</span></td>
-                                            <td><span class="bbill-product__pay-sum"><?= number_format($order['price_ship'], 0, ',', '.'); ?> VNĐ</span></td>
-                                        </tr>
-                                    </td>
-                                    <td>
-                                        <tr>
-                                            <td><span class="bbill-product__pay-text">Voucher:</span></td>
-                                            <td><span class="bbill-product__pay-sum">-<?= number_format($order['coupon'], 0, ',', '.'); ?> VNĐ</span></td>
-                                        </tr>
-                                    </td>
-                                    <td>
-                                        <tr>
-                                            <td><span class="bbill-product__pay-text">Tổng thành tiền</span></td>
-                                            <td><span class="bbill-product__pay-sum"><?= number_format($order['money']+$order['price_ship']-$order['coupon'], 0, ',', '.'); ?> VNĐ</span></td>
-                                        </tr>
-                                    </td>
+                                <tr>
+                                    <td><span class="bbill-product__pay-text">Tổng cộng:</span></td>
+                                    <td><span class="bbill-product__pay-sum"><?= number_format($order['money'], 0, ',', '.'); ?> VNĐ</span></td>
+                                </tr>
+                                </td>
+                                <td>
+                                    <tr>
+                                        <td><span class="bbill-product__pay-text">Phí vận chuyển</span></td>
+                                        <td><span class="bbill-product__pay-sum"><?= number_format($order['price_ship'], 0, ',', '.'); ?> VNĐ</span></td>
+                                    </tr>
+                                </td>
+                                <td>
+                                    <tr>
+                                        <td><span class="bbill-product__pay-text">Voucher:</span></td>
+                                        <td><span class="bbill-product__pay-sum">-<?= number_format($order['coupon'], 0, ',', '.'); ?> VNĐ</span></td>
+                                    </tr>
+                                </td>
+                                <td>
+                                    <tr>
+                                        <td><span class="bbill-product__pay-text">Tổng thành tiền</span></td>
+                                        <td><span class="bbill-product__pay-sum"><?= number_format($order['money'] + $order['price_ship'] - $order['coupon'], 0, ',', '.'); ?> VNĐ</span></td>
+                                    </tr>
+                                </td>
                                 </tr>
                             </table>
                         </form>
                     </div>
-                    <p class="bill-noti">Trạng thái hóa đơn: <span><?=$orderstatus['orderstatus']?></span></p>
+                    <p class="bill-noti">Trạng thái hóa đơn: <span><?= $orderstatus['orderstatus'] ?></span></p>
                 </div>
             </div>
         </div>
     </div>
 </body>
+
 </html>
