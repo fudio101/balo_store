@@ -71,11 +71,26 @@ if ($result != null) {
                     </a>
                 </div>
                 <div class="hearder-seach__search">
-                    <input type="text" class="hearder-seach__search-input hearder-seach__search-hover" placeholder="Tìm kiếm...">
-                    <button class="header-seach__search-icon">
+                    <input
+                        type="text"
+                        class="hearder-seach__search-input hearder-seach__search-hover"
+                        id="searchBox"
+                        value="<?=isset($_GET['key'])?$_GET['key']:'';?>"
+                        placeholder="Tìm kiếm...">
+                    <button class="header-seach__search-icon" id="submitSearchBox">
                         <i class="header-seach__search-icon-icon fas fa-search"></i>
                     </button>
                 </div>
+                <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+                <script>
+                    $('#submitSearchBox').on('click', () => {
+                        var keyword = $('#searchBox').val();
+                        var linkToSearch = './search.php?key='+keyword;
+                        window.location.href = linkToSearch;
+                    });
+                </script>
+
+
                 <div class="hearder-seach__login">
                     <ul class="hearder-seach__login-list">
 
