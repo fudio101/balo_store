@@ -62,11 +62,6 @@ require_once('./database/dbhelper.php');
                                             </div>
                                         </div>
                                         <div class="container-client__last">
-                                            <label for="" class="container-client__last-text">Tên công ty</label>
-                                            <input type="text" class="container-client__last-input" id="company">
-                                            <p class="container-client__last-span"></p>
-                                        </div>
-                                        <div class="container-client__last">
                                             <label for="" class="container-client__last-text">Tỉnh/Thành phố*</label>
                                             <select class="container-client__last-input" id="province" required>
                                                 <option selected>Choose...</option>
@@ -231,7 +226,7 @@ require_once('./database/dbhelper.php');
         const amountPay = <?= ($total + $priceShip - $discount); ?>;
         const priceShip = <?= $priceShip; ?>;
         var amountPayTemp = <?= ($total + $priceShip - $discount); ?>;
-        var discount = 0;
+        var discount = <?= $discount ?>;
 
         $('#submit-coupon').on('click', () => {
             $.ajax({
@@ -272,7 +267,6 @@ require_once('./database/dbhelper.php');
 
             var firstname = $('#firstname').val();
             var lastname = $('#lastname').val();
-            var company = $('#company').val();
             var province = $('#province').val();
             var district = $('#district').val();
             var address = $('#address').val();
@@ -291,7 +285,6 @@ require_once('./database/dbhelper.php');
                     action: 'create_order',
                     firstname: firstname,
                     lastname: lastname,
-                    company: company,
                     province: province,
                     district: district,
                     address: address,

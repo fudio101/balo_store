@@ -196,10 +196,11 @@ html {
 }
 
 .container-info__p {
-    font-size: 0.8rem;
+    font-size: 1rem;
     font-weight: 600;
-    color: #09e609;
+    color: #ff0000;
     margin-top: 0;
+    margin-bottom: 12px;
 }
 
 .container-form__add {
@@ -343,9 +344,11 @@ html {
     text-decoration: none;
     display: block;
 }
-.container-sp__cart:hover .container-sp__cart-img{
+
+.container-sp__cart:hover .container-sp__cart-img {
     transform: scale(1.075);
 }
+
 .container-sp__cart-postion {
     position: absolute;
     top: 2%;
@@ -469,7 +472,6 @@ html {
     align-items: center;
     text-decoration: none;
 }
-
 
 .container-sidebar__group-div {
     padding-left: 10px;

@@ -98,7 +98,7 @@ if (!empty($_GET['id'])) {
                                             <div class="container-info__price">
                                                 <span class="container-info__price-new"><?= number_format($product['price'], 0, ',', '.') . '₫' ?></span>
                                             </div>
-                                            <p class="container-info__p"><?= $product['number'] > $product['number_buy'] ? 'Còn hàng' : 'Hết hàngngf' ?></p>
+                                            <p class="container-info__p"><?= $product['number'] > $product['number_buy'] ? '' : 'Hết hàng' ?></p>
                                             <form action="" class="container-form">
                                                 <div class="container-form__add">
                                                     <div class="container-form__add-number">
@@ -106,9 +106,9 @@ if (!empty($_GET['id'])) {
                                                         <input type="number" class="container-form__add-cart fix-number" id="numProducts" min="1" max="1000" value="1">
                                                         <input type="button" class="container-form__add-sub1" value="+">
                                                     </div>
-                                                    <button class="btn btn--green container-form__add-button" id="addToCart">Thêm vào giỏ hàng</button>
+                                                    <button class="btn btn--green container-form__add-button" id="addToCart" <?= $product['number'] > $product['number_buy'] ? '' : 'disabled' ?>>Thêm vào giỏ hàng</button>
                                                 </div>
-                                                <button class="btn btn--blue container-form_pay" onclick="buyNow()">Mua ngay</button>
+                                                <button class="btn btn--blue container-form_pay" onclick="buyNow()" <?= $product['number'] > $product['number_buy'] ? '' : 'disabled' ?>>Mua ngay</button>
                                             </form>
                                             <p class="container-info__noti">
                                                 Mọi sản phẩm của chúng tôi đều được chăm chút tỉ mỉ đến từng chi tiết – Đặt mua ngay trước khi hết hàng nhé bạn!

@@ -152,8 +152,8 @@ function add_coupon()
 {
     $coupon = isset($_POST['coupon']) ? $_POST['coupon'] : '';
     $discount = json_decode($coupon, true);
-
     $_SESSION['coupon'] = $discount;
+    sleep(2);
     echo $coupon;
 }
 
@@ -167,7 +167,6 @@ function create_order()
     $firstname      = isset($_POST['firstname']) ? $_POST['firstname'] : '';
     $lastname       = isset($_POST['lastname']) ? $_POST['lastname'] : '';
     $fullname       = "$firstname $lastname";
-    $company        = isset($_POST['company']) ? $_POST['company'] : '';
     $province       = isset($_POST['province']) ? $_POST['province'] : '';
     $provinceName   = executeResult("select * from `db_province` where `id`=$province", true)['name'];
     $district       = isset($_POST['district']) ? $_POST['district'] : '';
@@ -213,6 +212,14 @@ function create_order()
         $sqlAddDetail = "INSERT INTO `db_orderdetail`(`orderid`, `productid`, `number`, `price`)
                         VALUES ($idOrder,$productId,$productQuantity,'$price');";
         execute($sqlAddDetail);
+    }
+    if (!empty($_SESSION['coupon'])) {
+        $coupon = $_SESSION['coupon'];
+        $couponId = $coupon['id'];
+        $couponNumberUsed = $coupon['number_used'];
+        $couponNumberUsed += 1;
+        $sqlUpdateCoupon = "UPDATE `db_discount` SET `number_used`=$couponNumberUsed WHERE `id`=$couponId";
+        execute($sqlUpdateCoupon);
     }
     echo $orderCode;
     unset($_SESSION['cart']);
