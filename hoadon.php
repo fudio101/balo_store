@@ -92,8 +92,8 @@
                                 <tr>
                                    <td><span class="bbill-product__span-text"><?=$inforProduct['name'];?></span></td>
                                    <td><span class="bbill-product__span-text text-cent"><?=$product['number'];?></span></td>
-                                   <td><span class="bbill-product__span-text"><?= number_format($product['price'], 0, ',', '.'); ?> VNĐ</span></td>
-                                   <td><span class="bbill-product__span-text"><?= number_format($product['price']*$product['number'], 0, ',', '.'); ?> VNĐ</span></td>
+                                   <td><span class="bbill-product__span-text text-cent"><?= number_format($product['price'], 0, ',', '.'); ?> VNĐ</span></td>
+                                   <td><span class="bbill-product__span-text text-cent"><?= number_format($product['price']*$product['number'], 0, ',', '.'); ?> VNĐ</span></td>
                                 </tr>
                                 <?php endforeach; ?>
 
