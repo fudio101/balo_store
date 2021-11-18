@@ -24,13 +24,8 @@ require_once('./database/dbhelper.php');
         }
         ?>
 
-        <div class="container-loader">
-            <div class="loader">
-                <div class="point point-1"></div>
-                <div class="point point-2"></div>
-                <div class="point point-3"></div>
-                <div class="point point-4"></div>
-            </div>
+        <div class="container-loader" id='loading'>
+
         </div>
         <div class="container">
             <div class="grid wide">
@@ -273,6 +268,8 @@ require_once('./database/dbhelper.php');
         });
 
         $('#paydone').on('click', () => {
+            $('#loading').append('<div class="loader"><div class="point point-1"></div><div class="point point-2"></div><div class="point point-3"></div><div class="point point-4"></div></div>');
+
             var firstname = $('#firstname').val();
             var lastname = $('#lastname').val();
             var company = $('#company').val();
