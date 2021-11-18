@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="./assets/css/category.css">
     <link rel="stylesheet" href="./assets/css/thanhtoan.css">
     <link rel="stylesheet" href="./assets/css/giohang.css">
+    <link rel="stylesheet" href="./assets/css/loading.css">
     <link rel="stylesheet" href="./assets/css/gird.css">
     <link rel="stylesheet" href="./assets/css/responsive.css">
     <link rel="stylesheet" href="./assets/icon/fontawesome-free-5.15.3/css/all.min.css">

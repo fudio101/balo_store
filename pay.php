@@ -22,9 +22,16 @@ require_once('./database/dbhelper.php');
             $coupon = $_SESSION['coupon'];
             $discount = $coupon['discount'];
         }
-
         ?>
 
+        <div class="container-loader">
+            <div class="loader">
+                <div class="point point-1"></div>
+                <div class="point point-2"></div>
+                <div class="point point-3"></div>
+                <div class="point point-4"></div>
+            </div>
+        </div>
         <div class="container">
             <div class="grid wide">
                 <div class="container-pays">
@@ -276,7 +283,7 @@ require_once('./database/dbhelper.php');
             var email = $('#email').val();
             var products = $('#products').val();
             var cart = $('#cart').val();
-            var priceShip = <?=$priceShip;?>;
+            var priceShip = <?= $priceShip; ?>;
             var discount_price = discount;
             var amount_pay = amountPayTemp;
 
@@ -304,11 +311,11 @@ require_once('./database/dbhelper.php');
                     console.log(data);
                     var urlHoaDon = './hoadon.php?ordercode=' + data;
                     console.log(urlHoaDon);
-                    setTimeout(()=>{
+                    setTimeout(() => {
                         window.open(urlHoaDon, '_blank');
                         window.location.href = './index.php';
-                    },2000);
-                    
+                    }, 2000);
+
                 }
             });
         });
