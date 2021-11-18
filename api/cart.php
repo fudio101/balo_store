@@ -205,7 +205,11 @@ function create_order()
     foreach ($cartDecode as $product) {
         $productId = $product->id;
         $productQuantity = $product->quantity;
-        $price = executeResult("select * from db_product where id=$productId", true)['price'];
+        $getProduct = executeResult("select * from db_product where id=$productId", true);
+        $curentBuyQuantity = $getProduct['number_buy'];
+        $curentBuyQuantity += $productQuantity;
+        execute("UPDATE `db_product` SET `number_buy`=$curentBuyQuantity WHERE `id`=$productId");
+        $price = $getProduct['price'];
         $sqlAddDetail = "INSERT INTO `db_orderdetail`(`orderid`, `productid`, `number`, `price`)
                         VALUES ($idOrder,$productId,$productQuantity,'$price');";
         execute($sqlAddDetail);
