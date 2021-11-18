@@ -14,7 +14,7 @@ require_once('./database/dbhelper.php');
         <?php
         require_once("layouts/top.php");
         //Nếu giỏ hàng trống thì cho về trang chủ
-        if ($cartList == NULL){
+        if ($cartList == NULL) {
             echo "<script>window.location.href='./index.php';</script>";
         }
         $discount = 0;
@@ -105,7 +105,7 @@ require_once('./database/dbhelper.php');
                                         <ul class="container-bill__list">
                                             <input type="hidden" id="products" value='<?= json_encode($cartList); ?>'>
                                             <input type="hidden" id="cart" value='<?= json_encode($cart); ?>'>
-                                            <?php foreach ($cartList as $key => $sp) : ?>
+                                            <?php if ($cartList != null) foreach ($cartList as $key => $sp) : ?>
                                                 <li class="container-bill__item">
                                                     <div class="container-bill__item-flex">
                                                         <p class="container-bill__item-text">
@@ -129,7 +129,7 @@ require_once('./database/dbhelper.php');
                                         </div>
                                         <div class="container-bill__price">
                                             <span class="container-bill__price-text">Mã giảm giá:</span>
-                                            <span class="container-bill__price-text" id="discount_price"><?=number_format($discount, 0, ',', '.');?>đ</span>
+                                            <span class="container-bill__price-text" id="discount_price"><?= number_format($discount, 0, ',', '.'); ?>đ</span>
                                         </div>
                                         <div class="container-bill__price">
                                             <span class="container-bill__price-text">Thanh toán:</span>
@@ -249,6 +249,7 @@ require_once('./database/dbhelper.php');
                     }
                 }
             });
+
             function upadateDiscountPrice(res) {
                 discount = res.discount;
                 $('#discount_price').text(new Intl.NumberFormat('vi-VN', {
@@ -301,11 +302,11 @@ require_once('./database/dbhelper.php');
                 },
                 success: (data) => {
                     console.log(data);
-                    var urlHoaDon = './hoadon.php?ordercode='+data;
-                    
+                    var urlHoaDon = './hoadon.php?ordercode=' + data;
+
                     console.log(urlHoaDon);
                     window.open(urlHoaDon, '_blank');
-                    window.location.href='./index.php';
+                    window.location.href = './index.php';
                 }
             });
         });

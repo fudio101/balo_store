@@ -2,8 +2,7 @@
 session_start();
 
 $total = $number = 0;
-$cart = $category = null;
-$cartList = [];
+$cart = $cartList = $category = null;
 if (!empty($_SESSION['cart'])) {
     $cart = $_SESSION['cart'];
     foreach ($cart as $item) {
