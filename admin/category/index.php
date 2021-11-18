@@ -14,7 +14,7 @@ $data = executeResult($sql);
 	</div>
 
 	<!-- Add category -->
-	<div class="col-md-4 bg-info p-2 text-dark bg-opacity-10" style="height: 120px;">
+	<div class="col-md-3 bg-info p-2 text-dark bg-opacity-10 shadow-lg m-4" style="height: 120px;">
 		<form class="form-group" onsubmit="submitForm();">
 
 			<div class="input-group mb-3">
@@ -27,7 +27,7 @@ $data = executeResult($sql);
 	</div>
 
 	<!-- Table -->
-	<div class="col-md-8 table-responsive">
+	<div class="col-md-8 table-responsive shadow-lg m-4">
 		<table class="table table-striped table-hover">
 			<thead>
 				<tr>

@@ -33,9 +33,9 @@ if ($user != null) {
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 </head>
 
-<body style="background-image: url(../../assets/images/ecommerce.jpeg); background-size: cover; background-repeat: no-repeat;">
+<body style="background-image: url(../../assets/images/background-admin1.jpg); background-size: cover; background-repeat: no-repeat;">
 	<div class="container">
-		<div class="panel panel-primary" style="width: 480px; margin: 0px auto; margin-top: 50px; background-color: white; padding: 10px; border-radius: 5px; box-shadow: 2px 2px #9ac9f5;">
+		<div class="panel panel-primary shadow-lg" style="width: 480px; margin: 0px auto; margin-top: 50px; background-color: white; padding: 10px; border-radius: 5px; box-shadow: 2px 2px #9ac9f5;">
 			<div class="panel-heading">
 				<h2 class="text-center">Đăng Nhập</h2>
 				<p style="color: red;" class="text-center"><?= $msg ?></p>

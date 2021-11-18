@@ -43,7 +43,7 @@ if ($user == null) {
 <body style="height: 100%;">
   <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow navbar-custom">
 
-    <a class="navbar-brand col-sm-3 col-md-2 mr-0 ms-4 fs-6" href="#">FinalShop</a>
+    <a class="navbar-brand col-sm-3 col-md-2 mr-0 ms-4 fs-6" href="#">BaloStore</a>
 
     <ul class="navbar-nav px-3">
 
