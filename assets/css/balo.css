@@ -1106,6 +1106,7 @@ input[name="bottom"]{
     color: var(--white-color);
     font-size: 1.2rem;
     padding-bottom: 20px;
+    text-transform: uppercase;
 }
 .footer-hearder__link
 {
