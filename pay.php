@@ -25,7 +25,7 @@ require_once('./database/dbhelper.php');
         ?>
 
         <div class="container-loader" id='loading'>
-
+        
         </div>
         <div class="container">
             <div class="grid wide">
