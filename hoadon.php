@@ -16,6 +16,7 @@
     
     $customer = executeResult("select * from `db_customer` where `phone`={$order['phone']};", true);
     $products = executeResult("select * from `db_orderdetail` where `orderid`={$order['id']};");
+    $orderstatus = executeResult("select * from `db_orderstatus` where `id`={$order['order_status']};", true);
     
 ?>
 
@@ -38,12 +39,13 @@
     <title>Phiếu thanh toán</title>
 </head>
 <body>
-    <pre>
+    <!-- <pre>
         <?php print_r($order); ?>
         <?php print_r($customer); ?>
         <?php print_r($products); ?>
-    </pre>
-    <div class="gird wide">
+        <?php print_r($orderstatus); ?>
+    </pre> -->
+    <div class="grid wide">
         <div class="row sm-gutter">
             <div class="col l-12 m-12 c-12">
                 <div class="bill">
@@ -85,12 +87,13 @@
                                     <th><label for="" class="bill-product__th">Tổng</label></th>
                                 </tr>
 
-                                <?php foreach($products as $products): ?>
+                                <?php foreach($products as $product): ?>
+                                <?php $inforProduct = executeResult("select `name` from `db_product` where `id`={$product['productid']}", true); ?>
                                 <tr>
-                                   <td><span class="bbill-product__span-text">(8GB DDR4 1x8G 3000) RAM G.SKILL Trident Z RGB CL16-18-18-38</span></td>
-                                   <td><span class="bbill-product__span-text text-cent">1</span></td>
-                                   <td><span class="bbill-product__span-text">1,550,000 VNĐ</span></td>
-                                   <td><span class="bbill-product__span-text">1,550,000 VNĐ</span></td>
+                                   <td><span class="bbill-product__span-text"><?=$inforProduct['name'];?></span></td>
+                                   <td><span class="bbill-product__span-text text-cent"><?=$product['number'];?></span></td>
+                                   <td><span class="bbill-product__span-text text-cent"><?= number_format($product['price'], 0, ',', '.'); ?> VNĐ</span></td>
+                                   <td><span class="bbill-product__span-text text-cent"><?= number_format($product['price']*$product['number'], 0, ',', '.'); ?> VNĐ</span></td>
                                 </tr>
                                 <?php endforeach; ?>
 
@@ -98,32 +101,32 @@
                                     <td>
                                         <tr>
                                             <td><span class="bbill-product__pay-text">Tổng cộng:</span></td>
-                                            <td><span class="bbill-product__pay-sum">3,140,000 VNĐ</span></td>
+                                            <td><span class="bbill-product__pay-sum"><?= number_format($order['money'], 0, ',', '.'); ?> VNĐ</span></td>
                                         </tr>
                                     </td>
                                     <td>
                                         <tr>
                                             <td><span class="bbill-product__pay-text">Phí vận chuyển</span></td>
-                                            <td><span class="bbill-product__pay-sum">30,000 VNĐ</span></td>
+                                            <td><span class="bbill-product__pay-sum"><?= number_format($order['price_ship'], 0, ',', '.'); ?> VNĐ</span></td>
                                         </tr>
                                     </td>
                                     <td>
                                         <tr>
                                             <td><span class="bbill-product__pay-text">Voucher:</span></td>
-                                            <td><span class="bbill-product__pay-sum">-0 VNĐ</span></td>
+                                            <td><span class="bbill-product__pay-sum">-<?= number_format($order['coupon'], 0, ',', '.'); ?> VNĐ</span></td>
                                         </tr>
                                     </td>
                                     <td>
                                         <tr>
                                             <td><span class="bbill-product__pay-text">Tổng thành tiền</span></td>
-                                            <td><span class="bbill-product__pay-sum">3,170,000 VNĐ</span></td>
+                                            <td><span class="bbill-product__pay-sum"><?= number_format($order['money']+$order['price_ship']-$order['coupon'], 0, ',', '.'); ?> VNĐ</span></td>
                                         </tr>
                                     </td>
                                 </tr>
                             </table>
                         </form>
                     </div>
-                    <p class="bill-noti">Trang thái hóa đơn: <span>Thánh toán thành công</span></p>
+                    <p class="bill-noti">Trạng thái hóa đơn: <span><?=$orderstatus['orderstatus']?></span></p>
                 </div>
             </div>
         </div>

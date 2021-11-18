@@ -24,7 +24,7 @@ paySubmit.addEventListener('click',function(){
         modalNumber.innerHTML = "";
         modalSucsess.innerHTML= "Quá trình thanh toán thành công. Cảm ơn bạn";
         modalClose.classList.add('open');
-    },3000)
+    },10000)
 })
 //đóng thanh toán
 // modalClose.addEventListener('click',function(){

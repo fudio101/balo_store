@@ -188,30 +188,33 @@ function create_order()
         $sqlAddCustomer =   "INSERT INTO `db_customer`(`phone`, `fullname`, `address`, `email`)
                             VALUES ('$phoneNumber','$fullname','$fullAddress','$email');";
         execute($sqlAddCustomer);
-    } else {
-        $orderCode = get_odercode();
-        $sqlAddOrder    =   "INSERT INTO `db_order`(`orderCode`, `fullname`, `phone`, `money`, `price_ship`, `coupon`, `province`, `district`, `address`)
-        VALUES ('$orderCode','$fullname','$phoneNumber',$totalCost,$priceShip,$discount_price,$province,$district,'$address');";
-
-        execute($sqlAddOrder);
-
-        $sql = "SELECT `id` FROM `db_order` WHERE `orderCode`='$orderCode'";
-
-        $getId = executeResult($sql, true);
-        $idOrder = $getId['id'];
-
-
-        $cartDecode = json_decode($cart);
-        foreach ($cartDecode as $product) {
-            $productId = $product->id;
-            $productQuantity = $product->quantity;
-            $price = executeResult("select * from db_product where id=$productId", true)['price'];
-            $sqlAddDetail = "INSERT INTO `db_orderdetail`(`orderid`, `productid`, `number`, `price`)
-                            VALUES ($idOrder,$productId,$productQuantity,'$price');";
-            execute($sqlAddDetail);
-        }
-        echo $orderCode;
-        unset($_SESSION['cart']);
-        unset($_SESSION['coupon']);
     }
+
+    $orderCode = get_odercode();
+    $sqlAddOrder    =   "INSERT INTO `db_order`(`orderCode`, `fullname`, `phone`, `money`, `price_ship`, `coupon`, `province`, `district`, `address`)
+    VALUES ('$orderCode','$fullname','$phoneNumber',$totalCost,$priceShip,$discount_price,$province,$district,'$address');";
+
+    execute($sqlAddOrder);
+
+    $sql = "SELECT `id` FROM `db_order` WHERE `orderCode`='$orderCode'";
+
+    $getId = executeResult($sql, true);
+    $idOrder = $getId['id'];
+
+    $cartDecode = json_decode($cart);
+    foreach ($cartDecode as $product) {
+        $productId = $product->id;
+        $productQuantity = $product->quantity;
+        $getProduct = executeResult("select * from db_product where id=$productId", true);
+        $curentBuyQuantity = $getProduct['number_buy'];
+        $curentBuyQuantity += $productQuantity;
+        execute("UPDATE `db_product` SET `number_buy`=$curentBuyQuantity WHERE `id`=$productId");
+        $price = $getProduct['price'];
+        $sqlAddDetail = "INSERT INTO `db_orderdetail`(`orderid`, `productid`, `number`, `price`)
+                        VALUES ($idOrder,$productId,$productQuantity,'$price');";
+        execute($sqlAddDetail);
+    }
+    echo $orderCode;
+    unset($_SESSION['cart']);
+    unset($_SESSION['coupon']);
 }

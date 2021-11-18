@@ -134,7 +134,7 @@ html {
     cursor: pointer;
     position: absolute;
     top: 35%;
-    left: 7%;
+    left: 3%;
     color: var(--menu-text-color);
     font-weight: bold;
     font-size: 25px;
@@ -149,7 +149,7 @@ html {
     cursor: pointer;
     position: absolute;
     top: 35%;
-    right: 7%;
+    right: 3%;
     color: var(--menu-text-color);
     font-weight: bold;
     font-size: 25px;

@@ -2,29 +2,27 @@
 require_once("./database/dbhelper.php");
 require_once("./utils/utility.php");
 
-$id = 1;
+$keyword = '';
 $sort = 0;
-if (!isset($_GET['id'])) {
+if (!isset($_GET['key'])) {
     return header('Location: ./index.php');
 } else {
-    $id = (int)$_GET['id'];
+    $keyword = fixSqlInject($_GET['key']);
 }
 
 if (isset($_GET['sort'])) {
     $sort = $_GET['sort'];
 }
 
-$rowCategory = executeResult("select * from db_category where id=$id", true);
-if ($rowCategory == null) {
+$rowProduct = executeResult("select * from `db_product` where `name` like '%$keyword%'", true);
+//Không tìm thấy sản phẩm thì cho về trang chủ
+if ($rowProduct == null) {
     return header('Location: ./index.php');
-} else {
-    $rowCategory = $rowCategory;
 }
-
 ///PHAN TRANG///
 //calculate
-$totalProduct = count(executeResult("select `id` from `db_product` where `status`=1  and `catid`=$id"));
-$numProductsPerPage = 6;
+$totalProduct = count(executeResult("select `id` from `db_product` where `status`=1  and `name` like '%$keyword%'"));
+$numProductsPerPage = 4;
 $maxPage = (int)ceil($totalProduct / $numProductsPerPage);
 //get curent page
 $curentPage = 1;
@@ -51,7 +49,7 @@ $sortKey = ($sort == 1) ? "ORDER BY `price` ASC" : (($sort == 2) ? "ORDER BY `pr
 
 $sql = "SELECT `id`,`avatar`,`name`,`price`
         FROM `db_product`
-        WHERE `status`=1 AND `catid`=$id
+        WHERE `status`=1 AND `name` like '%$keyword%'
         $sortKey
         LIMIT $offset, $numProductsPerPage";
 $rowsProduct = executeResult($sql);
@@ -74,9 +72,9 @@ $rowsProduct = executeResult($sql);
                         <nav class="container-wrapper__page-nav">
                             <a href="./index.php" class="container-wrapper__page-link">Trang chủ</a>
                             <span class="container-wrapper__page-span">/</span>
-                            <span class="container-wrapper__page-span">Sản phẩm</span>
+                            <span class="container-wrapper__page-span">Tìm kiếm sản phẩm</span>
                             <span class="container-wrapper__page-span">/</span>
-                            <span class="container-wrapper__page-span"><?= $rowCategory['name']; ?></span>
+                            <span class="container-wrapper__page-span"><?= $keyword;?></span>
                         </nav>
                     </div>
                     <div class="container-wrapper__category">
@@ -112,17 +110,17 @@ $rowsProduct = executeResult($sql);
                     <div class="container-page">
                         <ul class="container-page__form">
                             <li class="container-page__list">
-                                <a href="category.php?id=<?= $id; ?>&sort=<?= $sort; ?>&page=<?= $curentPage > 5 ? ($curentPage - 5) : 1; ?>" class="container-page__link">
+                                <a href="search.php?key=<?= $keyword; ?>&sort=<?= $sort; ?>&page=<?= $curentPage > 5 ? ($curentPage - 5) : 1; ?>" class="container-page__link">
                                     <i class="container-page__icon fas fa-angle-double-left"></i>
                                 </a>
                             </li>
                             <?php for ($index = $pageStart; $index <= $pageEnd; $index++) : ?>
                                 <li class="container-page__list <?= $index == $curentPage ? 'open-color' : ''; ?>">
-                                    <a href="category.php?id=<?= $id; ?>&sort=<?= $sort; ?>&page=<?= $index; ?>" class="container-page__link"><?= $index; ?></a>
+                                    <a href="search.php?key=<?= $keyword; ?>&sort=<?= $sort; ?>&page=<?= $index; ?>" class="container-page__link"><?= $index; ?></a>
                                 </li>
                             <?php endfor; ?>
                             <li class="container-page__list">
-                                <a href="category.php?id=<?= $id; ?>&sort=<?= $sort; ?>&page=<?= $curentPage < ($maxPage - 5) ? ($curentPage + 5) : $maxPage; ?>" class="container-page__link">
+                                <a href="search.php?key=<?= $keyword; ?>&sort=<?= $sort; ?>&page=<?= $curentPage < ($maxPage - 5) ? ($curentPage + 5) : $maxPage; ?>" class="container-page__link">
                                     <i class="container-page__icon fas fa-angle-double-right"></i>
                                 </a>
                             </li>
