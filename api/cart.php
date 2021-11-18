@@ -76,7 +76,7 @@ function add_to_cart()
 {
     if (isset($_POST['id']) && isset($_POST['quantity'])) {
         if (!is_valid_quantity($_POST['id'], $_POST['quantity'])) {
-            echo 'Không đủ số lượng sản phẩm';
+            echo 'Không đủ số lượng sản phẩm1';
             return;
         }
         //create array of array with id and quantity
@@ -104,8 +104,8 @@ function add_to_cart()
             } else {
                 //if item is in cart, update quantity
                 $cart[$index]['quantity'] += $item['quantity'];
-                if (!is_valid_quantity($index, $cart[$index]['quantity'])) {
-                    echo 'Không đủ số lượng sản phẩm';
+                if (!is_valid_quantity($item['id'], $cart[$index]['quantity'])) {
+                    echo 'Không đủ số lượng sản phẩm ';
                     return;
                 }
                 $_SESSION['cart'] = $cart;
