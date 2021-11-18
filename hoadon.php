@@ -45,7 +45,7 @@
         <?php print_r($products); ?>
         <?php print_r($orderstatus); ?>
     </pre> -->
-    <div class="gird wide">
+    <div class="grid wide">
         <div class="row sm-gutter">
             <div class="col l-12 m-12 c-12">
                 <div class="bill">
@@ -92,8 +92,8 @@
                                 <tr>
                                    <td><span class="bbill-product__span-text"><?=$inforProduct['name'];?></span></td>
                                    <td><span class="bbill-product__span-text text-cent"><?=$product['number'];?></span></td>
-                                   <td><span class="bbill-product__span-text"><?= number_format($product['price'], 0, ',', '.'); ?> VNĐ</span></td>
-                                   <td><span class="bbill-product__span-text"><?= number_format($product['price']*$product['number'], 0, ',', '.'); ?> VNĐ</span></td>
+                                   <td><span class="bbill-product__span-text text-cent"><?= number_format($product['price'], 0, ',', '.'); ?> VNĐ</span></td>
+                                   <td><span class="bbill-product__span-text text-cent"><?= number_format($product['price']*$product['number'], 0, ',', '.'); ?> VNĐ</span></td>
                                 </tr>
                                 <?php endforeach; ?>
 
