@@ -17,3 +17,9 @@
     background-color: rgba(216, 216, 216, 0.247) !important;
     cursor: default;
 }
+
+.badge,
+.btn {
+    line-height: 2;
+    margin-top: 5%;
+}

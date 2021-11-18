@@ -4,11 +4,12 @@ require_once('../../utils/utility.php');
 require_once('../../database/dbhelper.php');
 
 $user = getUserToken();
-if($user == null) {
+if ($user == null) {
 	die();
 }
+$user_ = $user['username'];
 
-if(!empty($_POST)) {
+if (!empty($_POST)) {
 	$action = getPost('action');
 
 	switch ($action) {
@@ -18,10 +19,12 @@ if(!empty($_POST)) {
 	}
 }
 
-function updateStatus() {
+function updateStatus()
+{
 	$id = getPost('id');
 	$status = getPost('status');
+	global $user_;
 
-	$sql = "update Orders set status = $status where id = $id";
+	$sql = "UPDATE `db_order` SET `modified_by`='$user_',`status_code`=$status WHERE `id`=$id";
 	execute($sql);
 }
