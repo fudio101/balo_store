@@ -66,7 +66,7 @@ if ($result != null) {
                     <i class="hearder-seach__icon-bar fas fa-bars"></i>
                 </div>
                 <div class="hearder-seach__logo">
-                    <a href="" class="hearder-seach__logo-link">
+                    <a href="./index.php" class="hearder-seach__logo-link">
                         <img src="<?= $baseUrl ?>assets/images/logo.png" alt="" class="hearder-seach__logo-img">
                     </a>
                 </div>
@@ -80,7 +80,7 @@ if ($result != null) {
                     <ul class="hearder-seach__login-list">
 
                         <li class="hearder-seach__login-li hearder-seach__login-shoping">
-                            <a href="" class="hearder-seach__login-link hide-on-mobile-tablet">
+                            <a href="<?= $baseUrl ?>cart.php" class="hearder-seach__login-link hide-on-mobile-tablet">
                                 Giỏ Hàng / <span><?= number_format($total, 0, ',', '.') ?>đ</span>
                             </a>
                             <div class="hearder-seach__login-link-cart">

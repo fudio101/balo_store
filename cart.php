@@ -82,17 +82,17 @@ require_once("./utils/utility.php");
                                 </span>
                                 <div class="container-bank__cart-flex">
                                     <span class="container-bank__cart-item1">Tạm tính</span>
-                                    <span class="container-bank__cart-item1">13.720.000đ</span>
+                                    <span class="container-bank__cart-item1"><?= number_format($total, 0, ',', '.'); ?>đ</span>
                                 </div>
                                 <div class="container-bank__cart-flex">
                                     <span class="container-bank__cart-item1">Tổng</span>
-                                    <span class="container-bank__cart-item1">13.720.000đ</span>
+                                    <span class="container-bank__cart-item1"><?= number_format($total, 0, ',', '.'); ?>đ</span>
                                 </div>
-                                <button type="" class="btn btn--green container-bank__cart-btn">Tiến hành thanh toán</button>
+                                <button type="" class="btn btn--green container-bank__cart-btn" onclick="location.href='./pay.php';">Tiến hành thanh toán</button>
                                 <form action="" class="container-bank__form-list">
                                     <label for="" class="container-bank__lable">Phiếu ưu đãi</label>
-                                    <input type="text" class="container-bank__input js-bank-input" onchange="myFunction()">
-                                    <button class="container-bank__submit js-bank-submit">Áp dụng</button>
+                                    <input type="text" class="container-bank__input js-bank-input">
+                                    <button class="container-bank__submit js-bank-submit" disabled>Áp dụng</button>
                                 </form>
                             </div>
                         </div>
@@ -164,19 +164,18 @@ require_once("./utils/utility.php");
                 updateItem(value, $('#fix-number-' + value).val());
             }
         }
-    </script>
-    <script>
-        /*làm áp dụng phiếu ưu đãi */
-        let bankInput = $('.js-bank-input');
-        let bankSubmit = $('.js-bank-submit');
 
-        function myFunction() {
-            if (bankInput.val().trim().length > 0) {
-                bankSubmit.addClass('open');
+
+        /*làm áp dụng phiếu ưu đãi */
+        $('.js-bank-input').bind('input', function(event) {
+            if ($(this).val().trim().length > 0) {
+                $('.js-bank-submit').addClass('open');
+                $('.js-bank-submit').attr('disabled', false);
             } else {
-                bankSubmit.removeClass('open');
+                $('.js-bank-submit').removeClass('open');
+                $('.js-bank-submit').attr('disabled', true);
             }
-        }
+        })
     </script>
 
 </body>
