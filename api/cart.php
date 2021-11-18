@@ -14,6 +14,9 @@ if (!empty($_POST)) {
         case 'update':
             update_cart();
             break;
+        case 'getdiscount':
+            get_discount();
+            break;
     }
 }
 
@@ -124,4 +127,16 @@ function is_valid_quantity($id, $quantity)
         }
     }
     return false;
+}
+
+function get_discount()
+{
+    $couponCode = isset($_POST['couponcode'])?$_POST['couponcode']:'';
+    $sql = "SELECT `code`, `discount`, `limit_number`, `number_used`, `expiration_date`, `payment_limit`
+            FROM `db_discount`
+            WHERE status=1 AND `code`='$couponCode';";
+    $discount = executeResult($sql);
+    if($discount != null) {
+        echo json_encode($discount[0]); 
+    } else echo json_encode(array('message' => 'Mã giảm giá không hợp lệ'));
 }

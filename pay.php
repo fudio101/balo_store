@@ -9,12 +9,13 @@ require_once('./database/dbhelper.php');
 <!DOCTYPE html>
 <html lang="en">
 <?php require_once('layouts/head.php'); ?>
+
 <body>
     <div class="apps">
         <?php
         require_once("layouts/top.php");
         //Nếu giỏ hàng trống thì cho về trang chủ
-        if($cartList==NULL) return header('Location: index.php');
+        if ($cartList == NULL) return header('Location: index.php');
         ?>
 
         <div class="container">
@@ -29,9 +30,9 @@ require_once('./database/dbhelper.php');
                             <span class="container-pays__login-text">
                                 Nếu bạn có mã giảm giá, vui lòng điền vào phía bên dưới.
                             </span>
-                            <form action="" class="container-pays__login-from">
-                                <input type="text" class="container-pays__login-sale">
-                                <button class="btn btn--blue container-pays__login-button">Áp dụng</button>
+                            <form action="#" class="container-pays__login-from" id="form-coupon">
+                                <input type="text" class="container-pays__login-sale" id="coupon-code">
+                                <button class="btn btn--blue container-pays__login-button" id="submit-coupon">Áp dụng</button>
                             </form>
                         </div>
                         <div class="container-client">
@@ -95,35 +96,35 @@ require_once('./database/dbhelper.php');
                                             <span class="container-bill__noti-span">Tạm tính</span>
                                         </div>
                                         <ul class="container-bill__list">
-                                            <?php foreach($cartList as $key => $sp): ?> 
-                                            <li class="container-bill__item">
-                                                <div class="container-bill__item-flex">
-                                                    <p class="container-bill__item-text">
-                                                        <?=$sp['name'];?>
-                                                        <span class="container-bill__item-sapn">x<?=$cart[$key]['quantity'];?></span>
-                                                    </p>
-                                                    <p class="container-bill__item-money"><?=number_format($sp['price']*$cart[$key]['quantity'], 0, ',', '.'); ?></p>
-                                                </div>
-                                            </li>
+                                            <?php foreach ($cartList as $key => $sp) : ?>
+                                                <li class="container-bill__item">
+                                                    <div class="container-bill__item-flex">
+                                                        <p class="container-bill__item-text">
+                                                            <?= $sp['name']; ?>
+                                                            <span class="container-bill__item-sapn">x<?= $cart[$key]['quantity']; ?></span>
+                                                        </p>
+                                                        <p class="container-bill__item-money"><?= number_format($sp['price'] * $cart[$key]['quantity'], 0, ',', '.'); ?>đ</p>
+                                                    </div>
+                                                </li>
                                             <?php endforeach; ?>
-                                            
+
                                         </ul>
                                         <div class="container-bill__price">
                                             <span class="container-bill__price-text">Tạm tính:</span>
-                                            <span class="container-bill__price-text"><?=number_format($total,0,',','.');?>đ</span>
+                                            <span class="container-bill__price-text"><?= number_format($total, 0, ',', '.'); ?>đ</span>
                                         </div>
                                         <div class="container-bill__price">
                                             <?php $priceShip = executeResult('SELECT `priceShip` FROM `db_config`')[0]['priceShip']; ?>
                                             <span class="container-bill__price-text">Phí vận chuyển:</span>
-                                            <span class="container-bill__price-text"><?=number_format($priceShip,0,',','.');?>đ</span>
+                                            <span class="container-bill__price-text" id='discount'><?= number_format($priceShip, 0, ',', '.'); ?>đ</span>
                                         </div>
                                         <div class="container-bill__price">
-                                            <span class="container-bill__price-text">Mã giảm giá:</span><?php $discount = 0000;?>
-                                            <span class="container-bill__price-text"><?=number_format(00000,0,',','.');?>đ</span>
+                                            <span class="container-bill__price-text">Mã giảm giá:</span><?php $discount = 0; ?>
+                                            <span class="container-bill__price-text" id="discount_price">0đ</span>
                                         </div>
                                         <div class="container-bill__price">
                                             <span class="container-bill__price-text">Thanh toán:</span>
-                                            <span class="container-bill__price-text"><?=number_format($total+$priceShip-$discount,0,',','.');?>đ</span>
+                                            <span class="container-bill__price-text" id="amount_pay"><?= number_format($total + $priceShip - $discount, 0, ',', '.'); ?>đ</span>
                                         </div>
                                         <form action="" class="container-bill__pay">
                                             <p class="container-bill__pay-text">
@@ -177,17 +178,20 @@ require_once('./database/dbhelper.php');
                 action: 'getprovince'
             },
             success: (data) => {
-                if (data!=''){
+                if (data != '') {
                     var list = jQuery.parseJSON(data);
                     list = list.map(
-                        (res) => $('<option>', {value: res.id, text: res.name})
+                        (res) => $('<option>', {
+                            value: res.id,
+                            text: res.name
+                        })
                     );
                     $('#province').append(list);
                 }
             }
         });
 
-        $('#province').on('change', () =>{
+        $('#province').on('change', () => {
             $.ajax({
                 url: './api/address.php',
                 type: 'POST',
@@ -196,17 +200,55 @@ require_once('./database/dbhelper.php');
                     provinceid: $('#province').val()
                 },
                 success: (data) => {
-                    if (data!=''){
+                    if (data != '') {
                         var list = jQuery.parseJSON(data);
                         list = list.map(
-                            (res) => $('<option>', {value: res.id, text: res.name})
+                            (res) => $('<option>', {
+                                value: res.id,
+                                text: res.name
+                            })
                         );
-                        $('#district').empty().append($('<option>', {text: 'Choose...'})).append(list);
+                        $('#district').empty().append($('<option>', {
+                            text: 'Choose...'
+                        })).append(list);
                     }
                 }
             })
         });
-        
+
+        $('#submit-coupon').on('click', () => {
+            $.ajax({
+                url: './api/cart.php',
+                type: 'POST',
+                data: {
+                    action: 'getdiscount',
+                    couponcode: $('#coupon-code').val()
+                },
+                success: (data) => {
+                    var res = jQuery.parseJSON(data);
+                    if (typeof(res.message) !== 'undefined') {
+                        alert('Mã giảm giá không hợp lệ!');
+                    } else {
+                        upadateDiscountPrice(res);
+                    }
+                }
+            });
+            const totalCost = <?= $total; ?>;
+            const amountPay = <?= ($total + $priceShip - $discount); ?>;
+
+            function upadateDiscountPrice(res) {
+                $('#discount_price').text(new Intl.NumberFormat('vi-VN', {
+                    style: 'currency',
+                    currency: 'VND'
+                }).format(res.discount));
+                var amountPayNew = amountPay - res.discount;
+                $('#amount_pay').text(new Intl.NumberFormat('vi-VN', {
+                    style: 'currency',
+                    currency: 'VND'
+                }).format(amountPayNew));
+            }
+        })
     </script>
 </body>
+
 </html>
