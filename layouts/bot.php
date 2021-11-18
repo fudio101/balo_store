@@ -25,27 +25,27 @@
                     <div class="footer-hearder__list">
                         <h2>HỖ TRỢ KHÁCH HÀNG</h2>
                         <span class="footer-hearder__span">
-                            <a href="" class="footer-hearder__link">
+                            <a href="#" class="footer-hearder__link">
                                 Câu hỏi thường gặp (FAQ)
                             </a>
                         </span>
                         <span class="footer-hearder__span">
-                            <a href="" class="footer-hearder__link">
+                            <a href="#" class="footer-hearder__link">
                                 Hướng dẫn mua hàng
                             </a>
                         </span>
                         <span class="footer-hearder__span">
-                            <a href="" class="footer-hearder__link">
+                            <a href="#" class="footer-hearder__link">
                                 Chính sách giao hàng
                             </a>
                         </span>
                         <span class="footer-hearder__span">
-                            <a href="" class="footer-hearder__link">
+                            <a href="#" class="footer-hearder__link">
                                 Chính sách bảo hành
                             </a>
                         </span>
                         <span class="footer-hearder__span">
-                            <a href="" class="footer-hearder__link">
+                            <a href="#" class="footer-hearder__link">
                                 Điều khoản bảo mật
                             </a>
                         </span>
@@ -58,32 +58,32 @@
                         </p>
                         <h2>VỀ  Staskoverflow19</h2>
                         <span class="footer-hearder__span">
-                            <a href="" class="footer-hearder__link">
+                            <a href="#" class="footer-hearder__link">
                                 Giới thiệu về  Staskoverflow19
                             </a>
                         </span>
                         <span class="footer-hearder__span">
-                            <a href="" class="footer-hearder__link">
+                            <a href="#" class="footer-hearder__link">
                                 Quy trình tư vấn
                             </a>
                         </span>
                         <span class="footer-hearder__span">
-                            <a href="" class="footer-hearder__link">
+                            <a href="#" class="footer-hearder__link">
                                 Ưu đãi khách hàng thân thiết
                             </a>
                         </span>
                         <span class="footer-hearder__span">
-                            <a href="" class="footer-hearder__link">
+                            <a href="#" class="footer-hearder__link">
                                 Sản phẩm ở  Staskoverflow19
                             </a>
                         </span>
                         <span class="footer-hearder__span">
-                            <a href="" class="footer-hearder__link">
+                            <a href="#" class="footer-hearder__link">
                                 Vì sao chọn  Staskoverflow19?
                             </a>
                         </span>
                         <span class="footer-hearder__span">
-                            <a href="" class="footer-hearder__link">
+                            <a href="#" class="footer-hearder__link">
                                 Tuyển dụng
                             </a>
                         </span>
@@ -92,36 +92,36 @@
                 <div class="col l-3 m-12 c-12 container-shoping__culum-75">
                     <div class="footer-hearder__list">
                         <div class="footer-hearder__flex">
-                            <a href="" class="footer-hearder__flex-link">
+                            <a href="#" class="footer-hearder__flex-link">
                                 <i class="hearder-top-icon footer-hearder__flex-icon fab fa-facebook"></i>
                             </a>
-                            <a href="" class="footer-hearder__flex-link">
+                            <a href="#" class="footer-hearder__flex-link">
                                 <i class="hearder-top-icon footer-hearder__flex-icon fab fa-instagram"></i>
                             </a>
-                            <a href="" class="footer-hearder__flex-link">
+                            <a href="#" class="footer-hearder__flex-link">
                                 <i class="hearder-top-icon footer-hearder__flex-icon fab fa-twitter"></i>
                             </a>
-                            <a href="" class="footer-hearder__flex-link">
+                            <a href="#" class="footer-hearder__flex-link">
                                 <i class="hearder-top-icon footer-hearder__flex-icon fas fa-envelope"></i>
                             </a>
-                            <a href="" class="footer-hearder__flex-link footer-hearder__flex-red">
+                            <a href="#" class="footer-hearder__flex-link footer-hearder__flex-red">
                                 <i class="hearder-top-icon footer-hearder__flex-icon fab fa-youtube"></i>
                             </a>
                         </div>
                         <p class="footer-hearder__span-p">
                             Được chứng nhận
                         </p>
-                        <a href="" class="footer-hearder__flex-list-link">
+                        <a href="#" class="footer-hearder__flex-list-link">
                             <img src="<?= $baseUrl ?>assets/images/anh7.png" alt="" class="footer-hearder__flex-list-img">
                         </a>
                         <p class="footer-hearder__span-p">
                             Cách thức thanh toán
                         </p>
                         <div class="footer-hearder__flex">
-                            <a href="" class="footer-hearder__flex-link-pay">
+                            <a href="#" class="footer-hearder__flex-link-pay">
                                 <i class="hearder-top-icon footer-hearder__flex-icon-pay fab fa-cc-visa"></i>
                             </a>
-                            <a href="" class="footer-hearder__flex-link-pay">
+                            <a href="#" class="footer-hearder__flex-link-pay">
                                 <i class="hearder-top-icon footer-hearder__flex-icon-pay fab fa-cc-paypal"></i>
                             </a>
                         </div>
