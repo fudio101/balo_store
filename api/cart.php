@@ -17,6 +17,9 @@ if (!empty($_POST)) {
         case 'getdiscount':
             get_discount();
             break;
+        case 'addcoupon':
+            add_coupon();
+            break;
     }
 }
 
@@ -131,12 +134,21 @@ function is_valid_quantity($id, $quantity)
 
 function get_discount()
 {
-    $couponCode = isset($_POST['couponcode'])?$_POST['couponcode']:'';
-    $sql = "SELECT `code`, `discount`, `limit_number`, `number_used`, `expiration_date`, `payment_limit`
-            FROM `db_discount`
-            WHERE status=1 AND `code`='$couponCode';";
-    $discount = executeResult($sql);
-    if($discount != null) {
-        echo json_encode($discount[0]); 
+    $couponCode = isset($_POST['couponcode']) ? $_POST['couponcode'] : '';
+    $total = isset($_POST['total']) ? $_POST['total'] : 0;
+    $sql = "SELECT * FROM `db_discount` 
+            WHERE `status`=1 AND `expiration_date`>=CURDATE() AND (`limit_number`-`number_used`)>0 AND `code`='$couponCode' AND `payment_limit`<$total";
+    $discount = executeResult($sql, true);
+    if ($discount != null) {
+        echo json_encode($discount);
     } else echo json_encode(array('message' => 'Mã giảm giá không hợp lệ'));
+}
+
+function add_coupon()
+{
+    $coupon = isset($_POST['coupon']) ? $_POST['coupon'] : '';
+    $discount = json_decode($coupon, true);
+
+    $_SESSION['coupon'] = $discount;
+    echo $coupon;
 }

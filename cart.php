@@ -11,7 +11,14 @@ require_once("./utils/utility.php");
 <body>
     <div class="apps">
 
-        <?php require_once('./layouts/top.php') ?>
+        <?php
+        require_once('./layouts/top.php');
+        $discount = 0;
+        if (!empty($_SESSION['coupon'])) {
+            $coupon = $_SESSION['coupon'];
+            $discount = $coupon['discount'];
+        }
+        ?>
 
         <div class="container" style="min-height: 512px;">
             <div class="grid wide" style="margin-top:64px; margin-bottom: 64px;">
@@ -84,15 +91,21 @@ require_once("./utils/utility.php");
                                     <span class="container-bank__cart-item1">Tạm tính</span>
                                     <span class="container-bank__cart-item1"><?= number_format($total, 0, ',', '.'); ?>đ</span>
                                 </div>
+
+                                <div class="container-bank__cart-flex">
+                                    <span class="container-bank__cart-item1">Giảm giá</span>
+                                    <span class="container-bank__cart-item1"><?= number_format($discount, 0, ',', '.'); ?>đ</span>
+                                </div>
+
                                 <div class="container-bank__cart-flex">
                                     <span class="container-bank__cart-item1">Tổng</span>
-                                    <span class="container-bank__cart-item1"><?= number_format($total, 0, ',', '.'); ?>đ</span>
+                                    <span class="container-bank__cart-item1"><?= number_format($total - $discount, 0, ',', '.'); ?>đ</span>
                                 </div>
                                 <button type="" class="btn btn--green container-bank__cart-btn" onclick="location.href='./pay.php';">Tiến hành thanh toán</button>
                                 <form action="" class="container-bank__form-list">
                                     <label for="" class="container-bank__lable">Phiếu ưu đãi</label>
-                                    <input type="text" class="container-bank__input js-bank-input">
-                                    <button class="container-bank__submit js-bank-submit" disabled>Áp dụng</button>
+                                    <input type="text" class="container-bank__input js-bank-input" onsubmit="addCoupon()">
+                                    <button class="container-bank__submit js-bank-submit" onclick="addCoupon()" disabled>Áp dụng</button>
                                 </form>
                             </div>
                         </div>
@@ -112,6 +125,41 @@ require_once("./utils/utility.php");
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <script src="./assets/js/balo.js"></script>
     <script>
+        function addCoupon() {
+            var coupon = $('.js-bank-input').val();
+            $.ajax({
+                url: './api/cart.php',
+                type: 'POST',
+                data: {
+                    couponcode: coupon,
+                    total: <?= $total; ?>,
+                    action: 'getdiscount'
+                },
+                success: function(data) {
+                    var res = jQuery.parseJSON(data);
+                    if (typeof(res.message) !== 'undefined') {
+
+                        alert('Mã giảm giá không hợp lệ!');
+
+                    } else {
+
+                        $.ajax({
+                            url: './api/cart.php',
+                            type: 'POST',
+                            data: {
+                                coupon: data,
+                                action: 'addcoupon'
+                            },
+                            success: function(data) {
+                                location.reload();
+                            }
+                        });
+
+                    }
+                }
+            });
+        }
+
         function deleteItem(id) {
             $.ajax({
                 url: './api/cart.php',
@@ -127,13 +175,6 @@ require_once("./utils/utility.php");
                 }
             })
         }
-
-        $('.fix-number').each(function() {
-            $(this).on('change', function() {
-                var id = $(this).attr('id').replace('fix-number-', '');
-                updateItem(id, $(this).val());
-            })
-        })
 
         function updateItem(id, value) {
             var quantity = value;
@@ -165,6 +206,13 @@ require_once("./utils/utility.php");
             }
         }
 
+
+        $('.fix-number').each(function() {
+            $(this).on('change', function() {
+                var id = $(this).attr('id').replace('fix-number-', '');
+                updateItem(id, $(this).val());
+            })
+        })
 
         /*làm áp dụng phiếu ưu đãi */
         $('.js-bank-input').bind('input', function(event) {
