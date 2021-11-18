@@ -29,29 +29,33 @@ html {
     scroll-behavior: smooth;
 }
 .bill{
-    padding: 80px 0 0 0;
+    padding: 60px 0 0 0;
     /* display: flex;
     justify-content: center;
     flex-direction: column; */
-    margin-left: 400px;
+    margin-left: 300px;
 }
 /*thông tin người dùng*/
 .bill-slip{
     display: flex;
     justify-content: center;
     flex-direction: column;
-    max-width: 900px;
+    width: 900px;
+    max-width: 100%;
 }
 .bill-slip__text{
     margin: 5px 0;
     font-size: 2rem;
+    text-align: center;
 }
 .bill-slip__table td{
-    max-width: 900px;
+    width: 350px;
+    max-width: 100%;
     line-height: 2;
 }
 .bill-ship__label{
     font-size: 0.9rem;
+    font-weight: 600;
 }
 .bill-slip__span{
     margin: 0;
@@ -65,8 +69,9 @@ html {
 
 /*thông tin sản phẩm*/
 .bill-product__text{
-    margin: 5px 0;
+    margin: 10px 0;
     font-size: 2rem;
+    text-align: center;
 }
 .bill-product__noti{
     display: flex;
@@ -74,6 +79,10 @@ html {
 .bill-product__noti-code{
     padding: 0 10px;
     font-size: 0.9rem;
+}
+.bill-product__noti-code:first-child
+{
+    padding-left: 0;
 }
 .bill-product__noti-text{
     font-weight: 600;
@@ -85,10 +94,12 @@ html {
     max-width: 900px;
 }
 .bill-product__table-1{
-    max-width: 900px;
+    width: 900px;
+    max-width: 100%;
     table-layout: auto;
     border: 1px solid rgba(0, 0, 0, 0.2);
     border-radius: 2px;
+    padding: 0 5px;
 }
 .bill-product__th{
     text-align: center;

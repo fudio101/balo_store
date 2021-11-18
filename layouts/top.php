@@ -31,7 +31,7 @@ if ($result != null) {
                 <ul class="hearder-top__list">
                     <li class="hearder-top__list-call">
                         <i class="hearder-top-icon fas fa-phone-alt"></i>
-                        0906 03 5225 - 090609 5225
+                        0999999999 - 0999999999
                     </li>
                 </ul>
                 <ul class="hearder-top__list hide-on-mobile-tablet">
