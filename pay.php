@@ -44,7 +44,7 @@ require_once('./database/dbhelper.php');
                                             <div class="container-client__flex-name">
                                                 <label for="" class="container-client__flex-text">Tên*</label>
                                                 <input type="text" class="container-client__flex-input">
-                                                <p class="container-client__flex-span">...</p>
+                                                <p class="container-client__flex-span"></p>
                                             </div>
                                             <div class="container-client__flex-name">
                                                 <label for="" class="container-client__flex-text">Họ*</label>
@@ -55,31 +55,31 @@ require_once('./database/dbhelper.php');
                                         <div class="container-client__last">
                                             <label for="" class="container-client__last-text">Tên công ty</label>
                                             <input type="text" class="container-client__last-input">
-                                            <p class="container-client__last-span">....</p>
+                                            <p class="container-client__last-span"></p>
                                         </div>
                                         <div class="container-client__last">
                                             <label for="" class="container-client__last-text">Tỉnh/Thành phố*</label>
                                             <select class="container-client__last-input" id="province" required>
                                                 <option selected>Choose...</option>
                                             </select>
-                                            <p class="container-client__last-span">...</p>
+                                            <p class="container-client__last-span"></p>
                                         </div>
                                         <div class="container-client__last">
                                             <label for="" class="container-client__last-text">Quận/Huyện/Trị Trấn</label>
                                             <select class="container-client__last-input" id="district" required>
                                                 <option selected>Choose...</option>
                                             </select>
-                                            <p class="container-client__last-span">...</p>
+                                            <p class="container-client__last-span"></p>
                                         </div>
                                         <div class="container-client__last">
                                             <label for="" class="container-client__last-text">Địa chỉ*</label>
                                             <input type="text" class="container-client__last-input" required>
-                                            <p class="container-client__last-span">...</p>
+                                            <p class="container-client__last-span"></p>
                                         </div>
                                         <div class="container-client__last">
                                             <label for="" class="container-client__last-text">Số điện thoại*</label>
                                             <input type="text" class="container-client__last-input">
-                                            <p class="container-client__last-span">...</p>
+                                            <p class="container-client__last-span"></p>
                                         </div>
                                         <div class="container-client__last">
                                             <label for="" class="container-client__last-text">Địa chỉ Email*</label>
