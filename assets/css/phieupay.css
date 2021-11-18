@@ -30,28 +30,23 @@ html {
 }
 .bill{
     padding: 60px 0 0 0;
-    /* display: flex;
-    justify-content: center;
-    flex-direction: column; */
-    margin-left: 300px;
 }
 /*thông tin người dùng*/
 .bill-slip{
     display: flex;
     justify-content: center;
     flex-direction: column;
-    width: 900px;
-    max-width: 100%;
 }
 .bill-slip__text{
     margin: 5px 0;
     font-size: 2rem;
     text-align: center;
+    text-transform: uppercase;
 }
 .bill-slip__table td{
-    width: 350px;
-    max-width: 100%;
     line-height: 2;
+    width: 600px;
+    max-width: 100%;
 }
 .bill-ship__label{
     font-size: 0.9rem;
@@ -62,7 +57,7 @@ html {
     font-size: 0.9rem;
 }
 .bill-product__table{
-    max-width: 900px;
+    width: 100%;
 }
 
 
@@ -72,6 +67,7 @@ html {
     margin: 10px 0;
     font-size: 2rem;
     text-align: center;
+    text-transform: uppercase;
 }
 .bill-product__noti{
     display: flex;
@@ -91,11 +87,9 @@ html {
     display: flex;
     justify-content: center;
     flex-direction: column;
-    max-width: 900px;
 }
 .bill-product__table-1{
-    width: 900px;
-    max-width: 100%;
+    width: 100%;
     table-layout: auto;
     border: 1px solid rgba(0, 0, 0, 0.2);
     border-radius: 2px;
@@ -119,6 +113,7 @@ html {
     font-size: 0.9rem;
     padding: 7px 0;
     font-weight: 600;
+    width: 100%;
 }
 .bbill-product__pay-sum{
     text-align: left;

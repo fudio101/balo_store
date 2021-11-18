@@ -85,7 +85,7 @@ require_once('./database/dbhelper.php');
                                         </div>
                                         <div class="container-client__last">
                                             <label for="" class="container-client__last-text">Số điện thoại*</label>
-                                            <input type="text" class="container-client__last-input" id="phoneNumber">
+                                            <input type="text" class="container-client__last-input" id="phoneNumber" required>
                                             <p class="container-client__last-span"></p>
                                         </div>
                                         <div class="container-client__last">

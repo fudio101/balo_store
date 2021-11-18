@@ -90,7 +90,7 @@
                                    <td><span class="bbill-product__span-text">(8GB DDR4 1x8G 3000) RAM G.SKILL Trident Z RGB CL16-18-18-38</span></td>
                                    <td><span class="bbill-product__span-text text-cent">1</span></td>
                                    <td><span class="bbill-product__span-text">1,550,000 VNĐ</span></td>
-                                   <td><span class="bbill-product__span-text">1,550,000</span></td>
+                                   <td><span class="bbill-product__span-text">1,550,000 VNĐ</span></td>
                                 </tr>
                                 <?php endforeach; ?>
 
