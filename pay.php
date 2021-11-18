@@ -43,13 +43,8 @@ require_once('./database/dbhelper.php');
                                         <div class="container-client__flex">
                                             <div class="container-client__flex-name">
                                                 <label for="" class="container-client__flex-text">Tên*</label>
-<<<<<<< HEAD
                                                 <input type="text" class="container-client__flex-input">
                                                 <p class="container-client__flex-span"></p>
-=======
-                                                <input type="text" class="container-client__flex-input" id="firstname">
-                                                <p class="container-client__flex-span">...</p>
->>>>>>> 5ff4e79cc63dbb8f62f8d7a484a6ce94a381ff61
                                             </div>
                                             <div class="container-client__flex-name">
                                                 <label for="" class="container-client__flex-text">Họ*</label>
@@ -59,13 +54,8 @@ require_once('./database/dbhelper.php');
                                         </div>
                                         <div class="container-client__last">
                                             <label for="" class="container-client__last-text">Tên công ty</label>
-<<<<<<< HEAD
                                             <input type="text" class="container-client__last-input">
                                             <p class="container-client__last-span"></p>
-=======
-                                            <input type="text" class="container-client__last-input" id="company">
-                                            <p class="container-client__last-span">....</p>
->>>>>>> 5ff4e79cc63dbb8f62f8d7a484a6ce94a381ff61
                                         </div>
                                         <div class="container-client__last">
                                             <label for="" class="container-client__last-text">Tỉnh/Thành phố*</label>
@@ -83,7 +73,6 @@ require_once('./database/dbhelper.php');
                                         </div>
                                         <div class="container-client__last">
                                             <label for="" class="container-client__last-text">Địa chỉ*</label>
-<<<<<<< HEAD
                                             <input type="text" class="container-client__last-input" required>
                                             <p class="container-client__last-span"></p>
                                         </div>
@@ -91,15 +80,6 @@ require_once('./database/dbhelper.php');
                                             <label for="" class="container-client__last-text">Số điện thoại*</label>
                                             <input type="text" class="container-client__last-input">
                                             <p class="container-client__last-span"></p>
-=======
-                                            <input type="text" class="container-client__last-input" id="address" required>
-                                            <p class="container-client__last-span">...</p>
-                                        </div>
-                                        <div class="container-client__last">
-                                            <label for="" class="container-client__last-text">Số điện thoại*</label>
-                                            <input type="text" class="container-client__last-input" id="phoneNumber">
-                                            <p class="container-client__last-span">...</p>
->>>>>>> 5ff4e79cc63dbb8f62f8d7a484a6ce94a381ff61
                                         </div>
                                         <div class="container-client__last">
                                             <label for="" class="container-client__last-text">Địa chỉ Email*</label>
