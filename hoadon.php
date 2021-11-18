@@ -45,7 +45,7 @@
         <?php print_r($products); ?>
         <?php print_r($orderstatus); ?>
     </pre> -->
-    <div class="gird wide">
+    <div class="grid wide">
         <div class="row sm-gutter">
             <div class="col l-12 m-12 c-12">
                 <div class="bill">
