@@ -164,15 +164,14 @@ function get_odercode()
 
 function create_order()
 {
-    print_r($_POST);
     $firstname      = isset($_POST['firstname']) ? $_POST['firstname'] : '';
     $lastname       = isset($_POST['lastname']) ? $_POST['lastname'] : '';
     $fullname       = "$firstname $lastname";
     $company        = isset($_POST['company']) ? $_POST['company'] : '';
     $province       = isset($_POST['province']) ? $_POST['province'] : '';
-    $provinceName   = executeResult("select * from `db_province` where `id`=$province", true);
+    $provinceName   = executeResult("select * from `db_province` where `id`=$province", true)['name'];
     $district       = isset($_POST['district']) ? $_POST['district'] : '';
-    $districtName   = executeResult("select * from `db_district` where `id`=$district", true);
+    $districtName   = executeResult("select * from `db_district` where `id`=$district", true)['name'];
     $address        = isset($_POST['address']) ? $_POST['address'] : '';
     $phoneNumber    = isset($_POST['phoneNumber']) ? $_POST['phoneNumber'] : '';
     $email          = isset($_POST['email']) ? $_POST['email'] : '';
@@ -204,7 +203,6 @@ function create_order()
 
         $cartDecode = json_decode($cart);
         foreach ($cartDecode as $product) {
-            //echo "|||| $sql ||||";
             $productId = $product->id;
             $productQuantity = $product->quantity;
             $price = executeResult("select * from db_product where id=$productId", true)['price'];
@@ -212,5 +210,8 @@ function create_order()
                             VALUES ($idOrder,$productId,$productQuantity,'$price');";
             execute($sqlAddDetail);
         }
+        echo $orderCode;
+        unset($_SESSION['cart']);
+        unset($_SESSION['coupon']);
     }
 }

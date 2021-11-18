@@ -3,7 +3,6 @@ require_once('./utils/utility.php');
 require_once('./database/dbhelper.php');
 
 
-
 ?>
 
 <!DOCTYPE html>
@@ -15,7 +14,15 @@ require_once('./database/dbhelper.php');
         <?php
         require_once("layouts/top.php");
         //Nếu giỏ hàng trống thì cho về trang chủ
-        if ($cartList == NULL) return header('Location: index.php');
+        if ($cartList == NULL){
+            echo "<script>window.location.href='./index.php';</script>";
+        }
+        $discount = 0;
+        if (!empty($_SESSION['coupon'])) {
+            $coupon = $_SESSION['coupon'];
+            $discount = $coupon['discount'];
+        }
+
         ?>
 
         <div class="container">
@@ -43,7 +50,7 @@ require_once('./database/dbhelper.php');
                                         <div class="container-client__flex">
                                             <div class="container-client__flex-name">
                                                 <label for="" class="container-client__flex-text">Tên*</label>
-                                                <input type="text" class="container-client__flex-input">
+                                                <input type="text" class="container-client__flex-input" id="firstname">
                                                 <p class="container-client__flex-span"></p>
                                             </div>
                                             <div class="container-client__flex-name">
@@ -54,7 +61,7 @@ require_once('./database/dbhelper.php');
                                         </div>
                                         <div class="container-client__last">
                                             <label for="" class="container-client__last-text">Tên công ty</label>
-                                            <input type="text" class="container-client__last-input">
+                                            <input type="text" class="container-client__last-input" id="company">
                                             <p class="container-client__last-span"></p>
                                         </div>
                                         <div class="container-client__last">
@@ -73,12 +80,12 @@ require_once('./database/dbhelper.php');
                                         </div>
                                         <div class="container-client__last">
                                             <label for="" class="container-client__last-text">Địa chỉ*</label>
-                                            <input type="text" class="container-client__last-input" required>
+                                            <input type="text" class="container-client__last-input" id="address" required>
                                             <p class="container-client__last-span"></p>
                                         </div>
                                         <div class="container-client__last">
                                             <label for="" class="container-client__last-text">Số điện thoại*</label>
-                                            <input type="text" class="container-client__last-input">
+                                            <input type="text" class="container-client__last-input" id="phoneNumber" required>
                                             <p class="container-client__last-span"></p>
                                         </div>
                                         <div class="container-client__last">
@@ -121,8 +128,8 @@ require_once('./database/dbhelper.php');
                                             <span class="container-bill__price-text" id='priceShip'><?= number_format($priceShip, 0, ',', '.'); ?>đ</span>
                                         </div>
                                         <div class="container-bill__price">
-                                            <span class="container-bill__price-text">Mã giảm giá:</span><?php $discount = 0; ?>
-                                            <span class="container-bill__price-text" id="discount_price">0đ</span>
+                                            <span class="container-bill__price-text">Mã giảm giá:</span>
+                                            <span class="container-bill__price-text" id="discount_price"><?=number_format($discount, 0, ',', '.');?>đ</span>
                                         </div>
                                         <div class="container-bill__price">
                                             <span class="container-bill__price-text">Thanh toán:</span>
@@ -163,7 +170,7 @@ require_once('./database/dbhelper.php');
                 </div>
                 <div class="modal-form__pays">
                     <!-- <button class="modal-form__pays-submit js-modal-pays">Đồng ý thanh toán</button> -->
-                    <button class="modal-form__pays-close js-modal-close" id="paydone">Trở về</button>
+                    <button class="modal-form__pays-close js-modal-close" id="paydone">Xem hóa đơn</button>
                 </div>
             </div>
         </div>
@@ -230,6 +237,7 @@ require_once('./database/dbhelper.php');
                 type: 'POST',
                 data: {
                     action: 'getdiscount',
+                    total: totalCost,
                     couponcode: $('#coupon-code').val()
                 },
                 success: (data) => {
@@ -293,6 +301,11 @@ require_once('./database/dbhelper.php');
                 },
                 success: (data) => {
                     console.log(data);
+                    var urlHoaDon = './hoadon.php?ordercode='+data;
+                    
+                    console.log(urlHoaDon);
+                    window.open(urlHoaDon, '_blank');
+                    window.location.href='./index.php';
                 }
             });
         });
