@@ -74,7 +74,7 @@ $rowsProduct = executeResult($sql);
                             <span class="container-wrapper__page-span">/</span>
                             <span class="container-wrapper__page-span">Tìm kiếm sản phẩm</span>
                             <span class="container-wrapper__page-span">/</span>
-                            <span class="container-wrapper__page-span"><?= $keyword;?></span>
+                            <span class="container-wrapper__page-span"><?= $keyword; ?></span>
                         </nav>
                     </div>
                     <div class="container-wrapper__category">
@@ -135,11 +135,9 @@ $rowsProduct = executeResult($sql);
     <!-- javasprit -->
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <script>
-        $(document).ready(function() {
-            $('#sort').change(function() {
-                var sort = $('#sort option:selected').val();
-                window.location.href = "category.php?id=<?= $id; ?>&sort=" + sort;
-            });
+        $('#sort').change(function() {
+            var sort = $('#sort option:selected').val();
+            window.location.href = "category.php?id=<?= $id; ?>&sort=" + sort;
         });
     </script>
 </body>
