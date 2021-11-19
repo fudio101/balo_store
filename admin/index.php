@@ -18,7 +18,7 @@ $deliveringOders = executeResult($sql, true)['deliveringOders'];
 $sql = "SELECT COUNT(*) AS deliveredOders FROM `db_order` WHERE `status_code`=2";
 $deliveredOders = executeResult($sql, true)['deliveredOders'];
 
-$sql = "SELECT SUM(`money`) AS revenue FROM `db_order` WHERE `status_code`>1";
+$sql = "SELECT SUM(GREATEST(`money`-`coupon`,0)) AS revenue FROM `db_order` WHERE `status_code`=2 OR `status_code`=3";
 $revenue = executeResult($sql, true)['revenue'];
 ?>
 

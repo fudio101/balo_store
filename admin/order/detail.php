@@ -14,6 +14,11 @@ $sql = "SELECT `db_customer`.`phone`, `db_customer`.`fullname`, `db_customer`.`a
 		FROM `db_order`, `db_customer` 
 		WHERE `db_order`.`id`=2 AND `db_order`.`phone`=`db_customer`.`phone`";
 $orderItem = executeResult($sql, true);
+
+$sql = "SELECT `coupon` 
+		FROM `db_order` 
+		WHERE `id`=$orderId";
+$coupon = executeResult($sql, true);
 ?>
 
 <div class="row" style="margin-top: 20px;">
@@ -53,8 +58,24 @@ $orderItem = executeResult($sql, true);
 					<td></td>
 					<td></td>
 					<td></td>
-					<th>Subtotal</th>
+					<th>Total</th>
 					<th><?= $subtotal ?></th>
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<th>Discount</th>
+					<th><?= $coupon['coupon'] ?></th>
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<th>Subtotal</th>
+					<th><?= max($subtotal - $coupon['coupon'], 0) ?></th>
 				</tr>
 			</tbody>
 		</table>

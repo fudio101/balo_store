@@ -41,7 +41,7 @@ $data = executeResult($sql);
 					<td>' . $item['fullname'] . '</td>
 					<td>' . $item['phone'] . '</td>
 					<td>' . $item['address'] . '</td>
-					<td>' . $item['money'] . '</td>
+					<td>' . max($item['money'] - $item['coupon'], 0) . '</td>
 					<td>' . $item['created'] . '</td>
 					<td>';
 					if ($item['status_code'] == 1) {
