@@ -189,7 +189,7 @@ require_once("./utils/utility.php");
                 success: function(data) {
                     if (data != '')
                         alert(data);
-                    location.reload();
+                    window.location.reload();
                 }
             })
         }
