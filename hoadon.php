@@ -16,7 +16,7 @@ if ($order == null) {
 
 $customer = executeResult("select * from `db_customer` where `phone`={$order['phone']};", true);
 $products = executeResult("select * from `db_orderdetail` where `orderid`={$order['id']};");
-$orderstatus = executeResult("select * from `db_orderstatus` where `id`={$order['order_status']};", true);
+$orderstatus = executeResult("select * from `db_orderstatus` where `id`={$order['status_code']};", true);
 
 ?>
 
