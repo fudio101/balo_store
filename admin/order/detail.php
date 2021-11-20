@@ -12,8 +12,8 @@ $data = executeResult($sql);
 
 $sql = "SELECT `db_customer`.`phone`, `db_customer`.`fullname`, `db_customer`.`address`, `db_customer`.`email` 
 		FROM `db_order`, `db_customer` 
-		WHERE `db_order`.`id`=2 AND `db_order`.`phone`=`db_customer`.`phone`";
-$orderItem = executeResult($sql, true);
+		WHERE `db_order`.`id`=$orderId AND `db_order`.`phone`=`db_customer`.`phone`";
+$customer = executeResult($sql, true);
 
 $sql = "SELECT `coupon` 
 		FROM `db_order` 
@@ -84,19 +84,19 @@ $coupon = executeResult($sql, true);
 		<table class="table table-bordered table-hover" style="margin-top: 20px;">
 			<tr>
 				<th>Name: </th>
-				<td><?= $orderItem['fullname'] ?></td>
+				<td><?= $customer['fullname'] ?></td>
 			</tr>
 			<tr>
 				<th>Email: </th>
-				<td><?= $orderItem['email'] ?></td>
+				<td><?= $customer['email'] ?></td>
 			</tr>
 			<tr>
 				<th>Address: </th>
-				<td><?= $orderItem['address'] ?></td>
+				<td><?= $customer['address'] ?></td>
 			</tr>
 			<tr>
 				<th>Phone: </th>
-				<td><?= $orderItem['phone'] ?></td>
+				<td><?= $customer['phone'] ?></td>
 			</tr>
 		</table>
 	</div>

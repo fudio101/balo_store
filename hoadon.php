@@ -16,7 +16,11 @@ if ($order == null) {
 
 $customer = executeResult("select * from `db_customer` where `phone`={$order['phone']};", true);
 $products = executeResult("select * from `db_orderdetail` where `orderid`={$order['id']};");
-$orderstatus = executeResult("select * from `db_orderstatus` where `id`={$order['order_status']};", true);
+$orderstatus = executeResult("select * from `db_orderstatus` where `id`={$order['status_code']};", true);
+
+$province = executeResult("select * from `db_province` where `id`={$order['province']}", true)['name'];
+$district = executeResult("select * from `db_district` where `id`={$order['district']}", true)['name'];
+$fullAddress = "{$order['address']}, {$district}, {$province}.";
 
 ?>
 
@@ -70,7 +74,7 @@ $orderstatus = executeResult("select * from `db_orderstatus` where `id`={$order[
                                 </tr>
                                 <tr>
                                     <td><label for="" class="bill-ship__label">Địa chỉ:</label></td>
-                                    <td><span class="bill-slip__span"><?= $customer['address']; ?></span></td>
+                                    <td><span class="bill-slip__span"><?= $fullAddress; ?></span></td>
                                 </tr>
                             </table>
                         </form>

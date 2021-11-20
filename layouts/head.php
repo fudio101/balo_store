@@ -1,11 +1,13 @@
 <?php
-    $baseUrl = './';
-    $title = executeResult('SELECT title FROM db_config', true)['title'];
+$baseUrl = './';
+$title = executeResult('SELECT title FROM db_config', true)['title'];
 ?>
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="./assets/images/store-solid.svg" />
     <!--[if lt IE 9]>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.1/respond.js"></script>
         <![endif]-->
@@ -23,5 +25,5 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap" rel="stylesheet">
-    <title><?=$title;?></title>
+    <title><?= $title; ?></title>
 </head>
