@@ -71,7 +71,7 @@ if ($user == null) {
             <li class="nav-item">
               <a class="nav-link category" href="<?= $baseUrl ?>category">
                 <i class="bi bi-folder"></i>
-                Categorys
+                Categories
               </a>
             </li>
 

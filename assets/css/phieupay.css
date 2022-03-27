@@ -31,6 +31,7 @@ html {
 .bill{
     padding: 60px 0 0 0;
 }
+
 /*thông tin người dùng*/
 .bill-slip{
     display: flex;
@@ -45,15 +46,16 @@ html {
 }
 .bill-slip__table td{
     line-height: 2;
-    width: 600px;
+    /* width: 150px; */
     max-width: 100%;
 }
 .bill-ship__label{
     font-size: 0.9rem;
+    /* width: 120px; */
     font-weight: 600;
 }
 .bill-slip__span{
-    margin: 0;
+    margin: 0 0 0 0px;
     font-size: 0.9rem;
 }
 .bill-product__table{
@@ -87,6 +89,7 @@ html {
     display: flex;
     justify-content: center;
     flex-direction: column;
+    margin-top: 64px
 }
 .bill-product__table-1{
     width: 100%;

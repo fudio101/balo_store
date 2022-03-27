@@ -11,6 +11,9 @@
     {
         margin-right:10px;
     }
+    .bill-slip__table:nth-child(1){
+        width: 600px;
+    }
 }
 /*mobile-tablet*/
 @media (max-width:1023px){

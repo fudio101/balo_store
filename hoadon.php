@@ -47,10 +47,14 @@ $fullAddress = "{$order['address']}, {$district}, {$province}.";
 
 <body>
     <!-- <pre>
-        <?php print_r($order); ?>
-        <?php print_r($customer); ?>
-        <?php print_r($products); ?>
-        <?php print_r($orderstatus); ?>
+        <?php //print_r($order); 
+        ?>
+        <?php //print_r($customer); 
+        ?>
+        <?php //print_r($products); 
+        ?>
+        <?php //print_r($orderstatus); 
+        ?>
     </pre> -->
     <div class="grid wide">
         <div class="row sm-gutter">
@@ -62,19 +66,19 @@ $fullAddress = "{$order['address']}, {$district}, {$province}.";
                             <table class="bill-slip__table">
                                 <tr>
                                     <td><label for="" class="bill-ship__label">Họ Tên:</label></td>
-                                    <td><span class="bill-slip__span"><?= $order['fullname']; ?></span></td>
+                                    <td class="bill-ship__value"><span class="bill-slip__span"><?= $order['fullname']; ?></span></td>
                                 </tr>
                                 <tr>
                                     <td><label for="" class="bill-ship__label">Email:</label></td>
-                                    <td><span class="bill-slip__span"><?= $customer['email']; ?></span></td>
+                                    <td class="bill-ship__value"><span class="bill-slip__span"><?= $customer['email']; ?></span></td>
                                 </tr>
                                 <tr>
                                     <td><label for="" class="bill-ship__label">Điện thoại:</label></td>
-                                    <td><span class="bill-slip__span"><?= $order['phone']; ?></span></td>
+                                    <td class="bill-ship__value"><span class="bill-slip__span"><?= $order['phone']; ?></span></td>
                                 </tr>
                                 <tr>
                                     <td><label for="" class="bill-ship__label">Địa chỉ:</label></td>
-                                    <td><span class="bill-slip__span"><?= $fullAddress; ?></span></td>
+                                    <td class="bill-ship__value"><span class="bill-slip__span"><?= $fullAddress; ?></span></td>
                                 </tr>
                             </table>
                         </form>
@@ -88,7 +92,7 @@ $fullAddress = "{$order['address']}, {$district}, {$province}.";
                         <form action="" method="">
                             <table class="bill-product__table-1">
                                 <tr class="tr-pay">
-                                    <th><label for="" class="bill-product__th">Sản phẩm</label></th>
+                                    <th colspan="2"><label for="" class="bill-product__th">Sản phẩm</label></th>
                                     <th><label for="" class="bill-product__th">Số lượng</label></th>
                                     <th><label for="" class="bill-product__th">Đơn giá</label></th>
                                     <th><label for="" class="bill-product__th">Tổng</label></th>
@@ -97,7 +101,7 @@ $fullAddress = "{$order['address']}, {$district}, {$province}.";
                                 <?php foreach ($products as $product) : ?>
                                     <?php $inforProduct = executeResult("select `name` from `db_product` where `id`={$product['productid']}", true); ?>
                                     <tr>
-                                        <td><span class="bbill-product__span-text"><?= $inforProduct['name']; ?></span></td>
+                                        <td colspan="2"><span class="bbill-product__span-text"><?= $inforProduct['name']; ?></span></td>
                                         <td><span class="bbill-product__span-text text-cent"><?= $product['number']; ?></span></td>
                                         <td><span class="bbill-product__span-text text-cent"><?= number_format($product['price'], 0, ',', '.'); ?> VNĐ</span></td>
                                         <td><span class="bbill-product__span-text text-cent"><?= number_format($product['price'] * $product['number'], 0, ',', '.'); ?> VNĐ</span></td>
@@ -105,30 +109,20 @@ $fullAddress = "{$order['address']}, {$district}, {$province}.";
                                 <?php endforeach; ?>
 
                                 <tr>
-                                    <td>
-                                <tr>
                                     <td><span class="bbill-product__pay-text">Tổng cộng:</span></td>
                                     <td><span class="bbill-product__pay-sum"><?= number_format($order['money'], 0, ',', '.'); ?> VNĐ</span></td>
                                 </tr>
-                                </td>
-                                <td>
-                                    <tr>
-                                        <td><span class="bbill-product__pay-text">Phí vận chuyển</span></td>
-                                        <td><span class="bbill-product__pay-sum"><?= number_format($order['price_ship'], 0, ',', '.'); ?> VNĐ</span></td>
-                                    </tr>
-                                </td>
-                                <td>
-                                    <tr>
-                                        <td><span class="bbill-product__pay-text">Voucher:</span></td>
-                                        <td><span class="bbill-product__pay-sum">-<?= number_format($order['coupon'], 0, ',', '.'); ?> VNĐ</span></td>
-                                    </tr>
-                                </td>
-                                <td>
-                                    <tr>
-                                        <td><span class="bbill-product__pay-text">Tổng thành tiền</span></td>
-                                        <td><span class="bbill-product__pay-sum"><?= number_format($order['money'] + $order['price_ship'] - $order['coupon'], 0, ',', '.'); ?> VNĐ</span></td>
-                                    </tr>
-                                </td>
+                                <tr>
+                                    <td><span class="bbill-product__pay-text">Phí vận chuyển</span></td>
+                                    <td><span class="bbill-product__pay-sum"><?= number_format($order['price_ship'], 0, ',', '.'); ?> VNĐ</span></td>
+                                </tr>
+                                <tr>
+                                    <td><span class="bbill-product__pay-text">Voucher:</span></td>
+                                    <td><span class="bbill-product__pay-sum">-<?= number_format($order['coupon'], 0, ',', '.'); ?> VNĐ</span></td>
+                                </tr>
+                                <tr>
+                                    <td><span class="bbill-product__pay-text">Tổng thành tiền</span></td>
+                                    <td><span class="bbill-product__pay-sum"><?= number_format($order['money'] + $order['price_ship'] - $order['coupon'], 0, ',', '.'); ?> VNĐ</span></td>
                                 </tr>
                             </table>
                         </form>
